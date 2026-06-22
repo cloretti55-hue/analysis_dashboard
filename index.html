@@ -282,7 +282,7 @@
       .axis-label,
       .tick {
         fill: var(--muted);
-        font-size: 15px;
+        font-size: 18px;
         font-weight: 700;
       }
 
@@ -376,6 +376,19 @@
         margin: 0;
         color: var(--muted);
         line-height: 1.45;
+      }
+
+      .reading-item ul {
+        display: grid;
+        gap: 7px;
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      .reading-item li::marker {
+        color: var(--tone);
       }
 
       .tables-grid {
@@ -619,6 +632,24 @@
         },
       };
 
+      const READING_BULLETS = {
+        nominal: [
+          "Inclinação positiva voltou.",
+          "Movimento concentrado na ponta longa.",
+          "Prêmio maior para horizontes extensos.",
+        ],
+        real: [
+          "Inclinação vem dos juros reais.",
+          "Remuneração real voltou a ser relevante.",
+          "Carrego sem risco corporativo.",
+        ],
+        inflation: [
+          "Expectativas seguem ancoradas.",
+          "Inflação implícita cai na curva.",
+          "Convergência para perto da meta.",
+        ],
+      };
+
       const SPREADS = [
         { label: "5s2s", from: "2Y", to: "5Y" },
         { label: "10s2s", from: "2Y", to: "10Y" },
@@ -805,7 +836,6 @@
       function App() {
         const [mode, setMode] = useState("all");
         const [visibleCurves, setVisibleCurves] = useState(["nominal", "real", "inflation"]);
-        const [visibleMaturities, setVisibleMaturities] = useState(MATURITIES.map((m) => m.key));
         const [minYield, setMinYield] = useState(0);
         const [maxYield, setMaxYield] = useState(5.2);
         const [selected, setSelected] = useState("10Y");
@@ -814,13 +844,12 @@
         const filteredMaturities = useMemo(
           () =>
             MATURITIES.filter((m) => {
-              if (!visibleMaturities.includes(m.key)) return false;
               return activeCurves.some((curveKey) => {
                 const value = CURVES[curveKey].values[m.key];
                 return value >= Number(minYield) && value <= Number(maxYield);
               });
             }),
-          [visibleMaturities, activeCurves.join("|"), minYield, maxYield]
+          [activeCurves.join("|"), minYield, maxYield]
         );
 
         const rows = curveRows(activeCurves, filteredMaturities);
@@ -834,20 +863,9 @@
         const resetFilters = () => {
           setMode("all");
           setVisibleCurves(["nominal", "real", "inflation"]);
-          setVisibleMaturities(MATURITIES.map((m) => m.key));
           setMinYield(0);
           setMaxYield(5.2);
           setSelected("10Y");
-        };
-
-        const toggleMaturity = (key) => {
-          setVisibleMaturities((current) =>
-            current.includes(key) && current.length > 1
-              ? current.filter((item) => item !== key)
-              : current.includes(key)
-                ? current
-                : [...current, key]
-          );
         };
 
         const toggleCurve = (key) => {
@@ -950,27 +968,6 @@
               React.createElement(
                 "div",
                 { className: "control-block" },
-                React.createElement("div", { className: "control-title" }, "Prazos"),
-                React.createElement(
-                  "div",
-                  { className: "check-grid" },
-                  MATURITIES.map((maturity) =>
-                    React.createElement(
-                      "label",
-                      { className: "maturity-toggle", key: maturity.key },
-                      React.createElement("span", null, maturity.key),
-                      React.createElement("input", {
-                        type: "checkbox",
-                        checked: visibleMaturities.includes(maturity.key),
-                        onChange: () => toggleMaturity(maturity.key),
-                      })
-                    )
-                  )
-                )
-              ),
-              React.createElement(
-                "div",
-                { className: "control-block" },
                 React.createElement("div", { className: "control-title" }, "Faixa de taxa"),
                 React.createElement(
                   "div",
@@ -1055,7 +1052,7 @@
                       React.createElement("span", { className: "control-title" }, "O que o mercado está dizendo?"),
                       React.createElement("h2", null, mode === "all" ? "Curvas conectadas" : CURVES[mode].label)
                     ),
-                    React.createElement("span", { className: "mini-label" }, `${filteredMaturities.length} prazos ativos`)
+                    React.createElement("span", { className: "mini-label" }, `${filteredMaturities.length} vértices no gráfico`)
                   ),
                   React.createElement(
                     "div",
@@ -1119,7 +1116,11 @@
                           },
                         },
                         React.createElement("h3", null, CURVES[key].label),
-                        React.createElement("p", null, CURVES[key].reading)
+                        React.createElement(
+                          "ul",
+                          null,
+                          READING_BULLETS[key].map((item) => React.createElement("li", { key: item }, item))
+                        )
                       )
                     )
                   )
