@@ -8,24 +8,24 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <style>
       :root {
-        color-scheme: light;
-        --bg: #f5f2ea;
-        --surface: #fffdf8;
-        --surface-2: #ede7dc;
-        --ink: #1f2a2d;
-        --muted: #667173;
-        --line: #d9d0c1;
-        --nominal: #0f6d7a;
-        --real: #7b3f99;
-        --inflation: #b35b22;
-        --positive: #1d7a4d;
-        --negative: #b2413c;
-        --focus: #0b5964;
-        --nominal-soft: #e5f1f3;
-        --real-soft: #f0e8f4;
-        --inflation-soft: #f7ece4;
-        --focus-soft: #e6eff0;
-        --shadow: 0 18px 45px rgba(58, 48, 32, 0.12);
+        color-scheme: dark;
+        --bg: #071324;
+        --surface: #0f2037;
+        --surface-2: #142b48;
+        --ink: #f3f8ff;
+        --muted: #aab8ca;
+        --line: rgba(222, 233, 247, 0.16);
+        --nominal: #48d6e9;
+        --real: #c49bff;
+        --inflation: #ffae6b;
+        --positive: #7ee6a5;
+        --negative: #ff8b86;
+        --focus: #48d6e9;
+        --nominal-soft: rgba(72, 214, 233, 0.16);
+        --real-soft: rgba(196, 155, 255, 0.16);
+        --inflation-soft: rgba(255, 174, 107, 0.16);
+        --focus-soft: rgba(72, 214, 233, 0.14);
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.26);
       }
 
       * {
@@ -36,9 +36,9 @@
         margin: 0;
         min-height: 100vh;
         background:
-          linear-gradient(180deg, rgba(255, 253, 248, 0.92), rgba(245, 242, 234, 0.76)),
-          radial-gradient(circle at top left, rgba(15, 109, 122, 0.12), transparent 34%),
-          radial-gradient(circle at bottom right, rgba(179, 91, 34, 0.12), transparent 30%),
+          linear-gradient(180deg, rgba(7, 19, 36, 0.96), rgba(6, 15, 29, 0.98)),
+          radial-gradient(circle at top left, rgba(72, 214, 233, 0.14), transparent 34%),
+          radial-gradient(circle at bottom right, rgba(255, 174, 107, 0.1), transparent 30%),
           var(--bg);
         color: var(--ink);
         font-family:
@@ -101,7 +101,7 @@
         padding: 16px;
         border: 1px solid var(--line);
         border-radius: 8px;
-        background: rgba(255, 253, 248, 0.88);
+        background: rgba(15, 32, 55, 0.88);
         box-shadow: var(--shadow);
       }
 
@@ -125,7 +125,7 @@
       .panel {
         border: 1px solid var(--line);
         border-radius: 8px;
-        background: rgba(255, 253, 248, 0.92);
+        background: rgba(15, 32, 55, 0.88);
         box-shadow: var(--shadow);
       }
 
@@ -146,7 +146,8 @@
       .control-title,
       .mini-label {
         color: var(--muted);
-        font-size: 11px;
+        font-size: 14px;
+        font-weight: 700;
         font-weight: 800;
         text-transform: uppercase;
       }
@@ -281,11 +282,12 @@
       .axis-label,
       .tick {
         fill: var(--muted);
-        font-size: 11px;
+        font-size: 15px;
+        font-weight: 700;
       }
 
       .grid-line {
-        stroke: rgba(102, 113, 115, 0.25);
+        stroke: rgba(222, 233, 247, 0.16);
         stroke-width: 1;
       }
 
@@ -312,7 +314,7 @@
       }
 
       .tooltip rect {
-        fill: rgba(31, 42, 45, 0.94);
+        fill: rgba(7, 19, 36, 0.96);
         rx: 8;
       }
 
@@ -418,7 +420,7 @@
 
       tbody tr:hover,
       tbody tr.is-selected {
-        background: rgba(15, 109, 122, 0.08);
+        background: rgba(72, 214, 233, 0.1);
       }
 
       .spread-list {
@@ -437,7 +439,7 @@
       .spread-track {
         height: 10px;
         border-radius: 999px;
-        background: rgba(102, 113, 115, 0.18);
+        background: rgba(222, 233, 247, 0.14);
         overflow: hidden;
       }
 
@@ -465,7 +467,7 @@
         border: 1px solid var(--line);
         border-radius: 8px;
         padding: 14px;
-        background: rgba(255, 255, 255, 0.36);
+        background: rgba(255, 255, 255, 0.04);
       }
 
       .diag-item h3 {
@@ -500,7 +502,7 @@
         padding: 12px;
         border: 1px solid var(--line);
         border-radius: 8px;
-        background: rgba(29, 122, 77, 0.07);
+        background: rgba(126, 230, 165, 0.08);
       }
 
       .benefit b {
@@ -510,7 +512,7 @@
       .callout {
         margin: 16px;
         padding: 16px;
-        border: 1px solid #9bb9bd;
+        border: 1px solid rgba(72, 214, 233, 0.32);
         border-radius: 8px;
         background: var(--focus-soft);
       }
@@ -591,7 +593,7 @@
         nominal: {
           label: "Curva Nominal",
           short: "Nominal",
-          color: "#0f6d7a",
+          color: "#48d6e9",
           unit: "%",
           values: { "2Y": 4.23, "5Y": 4.28, "7Y": 4.38, "10Y": 4.51, "30Y": 4.95 },
           reading:
@@ -600,7 +602,7 @@
         real: {
           label: "Curva Real - TIPS",
           short: "Real",
-          color: "#7b3f99",
+          color: "#c49bff",
           unit: "%",
           values: { "2Y": 1.82, "5Y": 1.96, "7Y": 2.07, "10Y": 2.21, "30Y": 2.7 },
           reading:
@@ -609,7 +611,7 @@
         inflation: {
           label: "Inflação Implícita",
           short: "Fisher",
-          color: "#b35b22",
+          color: "#ffae6b",
           unit: "%",
           values: { "2Y": 2.37, "5Y": 2.28, "7Y": 2.27, "10Y": 2.25, "30Y": 2.19 },
           reading:
@@ -683,7 +685,7 @@
         const min = Math.min(...allValues, 0);
         const max = Math.max(...allValues, 1);
         const pad = Math.max(0.15, (max - min) * 0.12);
-        const yMin = Math.max(0, min - pad);
+        const yMin = 1.5;
         const yMax = max + pad;
 
         const x = (index) =>
