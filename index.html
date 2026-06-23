@@ -1075,7 +1075,7 @@
       .satellite-layout {
         display: grid;
         grid-template-columns: minmax(0, 1.35fr) minmax(330px, 0.8fr);
-        gap: 18px;
+        gap: 22px;
         align-items: start;
       }
 
@@ -1103,16 +1103,16 @@
       .filter-chip {
         border: 1px solid var(--line);
         border-radius: 999px;
-        padding: 7px 11px;
-        background: rgba(255, 255, 255, 0.04);
+        padding: 7px 12px;
+        background: rgba(255, 255, 255, 0.025);
         color: var(--muted);
         font-weight: 800;
       }
 
       .filter-chip[aria-pressed="true"] {
-        border-color: rgba(255, 118, 118, 0.62);
-        background: rgba(255, 118, 118, 0.12);
-        color: #ffb5b5;
+        border-color: rgba(72, 214, 233, 0.48);
+        background: rgba(72, 214, 233, 0.1);
+        color: #a9efff;
       }
 
       .risk-legend {
@@ -1123,10 +1123,10 @@
       }
 
       .risk-legend span {
-        border-left: 4px solid var(--zone);
+        border-left: 3px solid var(--zone);
         border-radius: 8px;
-        padding: 6px 9px;
-        background: rgba(255, 255, 255, 0.035);
+        padding: 6px 10px;
+        background: rgba(255, 255, 255, 0.025);
         color: var(--muted);
         font-size: 11px;
         font-weight: 850;
@@ -1134,8 +1134,8 @@
 
       .satellite-grid {
         display: grid;
-        gap: 14px;
-        padding: 0 16px 16px;
+        gap: 16px;
+        padding: 0 16px 20px;
       }
 
       .satellite-card {
@@ -1143,18 +1143,18 @@
         grid-template-columns: minmax(0, 1fr) auto;
         gap: 12px;
         align-items: center;
-        border: 1px solid var(--line);
-        border-left: 4px solid var(--zone);
+        border: 1px solid rgba(222, 233, 247, 0.11);
+        border-left: 3px solid var(--zone);
         border-radius: 8px;
-        padding: 12px;
-        background: rgba(255, 255, 255, 0.035);
+        padding: 14px;
+        background: rgba(255, 255, 255, 0.022);
         text-align: left;
       }
 
       .satellite-card[aria-pressed="true"] {
-        border-color: rgba(72, 214, 233, 0.42);
+        border-color: rgba(72, 214, 233, 0.32);
         border-left-color: var(--zone);
-        background: rgba(72, 214, 233, 0.07);
+        background: rgba(72, 214, 233, 0.045);
       }
 
       .satellite-card h3 {
@@ -1175,14 +1175,14 @@
       }
 
       .satellite-icon {
-        width: 34px;
-        height: 34px;
-        flex: 0 0 34px;
+        width: 32px;
+        height: 32px;
+        flex: 0 0 32px;
         display: grid;
         place-items: center;
-        border: 1px solid rgba(72, 214, 233, 0.22);
+        border: 1px solid rgba(222, 233, 247, 0.12);
         border-radius: 8px;
-        background: rgba(72, 214, 233, 0.07);
+        background: rgba(255, 255, 255, 0.025);
         color: var(--zone);
       }
 
@@ -1195,7 +1195,7 @@
       .satellite-card p {
         margin: 0;
         color: var(--muted);
-        line-height: 1.35;
+        line-height: 1.45;
       }
 
       .satellite-tags {
@@ -1206,12 +1206,13 @@
       }
 
       .satellite-tag {
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 999px;
-        padding: 5px 8px;
+        padding: 5px 9px;
         color: var(--muted);
         font-size: 11px;
         font-weight: 800;
+        background: rgba(255, 255, 255, 0.018);
       }
 
       .sat-risk-high {
@@ -1230,13 +1231,13 @@
         position: sticky;
         top: 16px;
         display: grid;
-        gap: 12px;
-        padding: 14px;
+        gap: 14px;
+        padding: 16px;
       }
 
       .satellite-detail h2 {
         margin: 0;
-        font-size: 28px;
+        font-size: 26px;
       }
 
       .satellite-detail-head {
@@ -1246,32 +1247,32 @@
       }
 
       .satellite-detail-head .satellite-icon {
-        width: 46px;
-        height: 46px;
-        flex-basis: 46px;
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
       }
 
       .satellite-detail-head .satellite-icon svg {
-        width: 28px;
-        height: 28px;
+        width: 25px;
+        height: 25px;
       }
 
       .detail-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
-        margin-top: 8px;
+        gap: 10px;
+        margin-top: 10px;
       }
 
       .detail-box {
-        border: 1px solid var(--line);
+        border: 1px solid rgba(222, 233, 247, 0.11);
         border-radius: 8px;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.035);
+        padding: 11px;
+        background: rgba(255, 255, 255, 0.024);
       }
 
       .proxy-box {
-        margin-top: 8px;
+        margin-top: 10px;
       }
 
       .detail-box span {
@@ -1290,11 +1291,11 @@
 
       .satellite-list {
         display: grid;
-        gap: 7px;
+        gap: 8px;
         margin: 0;
         padding-left: 18px;
         color: var(--muted);
-        line-height: 1.35;
+        line-height: 1.45;
       }
 
       .core-cards {
