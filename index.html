@@ -2634,19 +2634,6 @@
 
       const EUROPE_THEMES = [
         {
-          theme: "Core Europa",
-          icon: "grid",
-          status: "Sim, como beta regional",
-          quality: "ETF amplo",
-          tone: "sat-risk-defensive",
-          implementation: "VGK / IEUR / FEZ / IMEU",
-          etfs: "VGK / IEUR / FEZ / IMEU",
-          why: "Beta regional amplo, líquido e simples.",
-          thesis: "Serve para diversificação geográfica. Compra o continente, mas dilui as teses estratégicas.",
-          names: ["VGK", "IEUR", "FEZ", "IMEU"],
-          points: ["Bom para beta regional.", "Simplicidade e liquidez.", "Não captura bem os campeões setoriais."],
-        },
-        {
           theme: "Defesa europeia",
           icon: "shield",
           status: "Não",
@@ -2736,7 +2723,14 @@
           React.createElement(
             "article",
             { className: "panel" },
-            React.createElement("div", { className: "section-head" }, React.createElement("div", null, React.createElement("span", { className: "control-title" }, "Europa ampla vs estratégica"), React.createElement("h2", null, "Europa ampla diversifica. Europa estratégica seleciona."))),
+            React.createElement("div", { className: "section-head" }, React.createElement("div", null, React.createElement("span", { className: "control-title" }, "Europa ampla vs estratégica"))),
+            React.createElement(
+              "div",
+              { className: "risk-legend", style: { padding: "14px 16px 0" } },
+              React.createElement("span", { className: "sat-risk-high" }, "Cesta superior"),
+              React.createElement("span", { className: "sat-risk-medium" }, "ETF parcial"),
+              React.createElement("span", { className: "sat-risk-defensive" }, "Defensivo / qualidade")
+            ),
             React.createElement(
               "div",
               { className: "satellite-grid", style: { paddingTop: 16 } },
