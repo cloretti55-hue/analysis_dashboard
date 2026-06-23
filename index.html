@@ -681,7 +681,7 @@
 
       .tech-main {
         display: grid;
-        grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.72fr);
+        grid-template-columns: minmax(0, 1.8fr) minmax(300px, 0.58fr);
         gap: 18px;
       }
 
@@ -699,7 +699,7 @@
 
       .cycle-table {
         width: 100%;
-        min-width: 920px;
+        min-width: 860px;
         border-collapse: collapse;
       }
 
@@ -844,6 +844,7 @@
         grid-template-columns: repeat(5, minmax(0, 1fr));
         gap: 10px;
         padding: 16px;
+        position: relative;
       }
 
       .timeline-step {
@@ -858,6 +859,33 @@
       .timeline-step[aria-current="step"] {
         border-color: var(--focus);
         background: var(--focus-soft);
+      }
+
+      .timeline-step.current-zone {
+        border-color: rgba(255, 174, 107, 0.52);
+        background: rgba(255, 174, 107, 0.09);
+      }
+
+      .timeline-marker {
+        align-self: center;
+        justify-self: center;
+        width: 100%;
+        border: 1px solid rgba(255, 174, 107, 0.5);
+        border-radius: 999px;
+        padding: 8px 10px;
+        background: rgba(255, 174, 107, 0.12);
+        color: #ffc18f;
+        font-size: 11px;
+        font-weight: 850;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .timeline-note {
+        margin: 0;
+        padding: 0 16px 16px;
+        color: var(--muted);
+        line-height: 1.4;
       }
 
       .timeline-step span {
@@ -1556,7 +1584,7 @@
           excess: ["Alto", "risk-high"],
           destruction: ["Muito alta", "risk-very"],
           winners: ["Alto", "winner-high"],
-          lesson: "Infraestrutura muda o mundo, mas muitos investidores quebram.",
+          lesson: "Infraestrutura real; capital destruído.",
         },
         {
           cycle: "Eletrificação",
@@ -1564,7 +1592,7 @@
           excess: ["Médio", "risk-mid"],
           destruction: ["Média", "risk-mid"],
           winners: ["Alto", "winner-high"],
-          lesson: "O valor migra para quem escala rede e uso.",
+          lesson: "Escala captura valor.",
         },
         {
           cycle: "Dotcom",
@@ -1572,7 +1600,7 @@
           excess: ["Muito alto", "risk-very"],
           destruction: ["Muito alta", "risk-very"],
           winners: ["Muito alto", "winner-very"],
-          lesson: "A tese estava certa; preço e timing destruíram capital.",
+          lesson: "Tese certa; preço errado.",
         },
         {
           cycle: "IA atual",
@@ -1580,7 +1608,7 @@
           excess: ["Em formação", "unknown"],
           destruction: ["Ainda incompleta", "unknown"],
           winners: ["Indefinido", "unknown"],
-          lesson: "O ciclo ainda está escolhendo vencedores.",
+          lesson: "Vencedores ainda em seleção.",
         },
       ];
 
@@ -1593,11 +1621,11 @@
       ];
 
       const TECH_TIMELINE = [
-        ["1", "Narrativa"],
-        ["2", "CAPEX"],
-        ["3", "Excesso"],
-        ["4", "Quebra / seleção"],
-        ["5", "Concentração dos ganhos"],
+        ["1", "Narrativa", ""],
+        ["2", "CAPEX", "current-zone"],
+        ["3", "Excesso", "current-zone"],
+        ["4", "Quebra / seleção", ""],
+        ["5", "Concentração dos ganhos", ""],
       ];
 
       const GOVERNMENT_STACK = [
@@ -1735,11 +1763,20 @@
               TECH_TIMELINE.map((step) =>
                 React.createElement(
                   "div",
-                  { className: "timeline-step", key: step[0], "aria-current": step[1] === "CAPEX" ? "step" : undefined },
+                  {
+                    className: `timeline-step ${step[2]}`,
+                    key: step[0],
+                    "aria-current": step[2] ? "step" : undefined,
+                  },
                   React.createElement("span", null, step[0]),
                   React.createElement("strong", null, step[1])
                 )
               )
+            ),
+            React.createElement(
+              "p",
+              { className: "timeline-note" },
+              "IA está na zona entre CAPEX acelerado e formação de excesso, antes da seleção completa dos vencedores."
             )
           ),
           React.createElement(
@@ -1752,7 +1789,7 @@
                 "div",
                 null,
                 React.createElement("span", { className: "control-title" }, "Camada estatal"),
-                React.createElement("h2", null, "Onde o governo aparece")
+                React.createElement("h2", null, "A infraestrutura do ciclo não nasce sozinha")
               )
             ),
             React.createElement(
