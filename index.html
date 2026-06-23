@@ -1882,7 +1882,7 @@
             React.createElement(
               "p",
               null,
-              "Apoio para avaliar se o prêmio de tecnologia ainda está em linha com o benchmark ou se virou concentração excessiva."
+              "Ajuda a separar prêmio justificado por crescimento de concentração excessiva em tecnologia."
             ),
             React.createElement(
               "a",
@@ -1948,11 +1948,11 @@
           React.createElement(
             "section",
             { className: "panel equity-summary" },
-            React.createElement("h2", null, "O prêmio vem acompanhado de crescimento superior."),
+            React.createElement("h2", null, "O prêmio vem com crescimento, mas exige seleção."),
             React.createElement(
               "p",
               null,
-              "FactSet/IBD reportou +63,2% YoY de lucro no 1T para o Mag-7, contra +17,4% para o restante do S&P 500; Goldman vê o grupo de mega caps ainda entregando crescimento de lucro superior ao restante do índice."
+              "FactSet/IBD reportou +63,2% YoY de lucro no 1T para o Mag-7, contra +17,4% para o restante do S&P 500. Goldman ainda vê crescimento superior nas mega caps, mas a dispersão dentro do grupo importa."
             )
           )
         );
@@ -1974,27 +1974,27 @@
         },
         equity: {
           title: "Valuation do mercado americano",
-          lead: "O valuation do S&P 500 é elevado, mas a concentração do prêmio está principalmente na Magnificent 7.",
+          lead: "O S&P 500 negocia caro, mas o prêmio está concentrado principalmente na Magnificent 7.",
           thesis: "Concentração",
           subtitle: "Prêmio na Magnificent 7",
         },
         tech: {
           title: "Todo grande ciclo tecnológico começa com excesso de capital",
-          lead: "Ferrovias, eletrificação, internet e IA seguem a mesma lógica financeira: primeiro vem investimento agressivo; depois, seleção, destruição de capital e concentração dos ganhos.",
+          lead: "Ferrovias, eletrificação, internet e IA seguem uma lógica comum: CAPEX agressivo, excesso, seleção e concentração dos ganhos.",
           thesis: "IA é CAPEX",
           subtitle: "Narrativa, excesso e seleção",
         },
         core: {
-          title: "A escolha do veículo altera a exposição, a execução e a eficiência da carteira",
-          lead: "Em carteiras globais, o ETF define liquidez, fiscalidade, acumulação, hedge, concentração, tracking error e eficiência operacional.",
+          title: "O veículo define a exposição real da carteira",
+          lead: "Em carteiras globais, ETF não é só custo: define liquidez, fiscalidade, acumulação, hedge, concentração e eficiência operacional.",
           thesis: "Implementação",
           subtitle: "Exposição, veículo e função",
         },
       };
 
       MODULE_COPY.satellites = {
-        title: "Satélites devem ser classificados por agressividade, convexidade e qualidade de implementação",
-        lead: "A alocação satélite combina tese forte, instrumento adequado e tamanho compatível com o risco.",
+        title: "Satélites devem combinar convexidade, veículo correto e tamanho de risco",
+        lead: "A alocação satélite não é lista de temas: cada tese precisa casar motor econômico, instrumento e risco de implementação.",
         thesis: "Convexidade",
         subtitle: "ETF vs cesta",
       };
@@ -2387,9 +2387,9 @@
           etfs: "SMH / SOXX",
           quality: "Alta",
           implementation: "ETF",
-          reading: "Captura o gargalo central da IA, com alta sensibilidade ao ciclo de CAPEX.",
+          reading: "Captura o gargalo central da IA, mas carrega alta sensibilidade ao ciclo de CAPEX.",
           names: ["Nvidia", "TSMC", "Broadcom", "ASML", "AMD"],
-          points: ["ETF captura bem a cadeia de valor.", "Tema forte, mas valuation e ciclo de semis importam.", "Boa primeira camada para exposição a IA física."],
+          points: ["ETF captura bem a cadeia de valor.", "Valuation e ciclo de semicondutores precisam ser monitorados.", "Boa primeira camada para exposição à infraestrutura de IA."],
         },
         {
           theme: "Defesa EUA",
@@ -2401,9 +2401,9 @@
           etfs: "ITA / PPA",
           quality: "Alta",
           implementation: "ETF",
-          reading: "Geopolítica, orçamento público e tecnologia dual-use sustentam a tese.",
+          reading: "Geopolítica, orçamento público e tecnologia dual-use sustentam demanda estrutural.",
           names: ["Lockheed Martin", "RTX", "Northrop Grumman", "General Dynamics"],
-          points: ["ETF representa bem contratadas americanas.", "Demanda estatal reduz dependência de consumidor.", "Mistura defesa tradicional e tecnologia militar."],
+          points: ["ETF representa bem as grandes contratadas americanas.", "Demanda estatal reduz dependência do consumidor.", "Mistura defesa tradicional, ciber e tecnologia militar."],
         },
         {
           theme: "Cybersecurity",
@@ -2415,9 +2415,9 @@
           etfs: "CIBR / HACK",
           quality: "Média/alta",
           implementation: "ETF",
-          reading: "Demanda estrutural e recorrente, menos dependente de CAPEX físico.",
+          reading: "Demanda estrutural, recorrente e menos dependente de CAPEX físico.",
           names: ["Palo Alto", "CrowdStrike", "Fortinet", "Zscaler"],
-          points: ["ETF funciona, mas composição deve ser monitorada.", "Tema recorrente dentro de segurança digital.", "Menos binário do que quantum ou data centers físicos."],
+          points: ["ETF funciona, mas a composição deve ser monitorada.", "Tema recorrente dentro de segurança digital.", "Menos binário do que quantum ou data centers físicos."],
         },
         {
           theme: "Robotics / automação",
@@ -2429,9 +2429,9 @@
           etfs: "BOTZ / ROBO",
           quality: "Média",
           implementation: "ETF + cesta",
-          reading: "Tema forte, mas ETFs misturam exposição demais.",
+          reading: "Tema forte, mas os ETFs misturam empresas com motores econômicos diferentes.",
           names: ["Rockwell", "ABB", "Fanuc", "Teradyne"],
-          points: ["ETF ajuda como camada inicial.", "Cesta melhora precisão da tese.", "Automação industrial não é igual a robótica de consumo."],
+          points: ["ETF ajuda como camada inicial.", "Cesta melhora precisão da tese.", "Automação industrial é subtema relevante de reindustrialização."],
         },
         {
           theme: "Energia / grid",
@@ -2445,7 +2445,7 @@
           implementation: "ETF + cesta",
           reading: "A tese é eletrificação, transmissão e equipamentos, não apenas energia tradicional.",
           names: ["Eaton", "Hubbell", "Quanta Services", "Constellation", "NextEra"],
-          points: ["ETF amplo dilui o motor econômico.", "Cesta ajuda a separar utilities, equipamentos e engenharia.", "Data centers tornam grid uma restrição estratégica."],
+          points: ["ETF amplo dilui o motor econômico.", "Cesta separa utilities, equipamentos e engenharia.", "Data centers tornam o grid uma restrição estratégica."],
         },
         {
           theme: "Infrastructure / utilities",
@@ -2457,9 +2457,9 @@
           etfs: "XLU / PAVE / GRID",
           quality: "Média",
           implementation: "ETF + cesta",
-          reading: "Exposição mais defensiva, ligada a CAPEX físico e regulação.",
+          reading: "Exposição mais defensiva, ligada a CAPEX físico, regulação e demanda elétrica.",
           names: ["Duke Energy", "Southern Company", "NextEra", "Quanta Services"],
-          points: ["Pode estabilizar a carteira.", "Duration risk precisa ser monitorado.", "ETF amplo mistura defesa com sensibilidade a juros."],
+          points: ["Pode estabilizar a carteira.", "Risco de duration precisa ser monitorado.", "ETF amplo mistura perfil defensivo com sensibilidade a juros."],
         },
         {
           theme: "Data centers físicos",
@@ -2471,9 +2471,9 @@
           etfs: "SRVR / VPN / proxies",
           quality: "Baixa",
           implementation: "Cesta",
-          reading: "ETFs não capturam bem energia, cooling, equipamentos e networking.",
+          reading: "ETFs ainda capturam mal energia, cooling, equipamentos e networking.",
           names: ["Vertiv", "Eaton", "Schneider", "Equinix", "Digital Realty", "Arista", "Broadcom"],
-          points: ["Tema físico e fragmentado.", "REITs ou proxies não bastam.", "A cesta vira necessidade de implementação."],
+          points: ["Tema físico e fragmentado.", "REITs e proxies não capturam a cadeia completa.", "Aqui a cesta vira necessidade de implementação."],
         },
         {
           theme: "Onshoring / reindustrialização",
@@ -2487,7 +2487,7 @@
           implementation: "Cesta",
           reading: "ETF industrial amplo dilui a tese de reindustrialização.",
           names: ["Rockwell", "Emerson", "Honeywell", "Caterpillar", "Nucor", "Union Pacific"],
-          points: ["Exige separar automação, transporte, aço e bens de capital.", "ETF amplo captura indústria passada, não necessariamente CAPEX futuro.", "Cesta melhora aderência à tese."],
+          points: ["Exige separar automação, transporte, aço e bens de capital.", "ETF amplo tende a olhar indústria passada, não necessariamente CAPEX futuro.", "Cesta melhora aderência à tese."],
         },
         {
           theme: "Quantum / frontier computing",
@@ -2499,9 +2499,9 @@
           etfs: "QTUM / cestas",
           quality: "Baixa/média",
           implementation: "Cesta pequena",
-          reading: "Opcionalidade alta, baixa previsibilidade.",
+          reading: "Opcionalidade alta, baixa previsibilidade e dispersão extrema de resultados.",
           names: ["IBM", "IonQ", "Rigetti", "D-Wave", "Microsoft"],
-          points: ["Tamanho inicial deve ser controlado.", "Tema ainda escolhe vencedores.", "ETF pode misturar empresas pouco expostas ao motor real."],
+          points: ["Tamanho inicial deve ser controlado.", "O tema ainda está escolhendo vencedores.", "ETF pode misturar empresas pouco expostas ao motor real."],
         },
       ];
 
