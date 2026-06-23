@@ -1214,15 +1214,15 @@
         font-weight: 800;
       }
 
-      .risk-high {
+      .sat-risk-high {
         --zone: #4f7dff;
       }
 
-      .risk-medium {
+      .sat-risk-medium {
         --zone: #5bbcff;
       }
 
-      .risk-defensive {
+      .sat-risk-defensive {
         --zone: #1f7f8b;
       }
 
@@ -2581,9 +2581,9 @@
               React.createElement(
                 "div",
                 { className: "risk-legend" },
-                React.createElement("span", { className: "risk-high" }, "Alta convexidade"),
-                React.createElement("span", { className: "risk-medium" }, "Convexidade média"),
-                React.createElement("span", { className: "risk-defensive" }, "Defensivo")
+                React.createElement("span", { className: "sat-risk-high" }, "Alta convexidade"),
+                React.createElement("span", { className: "sat-risk-medium" }, "Convexidade média"),
+                React.createElement("span", { className: "sat-risk-defensive" }, "Defensivo")
               )
             ),
             React.createElement(
@@ -2592,7 +2592,7 @@
               filtered.map((item) =>
                 React.createElement(
                   "button",
-                  { className: `satellite-card risk-${item.aggression}`, type: "button", key: item.theme, "aria-pressed": active.theme === item.theme, onClick: () => setSelectedTheme(item.theme) },
+                  { className: `satellite-card sat-risk-${item.aggression}`, type: "button", key: item.theme, "aria-pressed": active.theme === item.theme, onClick: () => setSelectedTheme(item.theme) },
                   React.createElement(
                     "div",
                     null,
@@ -2608,7 +2608,7 @@
             "aside",
             { className: "panel satellite-detail" },
             React.createElement("span", { className: "detail-role" }, "Tema selecionado"),
-            React.createElement("div", { className: `satellite-detail-head risk-${active.aggression}` }, React.createElement(SatelliteIcon, { type: active.icon }), React.createElement("h2", null, active.theme)),
+            React.createElement("div", { className: `satellite-detail-head sat-risk-${active.aggression}` }, React.createElement(SatelliteIcon, { type: active.icon }), React.createElement("h2", null, active.theme)),
             React.createElement(
               "div",
               { className: "detail-grid" },
