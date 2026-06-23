@@ -2014,13 +2014,6 @@
         "SPY options": ["Hedge macro", "Proteção de drawdown específico.", "Custo de prêmio corrói retorno se mal dimensionado.", ["Puts, collars e overlays táticos.", "Exige gestão de vencimento e strike.", "Instrumento de proteção, não de carrego."]],
       };
 
-      const CORE_CARDS = [
-        ["Domicílio importa", "#48d6e9", ["US-listed vs UCITS muda tributação, sucessão e distribuição.", "Acc pode ser mais eficiente para reinvestimento offshore."]],
-        ["Liquidez vs carregamento", "#7ee6a5", ["SPY e QQQ executam melhor.", "VOO, QQQM e UCITS Acc carregam melhor."]],
-        ["Beta não é neutro", "#ffae6b", ["S&P 500 carrega concentração.", "Equal weight reduz mega caps, mas muda risco cíclico."]],
-        ["Checklist institucional", "#c49bff", ["Domicílio, Acc/Dist, spread, tracking, opções, moeda e overlap.", "A decisão correta combina exposição, veículo e função."]],
-      ];
-
       function CoreModule() {
         const [selectedEtf, setSelectedEtf] = useState("VOO");
         const detail = CORE_DETAILS[selectedEtf] || CORE_DETAILS.VOO;
@@ -2063,15 +2056,7 @@
               React.createElement("p", null, detail[2]),
               React.createElement("ul", { className: "core-detail-list" }, detail[3].map((point) => React.createElement("li", { key: point }, point)))
             )
-          ),
-          React.createElement(
-            "section",
-            { className: "core-cards" },
-            CORE_CARDS.map((card) =>
-              React.createElement("article", { className: "core-card", key: card[0], style: { "--tone": card[1] } }, React.createElement("h3", null, card[0]), React.createElement("ul", null, card[2].map((bullet) => React.createElement("li", { key: bullet }, bullet))))
-            )
-          ),
-          React.createElement("section", { className: "panel equity-summary" }, React.createElement("h2", null, "Índice é exposição. Veículo é implementação."), React.createElement("p", null, "O ETF correto não é o mais famoso; é o que cumpre melhor a função institucional da carteira."))
+          )
         );
       }
 
