@@ -932,6 +932,132 @@
         line-height: 1.35;
       }
 
+      .core-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(340px, 0.75fr);
+        gap: 18px;
+      }
+
+      .core-function-grid {
+        display: grid;
+        gap: 10px;
+        padding: 16px;
+      }
+
+      .core-function {
+        display: grid;
+        grid-template-columns: minmax(160px, 0.8fr) minmax(0, 1.2fr);
+        gap: 12px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .core-function h3 {
+        margin: 0 0 5px;
+        font-size: 15px;
+      }
+
+      .core-function p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      .etf-token-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .etf-token {
+        min-width: 64px;
+        min-height: 38px;
+        border: 1px solid rgba(72, 214, 233, 0.28);
+        border-radius: 999px;
+        padding: 8px 11px;
+        background: rgba(72, 214, 233, 0.08);
+        color: var(--ink);
+        font-weight: 850;
+      }
+
+      .etf-token[aria-pressed="true"] {
+        border-color: var(--focus);
+        background: var(--focus-soft);
+        color: var(--focus);
+      }
+
+      .core-detail {
+        position: sticky;
+        top: 16px;
+        display: grid;
+        gap: 12px;
+        padding: 16px;
+      }
+
+      .core-detail h2 {
+        margin: 0;
+        font-size: 30px;
+      }
+
+      .detail-pill {
+        width: fit-content;
+        border-radius: 999px;
+        padding: 5px 9px;
+        background: rgba(126, 230, 165, 0.12);
+        color: var(--positive);
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .core-detail p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .core-detail-list {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      .core-cards {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .core-card {
+        border-left: 4px solid var(--tone);
+        border-radius: 8px;
+        padding: 14px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .core-card h3 {
+        margin: 0 0 8px;
+      }
+
+      .core-card p,
+      .core-card li {
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      .core-card ul {
+        display: grid;
+        gap: 6px;
+        margin: 0;
+        padding-left: 18px;
+      }
+
       .equity-cards {
         display: grid;
         gap: 12px;
@@ -996,6 +1122,7 @@
         .layout,
         .main-grid,
         .equity-grid,
+        .core-layout,
         .allocation,
 
         .controls {
@@ -1004,6 +1131,7 @@
 
         .kpis,
         .equity-kpis,
+        .core-cards,
         .diagnosis {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
@@ -1020,8 +1148,13 @@
 
         .kpis,
         .equity-kpis,
+        .core-cards,
         .diagnosis,
         .benefits {
+          grid-template-columns: 1fr;
+        }
+
+        .core-function {
           grid-template-columns: 1fr;
         }
 
@@ -1575,6 +1708,12 @@
           thesis: "IA é CAPEX",
           subtitle: "Narrativa, excesso e seleção",
         },
+        core: {
+          title: "A escolha do veículo altera a exposição, a execução e a eficiência da carteira",
+          lead: "Em carteiras globais, o ETF define liquidez, fiscalidade, acumulação, hedge, concentração, tracking error e eficiência operacional.",
+          thesis: "Implementação",
+          subtitle: "Exposição, veículo e função",
+        },
       };
 
       const TECH_CYCLES = [
@@ -1789,7 +1928,7 @@
                 "div",
                 null,
                 React.createElement("span", { className: "control-title" }, "Camada estatal"),
-                React.createElement("h2", null, "A infraestrutura do ciclo não nasce sozinha")
+                React.createElement("h2", null, "Onde o governo aparece")
               )
             ),
             React.createElement(
@@ -1830,6 +1969,111 @@
               )
             )
           )
+        );
+      }
+
+      const CORE_FUNCTIONS = [
+        { fn: "Beta estrutural EUA", why: "Baixo custo, replicação eficiente e longo prazo.", tickers: ["VOO", "CSPX", "VUAA"], note: "Preferir UCITS Acc para offshore não-US quando fiscalmente adequado." },
+        { fn: "Execução / hedge EUA", why: "Liquidez, opções e profundidade de mercado.", tickers: ["SPY"], note: "Melhor para puts, collars, overlays e rebalanceamento tático." },
+        { fn: "Growth estrutural", why: "Nasdaq-100 com menor custo ou versão UCITS.", tickers: ["QQQM", "CNDX", "EQQQ"], note: "QQQ executa melhor; QQQM/UCITS carregam melhor." },
+        { fn: "Growth tático / hedge", why: "Opções profundas e liquidez superior.", tickers: ["QQQ"], note: "Instrumento de trading, não necessariamente melhor veículo fiscal." },
+        { fn: "Redução de concentração", why: "Reduz dominância das mega caps.", tickers: ["RSP"], note: "Aumenta exposição a cíclicas e risco de juros." },
+        { fn: "Core developed ex-US", why: "Diversificação desenvolvida fora dos EUA.", tickers: ["VEA", "IEFA", "IWDA", "SWDA"], note: "Avaliar overlap com Europa/Japão." },
+        { fn: "Core Europa", why: "Exposição regional.", tickers: ["VGK", "IEUR", "FEZ", "IMEU"], note: "ETF amplo não captura bem defesa, luxo e soberania digital." },
+        { fn: "Emergentes amplos", why: "Beta EM diversificado.", tickers: ["VWO", "IEMG", "EIMI"], note: "China pode dominar demais o risco." },
+        { fn: "Emergentes ex-China", why: "Reduz risco China.", tickers: ["EMXC", "EXCH"], note: "Útil para China+1 e diversificação geopolítica." },
+        { fn: "Liquidez USD", why: "Carrego curto com baixa volatilidade.", tickers: ["IB01"], note: "Treasury bills UCITS Acc para reinvestimento offshore." },
+        { fn: "Inflação USD", why: "Inflação americana com duration controlada.", tickers: ["TIP5"], note: "Evita misturar inflação com duration longa." },
+        { fn: "Hedge macro", why: "Proteção de cauda ou crise.", tickers: ["Ouro ETC", "SPY options"], note: "Ouro protege regime; opção protege drawdown específico." },
+      ];
+
+      const CORE_DETAILS = {
+        VOO: ["Beta estrutural EUA", "Carregar S&P 500 com baixo custo.", "Não é o melhor instrumento para hedge com opções.", ["Veículo eficiente para buy and hold.", "Boa escolha quando fiscalidade US-listed é aceitável.", "Menos vocacionado a overlays táticos do que SPY."]],
+        CSPX: ["Beta estrutural EUA", "S&P 500 UCITS acumulador.", "Menos útil para execução tática e opções.", ["Apropriado para muitas carteiras offshore não-US.", "Accumulating reduz distribuição de caixa.", "Veículo de carregamento, não de trading."]],
+        VUAA: ["Beta estrutural EUA", "S&P 500 UCITS Acc com custo competitivo.", "Menor profundidade tática que SPY.", ["Bom para reinvestimento automático.", "Útil quando domicílio UCITS importa.", "Função principal: core estrutural."]],
+        SPY: ["Execução / hedge EUA", "Liquidez, opções e execução tática.", "Pode não ser o veículo mais eficiente para carregar patrimônio offshore.", ["Excelente para puts, collars e overlays.", "Profundidade de mercado reduz fricção.", "Instrumento de operação, não necessariamente de carregamento fiscal."]],
+        QQQ: ["Growth tático / hedge", "Execução e opções em Nasdaq-100.", "Buy and hold pode pedir outro veículo.", ["Alta liquidez intradiária.", "Opções profundas.", "Concentração em growth e tecnologia é parte da tese."]],
+        QQQM: ["Growth estrutural", "Carregar Nasdaq-100 com custo menor.", "Menos ideal para trading pesado que QQQ.", ["Melhor vocação para posição estrutural.", "Mantém exposição growth concentrada.", "Diferença de veículo importa no horizonte longo."]],
+        CNDX: ["Growth estrutural", "Nasdaq-100 UCITS Acc.", "Não substitui QQQ em liquidez/opções.", ["Útil para offshore não-US.", "Acumulação facilita reinvestimento.", "Exposição growth com wrapper UCITS."]],
+        EQQQ: ["Growth estrutural", "Nasdaq-100 em formato UCITS.", "Verificar distribuição, custo e moeda de negociação.", ["Alternativa europeia para Nasdaq-100.", "Boa para separar exposição de veículo.", "Comparar com CNDX conforme domicílio e política de distribuição."]],
+        RSP: ["Redução de concentração", "Equal weight no S&P 500.", "Não é automaticamente melhor; muda fatores de risco.", ["Reduz peso da Magnificent 7.", "Aumenta sensibilidade a mid/large cíclicas.", "Pode sofrer mais com juros e ciclo doméstico."]],
+        VEA: ["Core developed ex-US", "Mercados desenvolvidos fora dos EUA.", "Pode diluir qualidade/crescimento versus EUA.", ["Diversificação geográfica ampla.", "Exposição a Europa, Japão e Pacífico.", "Ver overlap com ETFs regionais."]],
+        IEFA: ["Core developed ex-US", "Developed ex-US amplo.", "Não resolve sozinho a composição setorial desejada.", ["Alternativa ampla para mercados desenvolvidos.", "Boa peça de core internacional.", "Checar tracking, custo e domicílio."]],
+        IWDA: ["Core global desenvolvido", "MSCI World UCITS.", "Inclui EUA; pode sobrepor com S&P 500.", ["Veículo UCITS amplo.", "Útil para simplificar core global.", "Checar overlap com VOO/CSPX/VUAA."]],
+        SWDA: ["Core global desenvolvido", "MSCI World UCITS Acc.", "Não é ex-US; EUA domina o índice.", ["Acumulação e ampla diversificação.", "Bom para carteira offshore simples.", "Requer controle de concentração EUA."]],
+        VGK: ["Core Europa", "Beta europeu amplo.", "Europa ampla pode esconder teses setoriais distintas.", ["Exposição regional direta.", "Útil para rebalancear geografia.", "Não captura perfeitamente luxo, defesa e soberania digital."]],
+        IEUR: ["Core Europa", "Europa ampla com veículo iShares.", "Avaliar custo, domicílio e liquidez.", ["Peça regional para developed markets.", "Pode complementar core global.", "Checar sobreposição com VEA/IEFA."]],
+        FEZ: ["Core Europa", "Euro Stoxx 50.", "Mais concentrado que Europa ampla.", ["Exposição blue chips da zona do euro.", "Mais concentrado em grandes nomes.", "Não substitui Europa ampla."]],
+        IMEU: ["Core Europa", "Europa via UCITS.", "Checar benchmark e política de distribuição.", ["Ferramenta regional para offshore.", "Útil para controle de domicílio.", "Comparar com VGK/IEUR/FEZ."]],
+        VWO: ["Emergentes amplos", "Beta emergente diversificado.", "China pode dominar o risco.", ["Exposição ampla a EM.", "Custo competitivo.", "Risco geopolítico e China precisam ser conscientes."]],
+        IEMG: ["Emergentes amplos", "EM amplo com grande liquidez.", "Não neutraliza China por si só.", ["Inclui large, mid e small em EM.", "Boa peça de beta emergente.", "Avaliar composição regional."]],
+        EIMI: ["Emergentes amplos", "EM UCITS amplo.", "Risco China e tracking devem ser monitorados.", ["Útil para offshore UCITS.", "Diversificação EM ampla.", "Checar Acc/Dist e moeda."]],
+        EMXC: ["Emergentes ex-China", "Tese China+1 e redução de risco China.", "Não representa o beta EM tradicional completo.", ["Remove o principal risco geopolítico do EM amplo.", "Aumenta peso relativo de Índia, Taiwan e outros.", "Útil como complemento."]],
+        EXCH: ["Emergentes ex-China", "EM ex-China em wrapper UCITS.", "Checar liquidez e tracking.", ["Separação geopolítica do beta EM.", "Útil para carteiras offshore.", "Complementa VWO/IEMG/EIMI."]],
+        IB01: ["Liquidez USD", "Treasury bills UCITS Acc.", "Não é hedge de duration; é caixa remunerado.", ["Carrego curto com baixa volatilidade.", "Acc pode ser eficiente para reinvestimento.", "Peça de liquidez, margem e espera."]],
+        TIP5: ["Inflação USD", "TIPS curtos com duration controlada.", "Não misturar com TIPS longos sem querer duration.", ["Proteção contra inflação realizada.", "Menor dependência de queda de juros longos.", "Combina com tese de carrego real."]],
+        "Ouro ETC": ["Hedge macro", "Proteção de regime e crise.", "Não protege drawdown específico como opção.", ["Funciona como ativo real/monetário.", "Ajuda em choques de confiança.", "Escolher ETC exige cuidado operacional e fiscal."]],
+        "SPY options": ["Hedge macro", "Proteção de drawdown específico.", "Custo de prêmio corrói retorno se mal dimensionado.", ["Puts, collars e overlays táticos.", "Exige gestão de vencimento e strike.", "Instrumento de proteção, não de carrego."]],
+      };
+
+      const CORE_CARDS = [
+        ["Domicílio importa", "#48d6e9", ["US-listed vs UCITS muda tributação, sucessão e distribuição.", "Acc pode ser mais eficiente para reinvestimento offshore."]],
+        ["Liquidez vs carregamento", "#7ee6a5", ["SPY e QQQ executam melhor.", "VOO, QQQM e UCITS Acc carregam melhor."]],
+        ["Beta não é neutro", "#ffae6b", ["S&P 500 carrega concentração.", "Equal weight reduz mega caps, mas muda risco cíclico."]],
+        ["Checklist institucional", "#c49bff", ["Domicílio, Acc/Dist, spread, tracking, opções, moeda e overlap.", "A decisão correta combina exposição, veículo e função."]],
+      ];
+
+      function CoreModule() {
+        const [selectedEtf, setSelectedEtf] = useState("VOO");
+        const detail = CORE_DETAILS[selectedEtf] || CORE_DETAILS.VOO;
+
+        return React.createElement(
+          "main",
+          { className: "tech-layout" },
+          React.createElement(
+            "section",
+            { className: "core-layout" },
+            React.createElement(
+              "article",
+              { className: "panel" },
+              React.createElement("div", { className: "section-head" }, React.createElement("div", null, React.createElement("span", { className: "control-title" }, "Matriz de implementação"), React.createElement("h2", null, "Função antes do ticker"))),
+              React.createElement(
+                "div",
+                { className: "core-function-grid" },
+                CORE_FUNCTIONS.map((row) =>
+                  React.createElement(
+                    "div",
+                    { className: "core-function", key: row.fn },
+                    React.createElement("div", null, React.createElement("h3", null, row.fn), React.createElement("p", null, row.why), React.createElement("p", null, row.note)),
+                    React.createElement(
+                      "div",
+                      { className: "etf-token-grid" },
+                      row.tickers.map((ticker) =>
+                        React.createElement("button", { className: "etf-token", type: "button", key: `${row.fn}-${ticker}`, "aria-pressed": selectedEtf === ticker, onClick: () => setSelectedEtf(ticker) }, ticker)
+                      )
+                    )
+                  )
+                )
+              )
+            ),
+            React.createElement(
+              "aside",
+              { className: "panel core-detail" },
+              React.createElement("span", { className: "detail-pill" }, detail[0]),
+              React.createElement("h2", null, selectedEtf),
+              React.createElement("p", null, detail[1]),
+              React.createElement("p", null, detail[2]),
+              React.createElement("ul", { className: "core-detail-list" }, detail[3].map((point) => React.createElement("li", { key: point }, point)))
+            )
+          ),
+          React.createElement(
+            "section",
+            { className: "core-cards" },
+            CORE_CARDS.map((card) =>
+              React.createElement("article", { className: "core-card", key: card[0], style: { "--tone": card[1] } }, React.createElement("h3", null, card[0]), React.createElement("ul", null, card[2].map((bullet) => React.createElement("li", { key: bullet }, bullet))))
+            )
+          ),
+          React.createElement("section", { className: "panel equity-summary" }, React.createElement("h2", null, "Índice é exposição. Veículo é implementação."), React.createElement("p", null, "O ETF correto não é o mais famoso; é o que cumpre melhor a função institucional da carteira."))
         );
       }
 
@@ -1891,6 +2135,16 @@
                     onClick: () => setActiveModule("tech"),
                   },
                   "Matriz de Ciclos Tecnológicos"
+                ),
+                React.createElement(
+                  "button",
+                  {
+                    className: "view-tab",
+                    type: "button",
+                    "aria-current": activeModule === "core" ? "page" : undefined,
+                    onClick: () => setActiveModule("core"),
+                  },
+                  "Core"
                 )
               ),
               React.createElement("h1", null, moduleCopy.title),
@@ -2283,7 +2537,9 @@
           )
             : activeModule === "equity"
               ? React.createElement(EquityValuationModule)
-              : React.createElement(TechCycleModule)
+              : activeModule === "tech"
+                ? React.createElement(TechCycleModule)
+                : React.createElement(CoreModule)
         );
       }
 
