@@ -1999,6 +1999,13 @@
         subtitle: "ETF vs cesta",
       };
 
+      MODULE_COPY.europe = {
+        title: "Na Europa, o core compra o continente — a cesta compra a tese",
+        lead: "Depois da exposição regional ampla, a oportunidade está em bolsões estratégicos: defesa, soberania digital, luxo, pharma, eletrificação e industriais de qualidade.",
+        thesis: "Seleção",
+        subtitle: "Europa estratégica",
+      };
+
       const TECH_CYCLES = [
         {
           cycle: "Ferrovias",
@@ -2531,6 +2538,8 @@
           grid: [path("M12 3l7 18H5l7-18z"), line(8, 13, 16, 13), line(9.5, 17, 14.5, 17), line(12, 3, 12, 21)],
           server: [rect(5, 5, 14, 5, 1), rect(5, 14, 14, 5, 1), circle(8, 7.5, 0.7), circle(8, 16.5, 0.7), line(11, 7.5, 16, 7.5), line(11, 16.5, 16, 16.5)],
           factory: [path("M4 20V9l5 3V9l5 3V5h6v15H4z"), line(7, 16, 7, 16), line(11, 16, 11, 16), line(15, 16, 15, 16)],
+          diamond: [path("M6 4h12l3 5-9 11L3 9l3-5z"), path("M3 9h18"), path("M8 4l4 16 4-16")],
+          pulse: [path("M20 12h-4l-2 5-4-10-2 5H4"), path("M12 21C7 17.5 4 14.5 4 10a4 4 0 017-2.6A4 4 0 0118 10c0 4.5-3 7.5-6 11z")],
           atom: [circle(12, 12, 1.5), React.createElement("ellipse", { cx: 12, cy: 12, rx: 8, ry: 3.2, key: "e1" }), React.createElement("ellipse", { cx: 12, cy: 12, rx: 8, ry: 3.2, transform: "rotate(60 12 12)", key: "e2" }), React.createElement("ellipse", { cx: 12, cy: 12, rx: 8, ry: 3.2, transform: "rotate(120 12 12)", key: "e3" })],
         };
 
@@ -2619,6 +2628,129 @@
             React.createElement("p", null, active.reading),
             React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
             React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Nomes / proxies"), React.createElement("strong", null, active.names.join(" · ")))
+          )
+        );
+      }
+
+      const EUROPE_THEMES = [
+        {
+          theme: "Defesa europeia",
+          icon: "shield",
+          status: "Não",
+          quality: "Cesta superior",
+          tone: "sat-risk-high",
+          implementation: "Cesta",
+          why: "Rearmamento, OTAN, Ucrânia e soberania militar.",
+          thesis: "A Europa entrou em um novo ciclo de gastos militares. A tese é fragmentada por países e campeões nacionais, o que torna a cesta mais precisa do que um ETF amplo.",
+          names: ["Rheinmetall", "BAE Systems", "Leonardo", "Saab", "Thales", "Dassault Aviation", "Airbus", "Safran", "Rolls-Royce", "Hensoldt", "Kongsberg", "Indra"],
+          points: ["Rearmamento virou prioridade fiscal e estratégica.", "ETF amplo europeu dilui defesa.", "Cesta captura melhor vencedores nacionais."],
+        },
+        {
+          theme: "Soberania digital",
+          icon: "network",
+          status: "Não",
+          quality: "Cesta superior",
+          tone: "sat-risk-high",
+          implementation: "Cesta",
+          why: "Cloud local, software, telecom, cyber, dados e regulação.",
+          thesis: "A Europa não tem um hyperscaler equivalente a AWS, Azure ou Google Cloud. A tese é uma arquitetura regulada e fragmentada de infraestrutura, software, telecom e segurança.",
+          names: ["SAP", "OVHcloud", "Deutsche Telekom", "Orange", "Telefónica", "Capgemini", "Dassault Systèmes", "Sopra Steria", "Thales", "Schneider", "Siemens", "Legrand"],
+          points: ["Menos crescimento explosivo, mais controle de dados.", "Regulação e segurança sustentam demanda.", "Cesta evita depender de um campeão único."],
+        },
+        {
+          theme: "Luxo / China indireta",
+          icon: "diamond",
+          status: "Parcial",
+          quality: "ETF parcial",
+          tone: "sat-risk-medium",
+          implementation: "Cesta",
+          why: "Pricing power global e exposição indireta ao consumidor asiático.",
+          thesis: "Luxo europeu é uma forma indireta de capturar renda global, consumidor asiático, marca, escassez e margem sem comprar China diretamente.",
+          names: ["LVMH", "Hermès", "Ferrari", "Richemont", "Moncler", "Prada", "Kering", "L’Oréal", "EssilorLuxottica", "Pernod Ricard"],
+          points: ["Tese de marca e pricing power.", "China indireta sem risco China puro.", "Cesta separa líderes de marcas mais frágeis."],
+        },
+        {
+          theme: "Pharma / healthcare",
+          icon: "pulse",
+          status: "Parcial",
+          quality: "ETF parcial",
+          tone: "sat-risk-defensive",
+          implementation: "Cesta ou ETF setorial",
+          why: "Defensividade, inovação e receita global.",
+          thesis: "Pharma europeia combina defensividade, pesquisa, escala global e menor dependência do ciclo econômico. É qualidade defensiva, não tecnologia explosiva.",
+          names: ["Novo Nordisk", "Roche", "Novartis", "AstraZeneca", "Sanofi", "GSK", "Merck KGaA", "Lonza", "Genmab", "UCB"],
+          points: ["Receita global e menor ciclicidade.", "Inovação importa mais do que beta europeu.", "Pode atuar como qualidade defensiva."],
+        },
+        {
+          theme: "Eletrificação / industriais",
+          icon: "energy",
+          status: "Parcial",
+          quality: "ETF parcial",
+          tone: "sat-risk-medium",
+          implementation: "Cesta",
+          why: "Grid, automação, equipamentos elétricos e eficiência energética.",
+          thesis: "A Europa ainda possui líderes em equipamentos elétricos, automação, grid e componentes críticos para infraestrutura, IA, data centers e reindustrialização.",
+          names: ["Schneider Electric", "Siemens", "ABB", "Legrand", "Prysmian", "Assa Abloy", "Atlas Copco", "Sandvik", "Infineon", "STMicroelectronics", "ASML"],
+          points: ["A tese conversa com IA, energia e data centers.", "ETF industrial amplo dilui qualidade.", "Cesta captura melhor equipamentos e automação."],
+        },
+        {
+          theme: "Semis europeus",
+          icon: "chip",
+          status: "Parcial",
+          quality: "ETF parcial",
+          tone: "sat-risk-medium",
+          implementation: "Cesta",
+          why: "ASML, Infineon, STMicroelectronics e equipment crítico.",
+          thesis: "A Europa não domina toda a cadeia de semis, mas controla peças críticas em equipment, analog, power semis e componentes industriais.",
+          names: ["ASML", "Infineon", "STMicroelectronics", "ASM International", "BE Semiconductor", "Soitec"],
+          points: ["ASML é ativo estratégico difícil de replicar.", "Exposição é concentrada em poucos nomes.", "Cesta evita diluição em tecnologia europeia ampla."],
+        },
+      ];
+
+      function EuropeModule() {
+        const [selectedTheme, setSelectedTheme] = useState("Defesa europeia");
+        const active = EUROPE_THEMES.find((item) => item.theme === selectedTheme) || EUROPE_THEMES[0];
+
+        return React.createElement(
+          "main",
+          { className: "satellite-layout" },
+          React.createElement(
+            "article",
+            { className: "panel" },
+            React.createElement("div", { className: "section-head" }, React.createElement("div", null, React.createElement("span", { className: "control-title" }, "Europa ampla vs estratégica"), React.createElement("h2", null, "Europa ampla diversifica. Europa estratégica seleciona."))),
+            React.createElement(
+              "div",
+              { className: "satellite-grid", style: { paddingTop: 16 } },
+              EUROPE_THEMES.map((item) =>
+                React.createElement(
+                  "button",
+                  { className: `satellite-card ${item.tone}`, type: "button", key: item.theme, "aria-pressed": active.theme === item.theme, onClick: () => setSelectedTheme(item.theme) },
+                  React.createElement(
+                    "div",
+                    null,
+                    React.createElement("div", { className: "satellite-title-row" }, React.createElement(SatelliteIcon, { type: item.icon }), React.createElement("h3", null, item.theme)),
+                    React.createElement("p", null, item.why)
+                  ),
+                  React.createElement("div", { className: "satellite-tags" }, React.createElement("span", { className: "satellite-tag" }, `ETF amplo: ${item.status}`), React.createElement("span", { className: "satellite-tag" }, item.implementation))
+                )
+              )
+            )
+          ),
+          React.createElement(
+            "aside",
+            { className: "panel satellite-detail" },
+            React.createElement("span", { className: "detail-role" }, "Tema selecionado"),
+            React.createElement("div", { className: `satellite-detail-head ${active.tone}` }, React.createElement(SatelliteIcon, { type: active.icon }), React.createElement("h2", null, active.theme)),
+            React.createElement(
+              "div",
+              { className: "detail-grid" },
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "ETF amplo resolve?"), React.createElement("strong", null, active.status)),
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Melhor implementação"), React.createElement("strong", null, active.implementation)),
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Qualidade do ETF"), React.createElement("strong", null, active.quality))
+            ),
+            React.createElement("p", null, active.thesis),
+            React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
+            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Cesta possível"), React.createElement("strong", null, active.names.join(" · ")))
           )
         );
       }
@@ -2756,6 +2888,16 @@
                     onClick: () => setActiveModule("satellites"),
                   },
                   "Satélites EUA"
+                ),
+                React.createElement(
+                  "button",
+                  {
+                    className: "view-tab",
+                    type: "button",
+                    "aria-current": activeModule === "europe" ? "page" : undefined,
+                    onClick: () => setActiveModule("europe"),
+                  },
+                  "Europa Estratégica"
                 )
               ),
               React.createElement("h1", null, moduleCopy.title),
@@ -3151,7 +3293,9 @@
                 ? React.createElement(TechCycleModule)
                 : activeModule === "core"
                   ? React.createElement(CoreModule)
-                  : React.createElement(SatelliteModule)
+                  : activeModule === "satellites"
+                    ? React.createElement(SatelliteModule)
+                    : React.createElement(EuropeModule)
         );
       }
 
