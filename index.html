@@ -693,11 +693,6 @@
               })
             )
           ),
-          React.createElement(
-            "text",
-            { className: "axis-label", x: margin.left, y: height - 14 },
-            "Prazo"
-          ),
           filteredMaturities.map((maturity, index) =>
             React.createElement(
               "text",
@@ -802,8 +797,8 @@
               "aside",
               { className: "market-stamp" },
               React.createElement("span", null, "Tese central"),
-              React.createElement("strong", null, "Carrego real"),
-              React.createElement("span", null, "TIPS curtos 0-5 anos como exemplo conceitual")
+              React.createElement("strong", null, "Carry"),
+              React.createElement("span", null, "Duration moderada (2.3y)")
             )
           ),
           React.createElement(
@@ -841,7 +836,7 @@
                         "aria-pressed": mode === key,
                         onClick: () => setMode(key),
                       },
-                      key === "all" ? "Todas" : CURVES[key].short
+                      key === "all" ? "Todas" : key === "inflation" ? "Inflação Implícita" : CURVES[key].short
                     )
                   )
                 )
