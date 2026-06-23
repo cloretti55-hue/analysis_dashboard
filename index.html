@@ -668,6 +668,12 @@
         font-weight: 850;
       }
 
+      .mega-table tr.benchmark-row td {
+        background: rgba(72, 214, 233, 0.1);
+        color: var(--focus);
+        font-weight: 850;
+      }
+
       .equity-cards {
         display: grid;
         gap: 12px;
@@ -1036,6 +1042,13 @@
 
       const MAGNIFICENT_ROWS = [
         {
+          company: "S&P 500",
+          pe: "20,5x",
+          growth: "Benchmark",
+          read: "Referência para comparar o prêmio das mega caps contra o índice cheio.",
+          benchmark: true,
+        },
+        {
           company: "Nvidia",
           pe: "~20x-25x",
           growth: ">70%",
@@ -1244,7 +1257,7 @@
                   MAGNIFICENT_ROWS.map((row) =>
                     React.createElement(
                       "tr",
-                      { key: row.company },
+                      { key: row.company, className: row.benchmark ? "benchmark-row" : undefined },
                       React.createElement("td", null, row.company),
                       React.createElement("td", null, row.pe),
                       React.createElement("td", null, row.growth),
