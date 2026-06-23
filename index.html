@@ -590,6 +590,7 @@
 
       .source-card {
         display: grid;
+        align-content: start;
         gap: 12px;
         min-height: 190px;
         padding: 16px;
@@ -671,6 +672,159 @@
         background: rgba(72, 214, 233, 0.1);
         color: var(--focus);
         font-weight: 850;
+      }
+
+      .tech-layout {
+        display: grid;
+        gap: 18px;
+      }
+
+      .tech-main {
+        display: grid;
+        grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.72fr);
+        gap: 18px;
+      }
+
+      .thesis-line {
+        margin: 0;
+        color: var(--ink);
+        font-size: 21px;
+        font-weight: 850;
+        line-height: 1.25;
+      }
+
+      .cycle-table-wrap {
+        overflow-x: auto;
+      }
+
+      .cycle-table {
+        width: 100%;
+        min-width: 920px;
+        border-collapse: collapse;
+      }
+
+      .cycle-table th,
+      .cycle-table td {
+        border-top: 1px solid var(--line);
+        padding: 12px;
+        text-align: left;
+        vertical-align: middle;
+      }
+
+      .cycle-table th {
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .cycle-table td:first-child {
+        font-weight: 850;
+        white-space: nowrap;
+      }
+
+      .intensity {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 34px;
+        border-radius: 8px;
+        padding: 8px;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .capex-high,
+      .capex-very {
+        background: rgba(72, 214, 233, 0.18);
+        color: #82ebff;
+      }
+
+      .risk-mid {
+        background: rgba(255, 174, 107, 0.18);
+        color: #ffc18f;
+      }
+
+      .risk-high,
+      .risk-very {
+        background: rgba(255, 123, 107, 0.2);
+        color: #ff9b8f;
+      }
+
+      .winner-high,
+      .winner-very {
+        background: rgba(126, 230, 165, 0.18);
+        color: #9df0ba;
+      }
+
+      .unknown {
+        background: rgba(170, 184, 202, 0.14);
+        color: #c8d3e1;
+      }
+
+      .lesson-cell {
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      .ai-stack {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 8px;
+        padding: 16px;
+      }
+
+      .stack-layer {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .stack-layer strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .stack-layer span {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+        padding: 16px;
+      }
+
+      .timeline-step {
+        position: relative;
+        min-height: 82px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .timeline-step[aria-current="step"] {
+        border-color: var(--focus);
+        background: var(--focus-soft);
+      }
+
+      .timeline-step span {
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .timeline-step strong {
+        display: block;
+        margin-top: 6px;
       }
 
       .equity-cards {
@@ -1297,6 +1451,221 @@
         );
       }
 
+      const MODULE_COPY = {
+        curve: {
+          title: "O retorno livre de risco voltou a competir por capital",
+          lead: "Curvas de Treasuries, TIPS e inflação implícita para separar inflação, juro real e prêmio de prazo.",
+          thesis: "Carry",
+          subtitle: "Duration moderada (2.3y)",
+        },
+        equity: {
+          title: "Valuation do mercado americano",
+          lead: "O valuation do S&P 500 é elevado, mas a concentração do prêmio está principalmente na Magnificent 7.",
+          thesis: "Concentração",
+          subtitle: "Prêmio na Magnificent 7",
+        },
+        tech: {
+          title: "Todo grande ciclo tecnológico começa com excesso de capital",
+          lead: "Ferrovias, eletrificação, internet e IA seguem a mesma lógica financeira: primeiro vem investimento agressivo; depois, seleção, destruição de capital e concentração dos ganhos.",
+          thesis: "IA é CAPEX",
+          subtitle: "Narrativa, excesso e seleção",
+        },
+      };
+
+      const TECH_CYCLES = [
+        {
+          cycle: "Ferrovias",
+          capex: ["Muito alto", "capex-very"],
+          excess: ["Alto", "risk-high"],
+          destruction: ["Muito alta", "risk-very"],
+          winners: ["Alto", "winner-high"],
+          lesson: "Infraestrutura muda o mundo, mas muitos investidores quebram.",
+        },
+        {
+          cycle: "Eletrificação",
+          capex: ["Alto", "capex-high"],
+          excess: ["Médio", "risk-mid"],
+          destruction: ["Média", "risk-mid"],
+          winners: ["Alto", "winner-high"],
+          lesson: "O valor migra para quem escala rede e uso.",
+        },
+        {
+          cycle: "Dotcom",
+          capex: ["Muito alto", "capex-very"],
+          excess: ["Muito alto", "risk-very"],
+          destruction: ["Muito alta", "risk-very"],
+          winners: ["Muito alto", "winner-very"],
+          lesson: "A tese estava certa; preço e timing destruíram capital.",
+        },
+        {
+          cycle: "IA atual",
+          capex: ["Muito alto", "capex-very"],
+          excess: ["Em formação", "unknown"],
+          destruction: ["Ainda incompleta", "unknown"],
+          winners: ["Indefinido", "unknown"],
+          lesson: "O ciclo ainda está escolhendo vencedores.",
+        },
+      ];
+
+      const AI_STACK = [
+        ["Energia / Grid", "Demanda física: utilities, transmissão e equipamentos."],
+        ["Data centers / Cooling", "Infraestrutura crítica: Vertiv, Eaton, Schneider, Equinix."],
+        ["Chips / HBM / Networking", "Gargalo tecnológico: Nvidia, TSMC, Broadcom, ASML."],
+        ["Cloud / Hyperscalers", "Escala e distribuição: Microsoft, Amazon, Google, Oracle."],
+        ["Aplicações", "Monetização final: software, agentes e vertical apps."],
+      ];
+
+      const TECH_TIMELINE = [
+        ["1", "Narrativa"],
+        ["2", "CAPEX"],
+        ["3", "Excesso"],
+        ["4", "Quebra / seleção"],
+        ["5", "Concentração dos ganhos"],
+      ];
+
+      function TechCycleModule() {
+        const intensity = (entry) =>
+          React.createElement("span", { className: `intensity ${entry[1]}` }, entry[0]);
+
+        return React.createElement(
+          "main",
+          { className: "tech-layout" },
+          React.createElement(
+            "section",
+            { className: "tech-main" },
+            React.createElement(
+              "article",
+              { className: "panel source-card" },
+              React.createElement(
+                "div",
+                { className: "section-head" },
+                React.createElement(
+                  "div",
+                  null,
+                  React.createElement("span", { className: "control-title" }, "Matriz de ciclos"),
+                  React.createElement("h2", null, "Inovação real não impede destruição de capital")
+                )
+              ),
+              React.createElement(
+                "p",
+                { className: "thesis-line" },
+                "O erro não é acreditar no ciclo tecnológico. O erro é achar que todo participante do ciclo vira bom investimento."
+              ),
+              React.createElement(
+                "div",
+                { className: "cycle-table-wrap" },
+                React.createElement(
+                  "table",
+                  { className: "cycle-table" },
+                  React.createElement(
+                    "thead",
+                    null,
+                    React.createElement(
+                      "tr",
+                      null,
+                      React.createElement("th", null, "Ciclo"),
+                      React.createElement("th", null, "CAPEX inicial"),
+                      React.createElement("th", null, "Excesso / bolha"),
+                      React.createElement("th", null, "Destruição de capital"),
+                      React.createElement("th", null, "Vencedores finais"),
+                      React.createElement("th", null, "Lição para IA")
+                    )
+                  ),
+                  React.createElement(
+                    "tbody",
+                    null,
+                    TECH_CYCLES.map((row) =>
+                      React.createElement(
+                        "tr",
+                        { key: row.cycle },
+                        React.createElement("td", null, row.cycle),
+                        React.createElement("td", null, intensity(row.capex)),
+                        React.createElement("td", null, intensity(row.excess)),
+                        React.createElement("td", null, intensity(row.destruction)),
+                        React.createElement("td", null, intensity(row.winners)),
+                        React.createElement("td", { className: "lesson-cell" }, row.lesson)
+                      )
+                    )
+                  )
+                )
+              )
+            ),
+            React.createElement(
+              "article",
+              { className: "panel source-card" },
+              React.createElement(
+                "div",
+                { className: "section-head" },
+                React.createElement(
+                  "div",
+                  null,
+                  React.createElement("span", { className: "control-title" }, "Pilha econômica"),
+                  React.createElement("h2", null, "Onde o dinheiro entra primeiro")
+                )
+              ),
+              React.createElement(
+                "div",
+                { className: "ai-stack" },
+                AI_STACK.map((layer) =>
+                  React.createElement(
+                    "div",
+                    { className: "stack-layer", key: layer[0] },
+                    React.createElement("strong", null, layer[0]),
+                    React.createElement("span", null, layer[1])
+                  )
+                )
+              ),
+              React.createElement(
+                "p",
+                { className: "thesis-line" },
+                "O dinheiro entra pela base antes de aparecer no topo."
+              )
+            )
+          ),
+          React.createElement(
+            "section",
+            { className: "panel source-card" },
+            React.createElement(
+              "div",
+              { className: "section-head" },
+              React.createElement(
+                "div",
+                null,
+                React.createElement("span", { className: "control-title" }, "Linha do tempo"),
+                React.createElement("h2", null, "Onde estamos na IA?")
+              )
+            ),
+            React.createElement(
+              "div",
+              { className: "timeline" },
+              TECH_TIMELINE.map((step) =>
+                React.createElement(
+                  "div",
+                  { className: "timeline-step", key: step[0], "aria-current": step[1] === "CAPEX" ? "step" : undefined },
+                  React.createElement("span", null, step[0]),
+                  React.createElement("strong", null, step[1])
+                )
+              )
+            ),
+            React.createElement(
+              "p",
+              { className: "thesis-line" },
+              "IA está entre CAPEX acelerado e seleção inicial dos vencedores."
+            )
+          ),
+          React.createElement(
+            "section",
+            { className: "panel equity-summary" },
+            React.createElement("h2", null, "O retorno não vem do tema. Vem de onde o dinheiro realmente aparece."),
+            React.createElement(
+              "p",
+              null,
+              "O tema pode estar certo, mas o investimento errado ainda pode destruir capital."
+            )
+          )
+        );
+      }
+
       function App() {
         const [activeModule, setActiveModule] = useState("curve");
         const [mode, setMode] = useState("nominal");
@@ -1312,6 +1681,7 @@
         const selected = null;
         const selectedRows = [];
         const setSelected = () => {};
+        const moduleCopy = MODULE_COPY[activeModule];
 
         return React.createElement(
           "div",
@@ -1344,33 +1714,27 @@
                     onClick: () => setActiveModule("equity"),
                   },
                   "Equity Valuation"
+                ),
+                React.createElement(
+                  "button",
+                  {
+                    className: "view-tab",
+                    type: "button",
+                    "aria-current": activeModule === "tech" ? "page" : undefined,
+                    onClick: () => setActiveModule("tech"),
+                  },
+                  "Matriz de Ciclos Tecnológicos"
                 )
               ),
-              React.createElement(
-                "h1",
-                null,
-                activeModule === "curve"
-                  ? "O retorno livre de risco voltou a competir por capital"
-                  : "Valuation do mercado americano"
-              ),
-              React.createElement(
-                "p",
-                { className: "lead" },
-                activeModule === "curve"
-                  ? "Curvas de Treasuries, TIPS e inflação implícita para separar inflação, juro real e prêmio de prazo."
-                  : "O valuation do S&P 500 é elevado, mas a concentração do prêmio está principalmente na Magnificent 7."
-              )
+              React.createElement("h1", null, moduleCopy.title),
+              React.createElement("p", { className: "lead" }, moduleCopy.lead)
             ),
             React.createElement(
               "aside",
               { className: "market-stamp" },
               React.createElement("span", null, "Tese central"),
-              React.createElement("strong", null, activeModule === "curve" ? "Carry" : "Concentração"),
-              React.createElement(
-                "span",
-                null,
-                activeModule === "curve" ? "Duration moderada (2.3y)" : "Prêmio na Magnificent 7"
-              )
+              React.createElement("strong", null, moduleCopy.thesis),
+              React.createElement("span", null, moduleCopy.subtitle)
             )
           ),
           activeModule === "curve"
@@ -1750,7 +2114,9 @@
               )
             )
           )
-            : React.createElement(EquityValuationModule)
+            : activeModule === "equity"
+              ? React.createElement(EquityValuationModule)
+              : React.createElement(TechCycleModule)
         );
       }
 
