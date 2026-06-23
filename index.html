@@ -1163,6 +1163,35 @@
         color: var(--ink);
       }
 
+      .satellite-title-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 4px;
+      }
+
+      .satellite-title-row h3 {
+        margin: 0;
+      }
+
+      .satellite-icon {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(72, 214, 233, 0.22);
+        border-radius: 8px;
+        background: rgba(72, 214, 233, 0.07);
+        color: var(--zone);
+      }
+
+      .satellite-icon svg {
+        width: 21px;
+        height: 21px;
+        stroke: currentColor;
+      }
+
       .satellite-card p {
         margin: 0;
         color: var(--muted);
@@ -1208,6 +1237,23 @@
       .satellite-detail h2 {
         margin: 0;
         font-size: 28px;
+      }
+
+      .satellite-detail-head {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .satellite-detail-head .satellite-icon {
+        width: 46px;
+        height: 46px;
+        flex-basis: 46px;
+      }
+
+      .satellite-detail-head .satellite-icon svg {
+        width: 28px;
+        height: 28px;
       }
 
       .detail-grid {
@@ -2333,6 +2379,7 @@
       const SATELLITES = [
         {
           theme: "Semicondutores / IA hardware",
+          icon: "chip",
           zone: "resolve",
           aggression: "high",
           motor: "ai",
@@ -2346,6 +2393,7 @@
         },
         {
           theme: "Defesa EUA",
+          icon: "shield",
           zone: "resolve",
           aggression: "medium",
           motor: "defense",
@@ -2359,6 +2407,7 @@
         },
         {
           theme: "Cybersecurity",
+          icon: "network",
           zone: "resolve",
           aggression: "medium",
           motor: "cyber",
@@ -2372,6 +2421,7 @@
         },
         {
           theme: "Robotics / automação",
+          icon: "robotics",
           zone: "partial",
           aggression: "high",
           motor: "industry",
@@ -2385,6 +2435,7 @@
         },
         {
           theme: "Energia / grid",
+          icon: "energy",
           zone: "partial",
           aggression: "medium",
           motor: "energy",
@@ -2398,6 +2449,7 @@
         },
         {
           theme: "Infrastructure / utilities",
+          icon: "grid",
           zone: "partial",
           aggression: "defensive",
           motor: "energy",
@@ -2411,6 +2463,7 @@
         },
         {
           theme: "Data centers físicos",
+          icon: "server",
           zone: "basket",
           aggression: "high",
           motor: "ai",
@@ -2424,6 +2477,7 @@
         },
         {
           theme: "Onshoring / reindustrialização",
+          icon: "factory",
           zone: "basket",
           aggression: "medium",
           motor: "industry",
@@ -2437,6 +2491,7 @@
         },
         {
           theme: "Quantum / frontier computing",
+          icon: "atom",
           zone: "basket",
           aggression: "high",
           motor: "ai",
@@ -2449,6 +2504,38 @@
           points: ["Tamanho inicial deve ser controlado.", "Tema ainda escolhe vencedores.", "ETF pode misturar empresas pouco expostas ao motor real."],
         },
       ];
+
+      function SatelliteIcon({ type }) {
+        const iconProps = { viewBox: "0 0 24 24", fill: "none", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": "true" };
+        const path = (d) => React.createElement("path", { d, key: d });
+        const line = (x1, y1, x2, y2) => React.createElement("line", { x1, y1, x2, y2, key: `${x1}-${y1}-${x2}-${y2}` });
+        const circle = (cx, cy, r) => React.createElement("circle", { cx, cy, r, key: `${cx}-${cy}-${r}` });
+        const rect = (x, y, width, height, rx = 2) => React.createElement("rect", { x, y, width, height, rx, key: `${x}-${y}-${width}-${height}` });
+
+        const shapes = {
+          chip: [
+            rect(7, 7, 10, 10, 2),
+            line(4, 9, 7, 9),
+            line(4, 15, 7, 15),
+            line(17, 9, 20, 9),
+            line(17, 15, 20, 15),
+            line(9, 4, 9, 7),
+            line(15, 4, 15, 7),
+            line(9, 17, 9, 20),
+            line(15, 17, 15, 20),
+          ],
+          shield: [path("M12 3l7 3v5c0 4.5-2.8 8-7 10-4.2-2-7-5.5-7-10V6l7-3z"), path("M9 12l2 2 4-5")],
+          network: [circle(7, 8, 2), circle(17, 8, 2), circle(12, 17, 2), line(9, 9, 15, 9), line(8, 10, 11, 15), line(16, 10, 13, 15)],
+          robotics: [path("M5 18h8"), path("M8 18v-5l4-4 3 3-4 4"), circle(16, 7, 2), path("M14 19l4-4"), path("M18 15l2 2")],
+          energy: [path("M13 2L5 14h6l-1 8 8-12h-6l1-8z")],
+          grid: [path("M12 3l7 18H5l7-18z"), line(8, 13, 16, 13), line(9.5, 17, 14.5, 17), line(12, 3, 12, 21)],
+          server: [rect(5, 5, 14, 5, 1), rect(5, 14, 14, 5, 1), circle(8, 7.5, 0.7), circle(8, 16.5, 0.7), line(11, 7.5, 16, 7.5), line(11, 16.5, 16, 16.5)],
+          factory: [path("M4 20V9l5 3V9l5 3V5h6v15H4z"), line(7, 16, 7, 16), line(11, 16, 11, 16), line(15, 16, 15, 16)],
+          atom: [circle(12, 12, 1.5), React.createElement("ellipse", { cx: 12, cy: 12, rx: 8, ry: 3.2, key: "e1" }), React.createElement("ellipse", { cx: 12, cy: 12, rx: 8, ry: 3.2, transform: "rotate(60 12 12)", key: "e2" }), React.createElement("ellipse", { cx: 12, cy: 12, rx: 8, ry: 3.2, transform: "rotate(120 12 12)", key: "e3" })],
+        };
+
+        return React.createElement("span", { className: "satellite-icon" }, React.createElement("svg", iconProps, shapes[type] || shapes.chip));
+      }
 
       function SatelliteModule() {
         const riskOrder = { high: 0, medium: 1, defensive: 2 };
@@ -2506,7 +2593,12 @@
                 React.createElement(
                   "button",
                   { className: `satellite-card risk-${item.aggression}`, type: "button", key: item.theme, "aria-pressed": active.theme === item.theme, onClick: () => setSelectedTheme(item.theme) },
-                  React.createElement("div", null, React.createElement("h3", null, item.theme), React.createElement("p", null, item.reading)),
+                  React.createElement(
+                    "div",
+                    null,
+                    React.createElement("div", { className: "satellite-title-row" }, React.createElement(SatelliteIcon, { type: item.icon }), React.createElement("h3", null, item.theme)),
+                    React.createElement("p", null, item.reading)
+                  ),
                   React.createElement("div", { className: "satellite-tags" }, React.createElement("span", { className: "satellite-tag" }, item.implementation), React.createElement("span", { className: "satellite-tag" }, item.quality))
                 )
               )
@@ -2516,7 +2608,7 @@
             "aside",
             { className: "panel satellite-detail" },
             React.createElement("span", { className: "detail-role" }, "Tema selecionado"),
-            React.createElement("h2", null, active.theme),
+            React.createElement("div", { className: `satellite-detail-head risk-${active.aggression}` }, React.createElement(SatelliteIcon, { type: active.icon }), React.createElement("h2", null, active.theme)),
             React.createElement(
               "div",
               { className: "detail-grid" },
