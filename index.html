@@ -319,21 +319,6 @@
         cursor: pointer;
       }
 
-      .tooltip {
-        pointer-events: none;
-      }
-
-      .tooltip rect {
-        fill: rgba(7, 19, 36, 0.96);
-        rx: 8;
-      }
-
-      .tooltip text {
-        fill: #fffdf8;
-        font-size: 12px;
-        font-weight: 700;
-      }
-
       .legend {
         display: flex;
         flex-wrap: wrap;
@@ -749,28 +734,13 @@
                 x2: width - margin.right,
                 y1: y(tick),
                 y2: y(tick),
-              }),
-              React.createElement(
-                "text",
-                { className: "tick", x: margin.left - 12, y: y(tick) + 4, textAnchor: "end" },
-                pct(tick)
-              )
+              })
             )
           ),
           React.createElement(
             "text",
             { className: "axis-label", x: margin.left, y: height - 14 },
             "Prazo"
-          ),
-          React.createElement(
-            "text",
-            {
-              className: "axis-label",
-              x: 14,
-              y: margin.top + 10,
-              transform: `rotate(-90 14 ${margin.top + 10})`,
-            },
-            mode === "all" ? "Yield / Inflação" : CURVES[mode].label
           ),
           filteredMaturities.map((maturity, index) =>
             React.createElement(
@@ -834,21 +804,7 @@
                     cy: point.y,
                     r: 18,
                     onClick: () => setSelected(selected === point.maturity ? null : point.maturity),
-                  }),
-                  selected === point.maturity &&
-                    React.createElement(
-                      "g",
-                      {
-                        className: "tooltip",
-                        transform: `translate(${Math.min(point.x + 12, width - 170)} ${Math.max(point.y - 42, 8)})`,
-                      },
-                      React.createElement("rect", { width: 146, height: 34 }),
-                      React.createElement(
-                        "text",
-                        { x: 10, y: 21 },
-                        `${CURVES[curveKey].short} ${point.maturity}: ${pct(point.value)}`
-                      )
-                  )
+                  })
                 )
               )
             );
@@ -940,8 +896,7 @@
                     )
                   )
                 )
-              ),
-              React.createElement("button", { className: "ghost-btn", type: "button", onClick: resetFilters }, "Restaurar visão")
+              )
             ),
             React.createElement(
               "section",
