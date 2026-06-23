@@ -1115,6 +1115,23 @@
         color: #ffb5b5;
       }
 
+      .risk-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-top: 2px;
+      }
+
+      .risk-legend span {
+        border-left: 4px solid var(--zone);
+        border-radius: 8px;
+        padding: 6px 9px;
+        background: rgba(255, 255, 255, 0.035);
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 850;
+      }
+
       .satellite-grid {
         display: grid;
         gap: 14px;
@@ -2469,7 +2486,19 @@
             "article",
             { className: "panel" },
             React.createElement("div", { className: "section-head" }, React.createElement("div", null, React.createElement("span", { className: "control-title" }, "Satélites temáticos"))),
-            React.createElement("div", { className: "satellite-filters" }, filterRow("aggression", "Risco"), filterRow("motor", "Motor")),
+            React.createElement(
+              "div",
+              { className: "satellite-filters" },
+              filterRow("aggression", "Convexidade"),
+              filterRow("motor", "Motor"),
+              React.createElement(
+                "div",
+                { className: "risk-legend" },
+                React.createElement("span", { className: "risk-high" }, "Alta convexidade"),
+                React.createElement("span", { className: "risk-medium" }, "Convexidade média"),
+                React.createElement("span", { className: "risk-defensive" }, "Defensivo")
+              )
+            ),
             React.createElement(
               "div",
               { className: "satellite-grid" },
