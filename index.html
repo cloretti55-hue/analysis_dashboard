@@ -771,25 +771,28 @@
 
       .ai-stack {
         display: flex;
-        flex-direction: column-reverse;
-        gap: 8px;
+        gap: 10px;
+        overflow-x: auto;
       }
 
       .stack-frame {
         display: grid;
-        grid-template-columns: 42px minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1fr);
         gap: 12px;
         padding: 16px;
       }
 
       .stack-arrow {
-        min-height: 100%;
-        background: linear-gradient(180deg, rgba(72, 214, 233, 0.92), rgba(72, 214, 233, 0.16));
-        clip-path: polygon(50% 0, 100% 15%, 72% 15%, 72% 100%, 28% 100%, 28% 15%, 0 15%);
+        height: 22px;
+        width: 100%;
+        background: linear-gradient(90deg, rgba(72, 214, 233, 0.18), rgba(72, 214, 233, 0.92));
+        clip-path: polygon(0 35%, 92% 35%, 92% 0, 100% 50%, 92% 100%, 92% 65%, 0 65%);
         filter: drop-shadow(0 0 14px rgba(72, 214, 233, 0.18));
       }
 
       .stack-layer {
+        min-width: 190px;
+        flex: 1 0 190px;
         border: 1px solid var(--line);
         border-radius: 8px;
         padding: 12px;
@@ -2151,7 +2154,7 @@
                 { className: "stack-frame" },
                 React.createElement(
                   "div",
-                  { className: "stack-arrow", "aria-label": "Ler a pilha de baixo para cima" }
+                  { className: "stack-arrow", "aria-label": "Ler da infraestrutura para a monetização" }
                 ),
                 React.createElement(
                   "div",
@@ -2170,7 +2173,7 @@
               React.createElement(
                 "p",
                 { className: "thesis-line" },
-                "O dinheiro entra pela base antes de aparecer no topo."
+                "O capital entra pela infraestrutura antes de aparecer na monetização final."
               )
             )
           ),
