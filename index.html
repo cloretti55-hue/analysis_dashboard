@@ -723,6 +723,42 @@
         white-space: nowrap;
       }
 
+      .cycle-table tbody tr {
+        cursor: pointer;
+      }
+
+      .cycle-table tbody tr.is-selected td {
+        background: rgba(72, 214, 233, 0.055);
+      }
+
+      .cycle-detail {
+        display: grid;
+        gap: 12px;
+        margin: 16px 0 0;
+        border: 1px solid rgba(222, 233, 247, 0.11);
+        border-radius: 8px;
+        padding: 14px;
+        background: rgba(255, 255, 255, 0.024);
+      }
+
+      .cycle-detail h3 {
+        margin: 0;
+        font-size: 20px;
+      }
+
+      .cycle-detail p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .cycle-lesson {
+        border-left: 3px solid var(--focus);
+        padding-left: 12px;
+        color: var(--ink);
+        font-weight: 850;
+      }
+
       .intensity {
         display: inline-flex;
         align-items: center;
@@ -2045,6 +2081,29 @@
         },
       ];
 
+      const CYCLE_DETAILS = {
+        Ferrovias: {
+          anatomy:
+            "O investimento era real: trilhos, terras, pontes, locomotivas e concessões. Mas houve excesso de linhas, dívida ferroviária e projetos construídos antes da demanda. A infraestrutura permaneceu, mas muitos acionistas e credores foram destruídos. O valor ficou com redes consolidadas, rotas críticas e operadores com escala logística.",
+          lesson: "Infraestrutura real não garante retorno para todo investidor.",
+        },
+        Eletrificação: {
+          anatomy:
+            "O CAPEX criou usinas, redes de transmissão, distribuição urbana, motores elétricos e equipamentos industriais. Houve disputa entre padrões, utilities locais e sistemas concorrentes. O domínio ficou com companhias que controlaram escala, equipamentos e distribuição.",
+          lesson: "Valor não vem só da infraestrutura; vem quando ela vira uso recorrente e escala econômica.",
+        },
+        Dotcom: {
+          anatomy:
+            "A tese da internet estava certa, mas o capital entrou cedo demais e caro demais. Houve excesso de fibra, telecom, servidores, portais e e-commerce sem lucro. Muitas pontocom desapareceram; o valor ficou com plataformas que sobreviveram, escalaram e monetizaram.",
+          lesson: "Tese certa pode destruir capital quando preço, timing e monetização estão errados.",
+        },
+        "IA atual": {
+          anatomy:
+            "O CAPEX é real: GPUs, HBM, networking, data centers, energia, cooling, cloud e modelos fundacionais. O risco não é a IA ser falsa; é construir capacidade acima da monetização final ou pagar múltiplos que já embutem sucesso perfeito.",
+          lesson: "O ciclo é real, mas os vencedores finais ainda estão sendo escolhidos.",
+        },
+      };
+
       const AI_STACK = [
         ["Energia / Grid", "Demanda física: utilities, transmissão e equipamentos.", "money-now", "fluxo de CAPEX visível"],
         ["Data centers / Cooling", "Infraestrutura crítica: Vertiv, Eaton, Schneider, Equinix.", "money-now", "fluxo de CAPEX visível"],
@@ -2070,6 +2129,8 @@
       ];
 
       function TechCycleModule() {
+        const [selectedCycle, setSelectedCycle] = useState("Ferrovias");
+        const cycleDetail = CYCLE_DETAILS[selectedCycle] || CYCLE_DETAILS.Ferrovias;
         const intensity = (entry) =>
           React.createElement("span", { className: `intensity ${entry[1]}` }, entry[0]);
 
@@ -2123,7 +2184,7 @@
                     TECH_CYCLES.map((row) =>
                       React.createElement(
                         "tr",
-                        { key: row.cycle },
+                        { key: row.cycle, className: selectedCycle === row.cycle ? "is-selected" : undefined, onClick: () => setSelectedCycle(row.cycle) },
                         React.createElement("td", null, row.cycle),
                         React.createElement("td", null, intensity(row.capex)),
                         React.createElement("td", null, intensity(row.excess)),
@@ -2134,6 +2195,14 @@
                     )
                   )
                 )
+              ),
+              React.createElement(
+                "div",
+                { className: "cycle-detail" },
+                React.createElement("span", { className: "control-title" }, "Anatomia do ciclo"),
+                React.createElement("h3", null, selectedCycle),
+                React.createElement("p", null, cycleDetail.anatomy),
+                React.createElement("p", { className: "cycle-lesson" }, `Lição para IA: ${cycleDetail.lesson}`)
               )
             ),
             React.createElement(
