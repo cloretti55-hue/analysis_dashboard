@@ -872,6 +872,38 @@
         margin-top: 6px;
       }
 
+      .policy-table {
+        width: 100%;
+        min-width: 860px;
+        border-collapse: collapse;
+      }
+
+      .policy-table th,
+      .policy-table td {
+        border-top: 1px solid var(--line);
+        padding: 13px 14px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .policy-table th {
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .policy-table td:first-child {
+        color: var(--focus);
+        font-weight: 850;
+        white-space: nowrap;
+      }
+
+      .policy-table td {
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
       .equity-cards {
         display: grid;
         gap: 12px;
@@ -1568,6 +1600,14 @@
         ["5", "Concentração dos ganhos"],
       ];
 
+      const GOVERNMENT_STACK = [
+        ["Semicondutores", "CHIPS Act / Intel", "Reindustrialização e soberania de chips."],
+        ["Quantum / supercomputação", "IBM, National Quantum Initiative, DOE labs", "Próxima fronteira de computação, criptografia e defesa."],
+        ["Data centers / energia", "FERC, DOE, terrenos federais, grid", "IA precisa de eletricidade, conexão e licenciamento."],
+        ["Defesa / segurança nacional", "Pentagon, cloud, IA militar, ciber", "Demanda estatal para tecnologias dual-use."],
+        ["Pesquisa básica", "NSF, DARPA, DOE, universidades", "Estado financia a base científica antes da monetização privada."],
+      ];
+
       function TechCycleModule() {
         const intensity = (entry) =>
           React.createElement("span", { className: `intensity ${entry[1]}` }, entry[0]);
@@ -1698,6 +1738,57 @@
                   { className: "timeline-step", key: step[0], "aria-current": step[1] === "CAPEX" ? "step" : undefined },
                   React.createElement("span", null, step[0]),
                   React.createElement("strong", null, step[1])
+                )
+              )
+            )
+          ),
+          React.createElement(
+            "section",
+            { className: "panel source-card" },
+            React.createElement(
+              "div",
+              { className: "section-head" },
+              React.createElement(
+                "div",
+                null,
+                React.createElement("span", { className: "control-title" }, "Camada estatal"),
+                React.createElement("h2", null, "Onde o governo aparece")
+              )
+            ),
+            React.createElement(
+              "p",
+              { className: "thesis-line" },
+              "A IA americana é privada na execução, mas estatal na infraestrutura, no financiamento, na pesquisa e na demanda estratégica."
+            ),
+            React.createElement(
+              "div",
+              { className: "cycle-table-wrap" },
+              React.createElement(
+                "table",
+                { className: "policy-table" },
+                React.createElement(
+                  "thead",
+                  null,
+                  React.createElement(
+                    "tr",
+                    null,
+                    React.createElement("th", null, "Onde aparece"),
+                    React.createElement("th", null, "Exemplo"),
+                    React.createElement("th", null, "Por que importa")
+                  )
+                ),
+                React.createElement(
+                  "tbody",
+                  null,
+                  GOVERNMENT_STACK.map((row) =>
+                    React.createElement(
+                      "tr",
+                      { key: row[0] },
+                      React.createElement("td", null, row[0]),
+                      React.createElement("td", null, row[1]),
+                      React.createElement("td", null, row[2])
+                    )
+                  )
                 )
               )
             )
