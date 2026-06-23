@@ -1013,30 +1013,30 @@
       }
 
       const EQUITY_PE = [
-        { name: "Magnificent 7", value: "24,4x", note: "Prêmio concentrado nas mega caps." },
-        { name: "S&P 500 LargeCap", value: "20,5x", note: "Índice cheio ainda elevado." },
-        { name: "S&P 400 MidCap", value: "16,4x", note: "Múltiplo mais moderado." },
-        { name: "S&P 600 SmallCap", value: "16,0x", note: "Barato, mas mais cíclico." },
+        { name: "Magnificent 7", value: "24,4x", note: "Principal fonte do prêmio." },
+        { name: "S&P 500 LargeCap", value: "20,5x", note: "Benchmark do índice cheio." },
+        { name: "S&P 400 MidCap", value: "16,4x", note: "Valuation mais moderado." },
+        { name: "S&P 600 SmallCap", value: "16,0x", note: "Desconto com maior ciclicidade." },
       ];
 
       const EQUITY_CARDS = [
         {
-          title: "Mega caps",
+          title: "Magnificent 7",
           tone: "#4f7cff",
-          bullets: ["Prêmio relevante.", "Peso alto no índice.", "Crescimento e rentabilidade superiores."],
-          message: "Pouca margem para erro.",
+          bullets: ["Concentra o prêmio do índice.", "Entrega crescimento e margem superiores.", "Carrega expectativa elevada."],
+          message: "O prêmio exige execução quase perfeita.",
         },
         {
           title: "Índice cheio",
           tone: "#48d6e9",
-          bullets: ["Múltiplo agregado mistura empresas muito diferentes.", "Mega caps distorcem a leitura."],
-          message: "S&P 500 hoje embute concentração.",
+          bullets: ["O múltiplo agregado mistura empresas muito diferentes.", "A Magnificent 7 puxa a leitura para cima."],
+          message: "Comprar S&P 500 hoje também é aceitar concentração.",
         },
         {
           title: "Mid e small caps",
           tone: "#ffae6b",
-          bullets: ["Múltiplos mais baixos.", "Mais sensíveis a juros, crédito e ciclo."],
-          message: "Mais barato não significa automaticamente melhor.",
+          bullets: ["Negociam a múltiplos mais baixos.", "São mais sensíveis a juros, crédito e ciclo."],
+          message: "O desconto existe, mas tem motivo.",
         },
       ];
 
@@ -1045,7 +1045,7 @@
           company: "S&P 500",
           pe: "20,5x",
           growth: "Benchmark",
-          read: "Referência para comparar o prêmio das mega caps contra o índice cheio.",
+          read: "Referência para comparar o prêmio da Magnificent 7 contra o índice cheio.",
           benchmark: true,
         },
         {
@@ -1349,7 +1349,7 @@
                 { className: "lead" },
                 activeModule === "curve"
                   ? "Curvas de Treasuries, TIPS e inflação implícita para separar inflação, juro real e prêmio de prazo."
-                  : "O valuation do S&P 500 é elevado, mas a concentração do prêmio está principalmente nas mega caps."
+                  : "O valuation do S&P 500 é elevado, mas a concentração do prêmio está principalmente na Magnificent 7."
               )
             ),
             React.createElement(
@@ -1360,7 +1360,7 @@
               React.createElement(
                 "span",
                 null,
-                activeModule === "curve" ? "Duration moderada (2.3y)" : "Prêmio nas mega caps"
+                activeModule === "curve" ? "Duration moderada (2.3y)" : "Prêmio na Magnificent 7"
               )
             )
           ),
