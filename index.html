@@ -793,8 +793,6 @@
         color: var(--focus);
         font-size: 24px;
         font-weight: 900;
-        writing-mode: vertical-rl;
-        transform: rotate(180deg);
       }
 
       .stack-arrow span {
@@ -1568,8 +1566,8 @@
       ];
 
       const AI_STACK = [
-        ["Energia / Grid", "Demanda física: utilities, transmissão e equipamentos.", "money-now", "dinheiro já aparece"],
-        ["Data centers / Cooling", "Infraestrutura crítica: Vertiv, Eaton, Schneider, Equinix.", "money-now", "dinheiro já aparece"],
+        ["Energia / Grid", "Demanda física: utilities, transmissão e equipamentos.", "money-now", "captura já materializada"],
+        ["Data centers / Cooling", "Infraestrutura crítica: Vertiv, Eaton, Schneider, Equinix.", "money-now", "captura já materializada"],
         ["Chips / HBM / Networking", "Gargalo tecnológico: Nvidia, TSMC, Broadcom, ASML.", "money-flow", "captura acelerada"],
         ["Cloud / Hyperscalers", "Escala e distribuição: Microsoft, Amazon, Google, Oracle.", "money-forming", "monetização em formação"],
         ["Aplicações", "Monetização final: software, agentes e vertical apps.", "money-future", "prova ainda incompleta"],
@@ -1669,8 +1667,7 @@
                 React.createElement(
                   "div",
                   { className: "stack-arrow", "aria-label": "Ler a pilha de baixo para cima" },
-                  "↑",
-                  React.createElement("span", null, "ler para cima")
+                  "↑"
                 ),
                 React.createElement(
                   "div",
