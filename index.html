@@ -286,15 +286,6 @@
         font-weight: 700;
       }
 
-      .curve-end-label {
-        font-size: 18px;
-        font-weight: 900;
-        paint-order: stroke;
-        stroke: var(--bg);
-        stroke-width: 5px;
-        stroke-linejoin: round;
-      }
-
       .point-value-label {
         font-size: 19px;
         font-weight: 900;
@@ -611,7 +602,7 @@
   <body>
     <div id="root"></div>
     <script>
-      const { useMemo, useState } = React;
+      const { useState } = React;
 
       const MATURITIES = [
         { key: "2Y", years: 2 },
@@ -859,18 +850,7 @@
                       )
                   )
                 )
-              ),
-              points.length > 0 &&
-                React.createElement(
-                  "text",
-                  {
-                    className: "curve-end-label",
-                    x: Math.min(points[points.length - 1].x + 18, width - 110),
-                    y: points[points.length - 1].y + 6,
-                    fill: CURVES[curveKey].color,
-                  },
-                  CURVES[curveKey].short
-                )
+              )
             );
           })
         );
@@ -878,22 +858,10 @@
 
       function App() {
         const [mode, setMode] = useState("all");
-        const [visibleCurves, setVisibleCurves] = useState(["nominal", "real", "inflation"]);
-        const [minYield, setMinYield] = useState(0);
-        const [maxYield, setMaxYield] = useState(5.2);
         const [selected, setSelected] = useState("10Y");
 
-        const activeCurves = mode === "all" ? visibleCurves : [mode];
-        const filteredMaturities = useMemo(
-          () =>
-            MATURITIES.filter((m) => {
-              return activeCurves.some((curveKey) => {
-                const value = CURVES[curveKey].values[m.key];
-                return value >= Number(minYield) && value <= Number(maxYield);
-              });
-            }),
-          [activeCurves.join("|"), minYield, maxYield]
-        );
+        const activeCurves = mode === "all" ? ["nominal", "real", "inflation"] : [mode];
+        const filteredMaturities = MATURITIES;
 
         const rows = curveRows(activeCurves, filteredMaturities);
         const selectedRows = selected ? rows.filter((row) => row.maturity === selected) : rows;
@@ -905,20 +873,7 @@
 
         const resetFilters = () => {
           setMode("all");
-          setVisibleCurves(["nominal", "real", "inflation"]);
-          setMinYield(0);
-          setMaxYield(5.2);
           setSelected("10Y");
-        };
-
-        const toggleCurve = (key) => {
-          setVisibleCurves((current) =>
-            current.includes(key) && current.length > 1
-              ? current.filter((item) => item !== key)
-              : current.includes(key)
-                ? current
-                : [...current, key]
-          );
         };
 
         return React.createElement(
@@ -986,64 +941,7 @@
                   )
                 )
               ),
-              React.createElement(
-                "div",
-                { className: "control-block" },
-                React.createElement("div", { className: "control-title" }, "Curvas no gráfico"),
-                React.createElement(
-                  "div",
-                  { className: "check-grid" },
-                  Object.keys(CURVES).map((key) =>
-                    React.createElement(
-                      "label",
-                      { className: "maturity-toggle", key },
-                      React.createElement("span", null, CURVES[key].label),
-                      React.createElement("input", {
-                        type: "checkbox",
-                        checked: visibleCurves.includes(key),
-                        disabled: mode !== "all",
-                        onChange: () => toggleCurve(key),
-                      })
-                    )
-                  )
-                )
-              ),
-              React.createElement(
-                "div",
-                { className: "control-block" },
-                React.createElement("div", { className: "control-title" }, "Faixa de taxa"),
-                React.createElement(
-                  "div",
-                  { className: "range-pair" },
-                  React.createElement(
-                    "label",
-                    null,
-                    React.createElement("span", { className: "mini-label" }, "Mín."),
-                    React.createElement("input", {
-                      type: "number",
-                      min: 0,
-                      max: 6,
-                      step: 0.05,
-                      value: minYield,
-                      onChange: (event) => setMinYield(event.target.value),
-                    })
-                  ),
-                  React.createElement(
-                    "label",
-                    null,
-                    React.createElement("span", { className: "mini-label" }, "Máx."),
-                    React.createElement("input", {
-                      type: "number",
-                      min: 0,
-                      max: 6,
-                      step: 0.05,
-                      value: maxYield,
-                      onChange: (event) => setMaxYield(event.target.value),
-                    })
-                  )
-                )
-              ),
-              React.createElement("button", { className: "ghost-btn", type: "button", onClick: resetFilters }, "Restaurar filtros")
+              React.createElement("button", { className: "ghost-btn", type: "button", onClick: resetFilters }, "Restaurar visão")
             ),
             React.createElement(
               "section",
@@ -1118,7 +1016,7 @@
                           key,
                           type: "button",
                           "aria-pressed": activeCurves.includes(key),
-                          onClick: () => (mode === "all" ? toggleCurve(key) : setMode(key)),
+                          onClick: () => setMode(key),
                         },
                         React.createElement("span", { className: "swatch", style: { "--swatch": CURVES[key].color } }),
                         CURVES[key].label
