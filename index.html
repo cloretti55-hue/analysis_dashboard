@@ -221,7 +221,7 @@
 
       .kpis {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 12px;
       }
 
@@ -316,7 +316,7 @@
 
       .point-hotspot {
         fill: transparent;
-        cursor: pointer;
+        pointer-events: none;
       }
 
       .legend {
@@ -387,10 +387,6 @@
       }
 
       .tables-grid {
-        display: block;
-      }
-
-      .tables-grid > .panel:first-child {
         display: none;
       }
 
@@ -658,7 +654,7 @@
         return CURVES[curveKey].values[spread.to] - CURVES[curveKey].values[spread.from];
       }
 
-      function Chart({ activeCurves, filteredMaturities, selected, setSelected, mode }) {
+      function Chart({ activeCurves, filteredMaturities, mode }) {
         const width = 920;
         const height = 470;
         const margin = { top: 46, right: 138, bottom: 68, left: 78 };
@@ -711,7 +707,7 @@
                 x: x(index),
                 y: height - 30,
                 textAnchor: "middle",
-                fontWeight: selected === maturity.key ? 800 : 500,
+                fontWeight: 700,
               },
               maturity.key
             )
@@ -732,7 +728,7 @@
                 className: "curve-line",
                 d,
                 stroke: CURVES[curveKey].color,
-                opacity: selected ? 0.68 : 1,
+                opacity: 1,
               }),
               points.map((point) =>
                 React.createElement(
@@ -742,9 +738,9 @@
                     className: "point",
                     cx: point.x,
                     cy: point.y,
-                    r: selected === point.maturity ? 8 : 6,
+                    r: 6,
                     fill: CURVES[curveKey].color,
-                    opacity: selected && selected !== point.maturity ? 0.42 : 1,
+                    opacity: 1,
                   }),
                   React.createElement(
                     "text",
@@ -753,7 +749,7 @@
                       x: point.x,
                       y: point.y + labelOffset,
                       fill: CURVES[curveKey].color,
-                      opacity: selected && selected !== point.maturity ? 0.5 : 1,
+                      opacity: 1,
                       textAnchor: "middle",
                     },
                     pct(point.value)
@@ -763,7 +759,6 @@
                     cx: point.x,
                     cy: point.y,
                     r: 18,
-                    onClick: () => setSelected(selected === point.maturity ? null : point.maturity),
                   })
                 )
               )
@@ -774,23 +769,15 @@
 
       function App() {
         const [mode, setMode] = useState("all");
-        const [selected, setSelected] = useState("10Y");
 
         const activeCurves = mode === "all" ? ["nominal", "real", "inflation"] : [mode];
         const filteredMaturities = MATURITIES;
 
-        const rows = curveRows(activeCurves, filteredMaturities);
-        const selectedRows = selected ? rows.filter((row) => row.maturity === selected) : rows;
         const nominalLongPremium = spreadValue("nominal", SPREADS[2]);
         const realLongPremium = spreadValue("real", SPREADS[2]);
-        const breakevenRange =
-          Math.max(...Object.values(CURVES.inflation.values)) -
-          Math.min(...Object.values(CURVES.inflation.values));
-
-        const resetFilters = () => {
-          setMode("all");
-          setSelected("10Y");
-        };
+        const selected = null;
+        const selectedRows = [];
+        const setSelected = () => {};
 
         return React.createElement(
           "div",
@@ -867,29 +854,22 @@
                 React.createElement(
                   "article",
                   { className: "kpi panel" },
-                  React.createElement("span", null, "Nominal 10Y"),
-                  React.createElement("strong", null, pct(CURVES.nominal.values["10Y"])),
-                  React.createElement("p", null, `${bps(spreadValue("nominal", SPREADS[1]))} contra o 2Y.`)
+                  React.createElement("span", null, "Nominal 5s2s"),
+                  React.createElement("strong", null, bps(spreadValue("nominal", SPREADS[0]))),
+                  React.createElement("p", null, "Inclinação curta da curva nominal.")
                 ),
                 React.createElement(
                   "article",
                   { className: "kpi panel" },
-                  React.createElement("span", null, "Real 10Y"),
-                  React.createElement("strong", null, pct(CURVES.real.values["10Y"])),
-                  React.createElement("p", null, "Juro real positivo sem risco corporativo.")
+                  React.createElement("span", null, "Nominal 10s2s"),
+                  React.createElement("strong", null, bps(spreadValue("nominal", SPREADS[1]))),
+                  React.createElement("p", null, "Inclinação intermediária contra o 2Y.")
                 ),
                 React.createElement(
                   "article",
                   { className: "kpi panel" },
-                  React.createElement("span", null, "Inflação implícita 10Y"),
-                  React.createElement("strong", null, pct(CURVES.inflation.values["10Y"])),
-                  React.createElement("p", null, `Faixa total de ${bps(breakevenRange)} entre vértices.`)
-                ),
-                React.createElement(
-                  "article",
-                  { className: "kpi panel" },
-                  React.createElement("span", null, "30s10s real"),
-                  React.createElement("strong", null, bps(realLongPremium)),
+                  React.createElement("span", null, "Nominal 30s10s"),
+                  React.createElement("strong", null, bps(spreadValue("nominal", SPREADS[2]))),
                   React.createElement("p", null, "Ponta longa concentra o prêmio de prazo.")
                 )
               ),
@@ -916,27 +896,8 @@
                     React.createElement(Chart, {
                       activeCurves,
                       filteredMaturities,
-                      selected,
-                      setSelected,
                       mode,
                     })
-                  ),
-                  React.createElement(
-                    "div",
-                    { className: "legend" },
-                    Object.keys(CURVES).map((key) =>
-                      React.createElement(
-                        "button",
-                        {
-                          key,
-                          type: "button",
-                          "aria-pressed": activeCurves.includes(key),
-                          onClick: () => setMode(key),
-                        },
-                        React.createElement("span", { className: "swatch", style: { "--swatch": CURVES[key].color } }),
-                        CURVES[key].label
-                      )
-                    )
                   )
                 ),
                 React.createElement(
