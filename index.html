@@ -984,10 +984,35 @@
         font-weight: 850;
       }
 
+      .etf-token.etf-us {
+        border-color: rgba(68, 143, 255, 0.48);
+        background: rgba(68, 143, 255, 0.14);
+        color: #b8d6ff;
+      }
+
+      .etf-token.etf-developed {
+        border-color: rgba(69, 206, 238, 0.48);
+        background: rgba(69, 206, 238, 0.12);
+        color: #a9efff;
+      }
+
+      .etf-token.etf-emerging {
+        border-color: rgba(111, 132, 255, 0.52);
+        background: rgba(111, 132, 255, 0.14);
+        color: #c4ccff;
+      }
+
+      .etf-token.etf-other {
+        border-color: rgba(164, 181, 204, 0.3);
+        background: rgba(164, 181, 204, 0.08);
+        color: #d8e1ee;
+      }
+
       .etf-token[aria-pressed="true"] {
         border-color: var(--focus);
         background: var(--focus-soft);
         color: var(--focus);
+        box-shadow: inset 0 0 0 1px rgba(72, 214, 233, 0.35);
       }
 
       .core-detail {
@@ -1985,6 +2010,35 @@
         { fn: "Hedge macro", why: "Proteção de cauda ou crise.", tickers: ["Ouro ETC", "SPY options"], note: "Ouro protege regime; opção protege drawdown específico." },
       ];
 
+      const CORE_TOKEN_GROUPS = {
+        VOO: "etf-us",
+        CSPX: "etf-us",
+        VUAA: "etf-us",
+        SPY: "etf-us",
+        QQQM: "etf-us",
+        CNDX: "etf-us",
+        EQQQ: "etf-us",
+        QQQ: "etf-us",
+        RSP: "etf-us",
+        VEA: "etf-developed",
+        IEFA: "etf-developed",
+        IWDA: "etf-developed",
+        SWDA: "etf-developed",
+        VGK: "etf-developed",
+        IEUR: "etf-developed",
+        FEZ: "etf-developed",
+        IMEU: "etf-developed",
+        VWO: "etf-emerging",
+        IEMG: "etf-emerging",
+        EIMI: "etf-emerging",
+        EMXC: "etf-emerging",
+        EXCH: "etf-emerging",
+        IB01: "etf-other",
+        TIP5: "etf-other",
+        "Ouro ETC": "etf-other",
+        "SPY options": "etf-other",
+      };
+
       const CORE_DETAILS = {
         VOO: ["Beta estrutural EUA", "Carregar S&P 500 com baixo custo.", "Não é o melhor instrumento para hedge com opções.", ["Veículo eficiente para buy and hold.", "Boa escolha quando fiscalidade US-listed é aceitável.", "Menos vocacionado a overlays táticos do que SPY."]],
         CSPX: ["Beta estrutural EUA", "S&P 500 UCITS acumulador.", "Menos útil para execução tática e opções.", ["Apropriado para muitas carteiras offshore não-US.", "Accumulating reduz distribuição de caixa.", "Veículo de carregamento, não de trading."]],
@@ -2040,7 +2094,7 @@
                       "div",
                       { className: "etf-token-grid" },
                       row.tickers.map((ticker) =>
-                        React.createElement("button", { className: "etf-token", type: "button", key: `${row.fn}-${ticker}`, "aria-pressed": selectedEtf === ticker, onClick: () => setSelectedEtf(ticker) }, ticker)
+                        React.createElement("button", { className: `etf-token ${CORE_TOKEN_GROUPS[ticker] || "etf-other"}`, type: "button", key: `${row.fn}-${ticker}`, "aria-pressed": selectedEtf === ticker, onClick: () => setSelectedEtf(ticker) }, ticker)
                       )
                     )
                   )
@@ -2137,8 +2191,7 @@
               "aside",
               { className: "market-stamp" },
               React.createElement("span", null, "Tese central"),
-              React.createElement("strong", null, moduleCopy.thesis),
-              React.createElement("span", null, moduleCopy.subtitle)
+              React.createElement("strong", null, moduleCopy.thesis)
             )
           ),
           activeModule === "curve"
