@@ -1021,6 +1021,21 @@
         box-shadow: inset 0 0 0 1px rgba(255, 118, 118, 0.26);
       }
 
+      .core-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: -2px 0 14px;
+      }
+
+      .core-legend .etf-token {
+        min-height: 28px;
+        min-width: 0;
+        padding: 6px 10px;
+        font-size: 11px;
+        pointer-events: none;
+      }
+
       .core-detail {
         position: sticky;
         top: 16px;
@@ -2107,6 +2122,15 @@
               "article",
               { className: "panel" },
               React.createElement("div", { className: "section-head" }, React.createElement("div", null, React.createElement("span", { className: "control-title" }, "Matriz de implementação"), React.createElement("h2", null, "Função antes do ticker"))),
+              React.createElement(
+                "div",
+                { className: "core-legend" },
+                React.createElement("span", { className: "etf-token etf-us" }, "EUA"),
+                React.createElement("span", { className: "etf-token etf-developed" }, "Developed ex-US"),
+                React.createElement("span", { className: "etf-token etf-emerging" }, "Emergentes"),
+                React.createElement("span", { className: "etf-token etf-fixed" }, "Renda fixa"),
+                React.createElement("span", { className: "etf-token etf-other" }, "Hedge macro")
+              ),
               React.createElement(
                 "div",
                 { className: "core-function-grid" },
