@@ -282,8 +282,27 @@
       .axis-label,
       .tick {
         fill: var(--muted);
-        font-size: 18px;
+        font-size: 21px;
         font-weight: 700;
+      }
+
+      .curve-end-label {
+        font-size: 18px;
+        font-weight: 900;
+        paint-order: stroke;
+        stroke: var(--bg);
+        stroke-width: 5px;
+        stroke-linejoin: round;
+      }
+
+      .point-value-label {
+        font-size: 19px;
+        font-weight: 900;
+        paint-order: stroke;
+        pointer-events: none;
+        stroke: var(--bg);
+        stroke-linejoin: round;
+        stroke-width: 5px;
       }
 
       .grid-line {
@@ -705,8 +724,8 @@
 
       function Chart({ activeCurves, filteredMaturities, selected, setSelected, mode }) {
         const width = 920;
-        const height = 430;
-        const margin = { top: 28, right: 34, bottom: 54, left: 58 };
+        const height = 470;
+        const margin = { top: 46, right: 138, bottom: 68, left: 78 };
         const plotW = width - margin.left - margin.right;
         const plotH = height - margin.top - margin.bottom;
 
@@ -783,6 +802,7 @@
               x: x(index),
               y: y(CURVES[curveKey].values[m.key]),
             }));
+            const labelOffset = curveKey === "real" ? 26 : -18;
             const d = points.map((p, index) => `${index ? "L" : "M"} ${p.x} ${p.y}`).join(" ");
             return React.createElement(
               "g",
@@ -805,6 +825,18 @@
                     fill: CURVES[curveKey].color,
                     opacity: selected && selected !== point.maturity ? 0.42 : 1,
                   }),
+                  React.createElement(
+                    "text",
+                    {
+                      className: "point-value-label",
+                      x: point.x,
+                      y: point.y + labelOffset,
+                      fill: CURVES[curveKey].color,
+                      opacity: selected && selected !== point.maturity ? 0.5 : 1,
+                      textAnchor: "middle",
+                    },
+                    pct(point.value)
+                  ),
                   React.createElement("circle", {
                     className: "point-hotspot",
                     cx: point.x,
@@ -825,9 +857,20 @@
                         { x: 10, y: 21 },
                         `${CURVES[curveKey].short} ${point.maturity}: ${pct(point.value)}`
                       )
-                    )
+                  )
                 )
-              )
+              ),
+              points.length > 0 &&
+                React.createElement(
+                  "text",
+                  {
+                    className: "curve-end-label",
+                    x: Math.min(points[points.length - 1].x + 18, width - 110),
+                    y: points[points.length - 1].y + 6,
+                    fill: CURVES[curveKey].color,
+                  },
+                  CURVES[curveKey].short
+                )
             );
           })
         );
