@@ -1082,7 +1082,7 @@
       .satellite-filters {
         display: grid;
         gap: 10px;
-        padding: 28px 16px 16px;
+        padding: 28px 16px 26px;
       }
 
       .filter-row {
@@ -1117,7 +1117,7 @@
 
       .satellite-grid {
         display: grid;
-        gap: 10px;
+        gap: 14px;
         padding: 0 16px 16px;
       }
 
@@ -1135,14 +1135,15 @@
       }
 
       .satellite-card[aria-pressed="true"] {
-        border-color: rgba(255, 118, 118, 0.5);
-        border-left-color: rgba(255, 118, 118, 0.8);
-        background: rgba(255, 118, 118, 0.08);
+        border-color: rgba(72, 214, 233, 0.42);
+        border-left-color: var(--zone);
+        background: rgba(72, 214, 233, 0.07);
       }
 
       .satellite-card h3 {
         margin: 0 0 4px;
         font-size: 16px;
+        color: var(--ink);
       }
 
       .satellite-card p {
@@ -1172,11 +1173,11 @@
       }
 
       .risk-medium {
-        --zone: #48d6e9;
+        --zone: #5bbcff;
       }
 
       .risk-defensive {
-        --zone: #3aa6a3;
+        --zone: #1f7f8b;
       }
 
       .satellite-detail {
@@ -1203,6 +1204,10 @@
         border-radius: 8px;
         padding: 10px;
         background: rgba(255, 255, 255, 0.035);
+      }
+
+      .proxy-box {
+        margin-top: 8px;
       }
 
       .detail-box span {
@@ -2491,7 +2496,7 @@
             ),
             React.createElement("p", null, active.reading),
             React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
-            React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Nomes / proxies"), React.createElement("strong", null, active.names.join(" · ")))
+            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Nomes / proxies"), React.createElement("strong", null, active.names.join(" · ")))
           )
         );
       }
