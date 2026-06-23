@@ -1167,16 +1167,16 @@
         font-weight: 800;
       }
 
-      .zone-resolve {
-        --zone: #36d399;
+      .risk-high {
+        --zone: #ff7676;
       }
 
-      .zone-partial {
+      .risk-medium {
         --zone: #e0b85d;
       }
 
-      .zone-basket {
-        --zone: #ff7676;
+      .risk-defensive {
+        --zone: #36d399;
       }
 
       .satellite-detail {
@@ -1226,17 +1226,6 @@
         padding-left: 18px;
         color: var(--muted);
         line-height: 1.35;
-      }
-
-      .decision-rule {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-      }
-
-      .decision-rule h3 {
-        margin: 0 0 8px;
-        font-size: 16px;
       }
 
       .core-cards {
@@ -1362,7 +1351,6 @@
         .equity-kpis,
         .core-cards,
         .detail-grid,
-        .decision-rule,
         .diagnosis,
         .benefits {
           grid-template-columns: 1fr;
@@ -2481,7 +2469,7 @@
               filtered.map((item) =>
                 React.createElement(
                   "button",
-                  { className: `satellite-card zone-${item.zone}`, type: "button", key: item.theme, "aria-pressed": active.theme === item.theme, onClick: () => setSelectedTheme(item.theme) },
+                  { className: `satellite-card risk-${item.aggression}`, type: "button", key: item.theme, "aria-pressed": active.theme === item.theme, onClick: () => setSelectedTheme(item.theme) },
                   React.createElement("div", null, React.createElement("h3", null, item.theme), React.createElement("p", null, item.reading)),
                   React.createElement("div", { className: "satellite-tags" }, React.createElement("span", { className: "satellite-tag" }, item.implementation), React.createElement("span", { className: "satellite-tag" }, item.quality))
                 )
@@ -2498,17 +2486,11 @@
               { className: "detail-grid" },
               React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "ETF possível"), React.createElement("strong", null, active.etfs)),
               React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Implementação"), React.createElement("strong", null, active.implementation)),
-              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Qualidade"), React.createElement("strong", null, active.quality))
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Qualidade do ETF"), React.createElement("strong", null, active.quality))
             ),
             React.createElement("p", null, active.reading),
             React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
-            React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Nomes / proxies"), React.createElement("strong", null, active.names.join(" · "))),
-            React.createElement(
-              "div",
-              { className: "decision-rule" },
-              React.createElement("div", { className: "detail-box" }, React.createElement("h3", null, "Usar ETF quando"), React.createElement("p", null, "o índice captura a cadeia de valor, há liquidez e o objetivo é exposição.")),
-              React.createElement("div", { className: "detail-box" }, React.createElement("h3", null, "Usar cesta quando"), React.createElement("p", null, "o ETF dilui a tese, captura o setor errado ou ignora onde o CAPEX aparece."))
-            )
+            React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Nomes / proxies"), React.createElement("strong", null, active.names.join(" · ")))
           )
         );
       }
