@@ -1072,6 +1072,173 @@
         line-height: 1.3;
       }
 
+      .satellite-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(330px, 0.8fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .satellite-filters {
+        display: grid;
+        gap: 10px;
+        padding: 0 16px 16px;
+      }
+
+      .filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .filter-label {
+        min-width: 92px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .filter-chip {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 7px 11px;
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      .filter-chip[aria-pressed="true"] {
+        border-color: rgba(255, 118, 118, 0.62);
+        background: rgba(255, 118, 118, 0.12);
+        color: #ffb5b5;
+      }
+
+      .satellite-grid {
+        display: grid;
+        gap: 10px;
+        padding: 0 16px 16px;
+      }
+
+      .satellite-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--zone);
+        border-radius: 8px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.035);
+        text-align: left;
+      }
+
+      .satellite-card[aria-pressed="true"] {
+        border-color: rgba(255, 118, 118, 0.5);
+        border-left-color: rgba(255, 118, 118, 0.8);
+        background: rgba(255, 118, 118, 0.08);
+      }
+
+      .satellite-card h3 {
+        margin: 0 0 4px;
+        font-size: 16px;
+      }
+
+      .satellite-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      .satellite-tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: end;
+        gap: 6px;
+      }
+
+      .satellite-tag {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        padding: 5px 8px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 800;
+      }
+
+      .zone-resolve {
+        --zone: #36d399;
+      }
+
+      .zone-partial {
+        --zone: #e0b85d;
+      }
+
+      .zone-basket {
+        --zone: #ff7676;
+      }
+
+      .satellite-detail {
+        position: sticky;
+        top: 16px;
+        display: grid;
+        gap: 12px;
+        padding: 14px;
+      }
+
+      .satellite-detail h2 {
+        margin: 0;
+        font-size: 28px;
+      }
+
+      .detail-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .detail-box {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .detail-box span {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .detail-box strong {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink);
+      }
+
+      .satellite-list {
+        display: grid;
+        gap: 7px;
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      .decision-rule {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .decision-rule h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+      }
+
       .core-cards {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1167,6 +1334,7 @@
         .main-grid,
         .equity-grid,
         .core-layout,
+        .satellite-layout,
         .allocation,
 
         .controls {
@@ -1193,13 +1361,20 @@
         .kpis,
         .equity-kpis,
         .core-cards,
+        .detail-grid,
+        .decision-rule,
         .diagnosis,
         .benefits {
           grid-template-columns: 1fr;
         }
 
-        .core-function {
+        .core-function,
+        .satellite-card {
           grid-template-columns: 1fr;
+        }
+
+        .satellite-tags {
+          justify-content: start;
         }
 
         .section-head {
@@ -1760,6 +1935,13 @@
         },
       };
 
+      MODULE_COPY.satellites = {
+        title: "Satélites devem ser classificados por agressividade, convexidade e qualidade de implementação",
+        lead: "A alocação satélite combina tese forte, instrumento adequado e tamanho compatível com o risco.",
+        thesis: "Convexidade",
+        subtitle: "ETF vs cesta",
+      };
+
       const TECH_CYCLES = [
         {
           cycle: "Ferrovias",
@@ -2108,6 +2290,244 @@
         "SPY options": ["Hedge macro", "Proteção de drawdown específico.", "Custo de prêmio corrói retorno se mal dimensionado.", ["Puts, collars e overlays táticos.", "Exige gestão de vencimento e strike.", "Instrumento de proteção, não de carrego."]],
       };
 
+      const SATELLITE_FILTERS = {
+        zone: [
+          ["all", "Todos"],
+          ["resolve", "ETF resolve"],
+          ["partial", "ETF parcial"],
+          ["basket", "Precisa cesta"],
+        ],
+        aggression: [
+          ["all", "Todos"],
+          ["high", "Alta convexidade"],
+          ["medium", "Convexidade média"],
+          ["defensive", "Defensivo"],
+        ],
+        motor: [
+          ["all", "Todos"],
+          ["ai", "IA hardware"],
+          ["energy", "Energia & grid"],
+          ["defense", "Defesa"],
+          ["cyber", "Cyber"],
+          ["industry", "Reindustrialização"],
+          ["hedge", "Hedge"],
+        ],
+        vehicle: [
+          ["all", "Todos"],
+          ["etf", "ETF"],
+          ["hybrid", "ETF + cesta"],
+          ["basket", "Cesta"],
+        ],
+      };
+
+      const SATELLITES = [
+        {
+          theme: "Semicondutores / IA hardware",
+          zone: "resolve",
+          aggression: "high",
+          motor: "ai",
+          vehicle: "etf",
+          etfs: "SMH / SOXX",
+          quality: "Alta",
+          implementation: "ETF",
+          reading: "Captura o gargalo central da IA, com alta sensibilidade ao ciclo de CAPEX.",
+          names: ["Nvidia", "TSMC", "Broadcom", "ASML", "AMD"],
+          points: ["ETF captura bem a cadeia de valor.", "Tema forte, mas valuation e ciclo de semis importam.", "Boa primeira camada para exposição a IA física."],
+        },
+        {
+          theme: "Defesa EUA",
+          zone: "resolve",
+          aggression: "medium",
+          motor: "defense",
+          vehicle: "etf",
+          etfs: "ITA / PPA",
+          quality: "Alta",
+          implementation: "ETF",
+          reading: "Geopolítica, orçamento público e tecnologia dual-use sustentam a tese.",
+          names: ["Lockheed Martin", "RTX", "Northrop Grumman", "General Dynamics"],
+          points: ["ETF representa bem contratadas americanas.", "Demanda estatal reduz dependência de consumidor.", "Mistura defesa tradicional e tecnologia militar."],
+        },
+        {
+          theme: "Cybersecurity",
+          zone: "resolve",
+          aggression: "medium",
+          motor: "cyber",
+          vehicle: "etf",
+          etfs: "CIBR / HACK",
+          quality: "Média/alta",
+          implementation: "ETF",
+          reading: "Demanda estrutural e recorrente, menos dependente de CAPEX físico.",
+          names: ["Palo Alto", "CrowdStrike", "Fortinet", "Zscaler"],
+          points: ["ETF funciona, mas composição deve ser monitorada.", "Tema recorrente dentro de segurança digital.", "Menos binário do que quantum ou data centers físicos."],
+        },
+        {
+          theme: "Ouro / hedge macro",
+          zone: "resolve",
+          aggression: "defensive",
+          motor: "hedge",
+          vehicle: "etf",
+          etfs: "GLD / IAU / ETC físico",
+          quality: "Alta",
+          implementation: "ETF / ETC",
+          reading: "Hedge de regime, não tese de crescimento.",
+          names: ["GLD", "IAU", "ETCs físicos offshore"],
+          points: ["Protege contra choques de confiança e regime.", "Não substitui hedge de drawdown específico.", "Veículo físico costuma ser mais limpo para a tese."],
+        },
+        {
+          theme: "Robotics / automação",
+          zone: "partial",
+          aggression: "high",
+          motor: "industry",
+          vehicle: "hybrid",
+          etfs: "BOTZ / ROBO",
+          quality: "Média",
+          implementation: "ETF + cesta",
+          reading: "Tema forte, mas ETFs misturam exposição demais.",
+          names: ["Rockwell", "ABB", "Fanuc", "Teradyne"],
+          points: ["ETF ajuda como camada inicial.", "Cesta melhora precisão da tese.", "Automação industrial não é igual a robótica de consumo."],
+        },
+        {
+          theme: "Energia / grid",
+          zone: "partial",
+          aggression: "medium",
+          motor: "energy",
+          vehicle: "hybrid",
+          etfs: "XLE / GRID / PAVE / XLU",
+          quality: "Parcial",
+          implementation: "ETF + cesta",
+          reading: "A tese é eletrificação, transmissão e equipamentos, não apenas energia tradicional.",
+          names: ["Eaton", "Hubbell", "Quanta Services", "Constellation", "NextEra"],
+          points: ["ETF amplo dilui o motor econômico.", "Cesta ajuda a separar utilities, equipamentos e engenharia.", "Data centers tornam grid uma restrição estratégica."],
+        },
+        {
+          theme: "Infrastructure / utilities",
+          zone: "partial",
+          aggression: "defensive",
+          motor: "energy",
+          vehicle: "hybrid",
+          etfs: "XLU / PAVE / GRID",
+          quality: "Média",
+          implementation: "ETF + cesta",
+          reading: "Exposição mais defensiva, ligada a CAPEX físico e regulação.",
+          names: ["Duke Energy", "Southern Company", "NextEra", "Quanta Services"],
+          points: ["Pode estabilizar a carteira.", "Duration risk precisa ser monitorado.", "ETF amplo mistura defesa com sensibilidade a juros."],
+        },
+        {
+          theme: "Data centers físicos",
+          zone: "basket",
+          aggression: "high",
+          motor: "ai",
+          vehicle: "basket",
+          etfs: "SRVR / VPN / proxies",
+          quality: "Baixa",
+          implementation: "Cesta",
+          reading: "ETFs não capturam bem energia, cooling, equipamentos e networking.",
+          names: ["Vertiv", "Eaton", "Schneider", "Equinix", "Digital Realty", "Arista", "Broadcom"],
+          points: ["Tema físico e fragmentado.", "REITs ou proxies não bastam.", "A cesta vira necessidade de implementação."],
+        },
+        {
+          theme: "Onshoring / reindustrialização",
+          zone: "basket",
+          aggression: "medium",
+          motor: "industry",
+          vehicle: "basket",
+          etfs: "XLI / AIRR",
+          quality: "Parcial",
+          implementation: "Cesta",
+          reading: "ETF industrial amplo dilui a tese de reindustrialização.",
+          names: ["Rockwell", "Emerson", "Honeywell", "Caterpillar", "Nucor", "Union Pacific"],
+          points: ["Exige separar automação, transporte, aço e bens de capital.", "ETF amplo captura indústria passada, não necessariamente CAPEX futuro.", "Cesta melhora aderência à tese."],
+        },
+        {
+          theme: "Quantum / frontier computing",
+          zone: "basket",
+          aggression: "high",
+          motor: "ai",
+          vehicle: "basket",
+          etfs: "QTUM / cestas",
+          quality: "Baixa/média",
+          implementation: "Cesta pequena",
+          reading: "Opcionalidade alta, baixa previsibilidade.",
+          names: ["IBM", "IonQ", "Rigetti", "D-Wave", "Microsoft"],
+          points: ["Tamanho inicial deve ser controlado.", "Tema ainda escolhe vencedores.", "ETF pode misturar empresas pouco expostas ao motor real."],
+        },
+      ];
+
+      function SatelliteModule() {
+        const [filters, setFilters] = useState({ zone: "all", aggression: "all", motor: "all", vehicle: "all" });
+        const [selectedTheme, setSelectedTheme] = useState("Semicondutores / IA hardware");
+        const filtered = SATELLITES.filter((item) =>
+          Object.entries(filters).every(([key, value]) => value === "all" || item[key] === value)
+        );
+        const active = filtered.find((item) => item.theme === selectedTheme) || filtered[0] || SATELLITES[0];
+
+        const filterRow = (key, label) =>
+          React.createElement(
+            "div",
+            { className: "filter-row", key },
+            React.createElement("span", { className: "filter-label" }, label),
+            SATELLITE_FILTERS[key].map(([value, text]) =>
+              React.createElement(
+                "button",
+                {
+                  className: "filter-chip",
+                  type: "button",
+                  key: value,
+                  "aria-pressed": filters[key] === value,
+                  onClick: () => setFilters({ ...filters, [key]: value }),
+                },
+                text
+              )
+            )
+          );
+
+        return React.createElement(
+          "main",
+          { className: "satellite-layout" },
+          React.createElement(
+            "article",
+            { className: "panel" },
+            React.createElement("div", { className: "section-head" }, React.createElement("div", null, React.createElement("span", { className: "control-title" }, "Satélites temáticos"), React.createElement("h2", null, "ETF quando simplifica. Cesta quando distorce."))),
+            React.createElement("div", { className: "satellite-filters" }, filterRow("zone", "Zona"), filterRow("aggression", "Risco"), filterRow("motor", "Motor"), filterRow("vehicle", "Veículo")),
+            React.createElement(
+              "div",
+              { className: "satellite-grid" },
+              filtered.map((item) =>
+                React.createElement(
+                  "button",
+                  { className: `satellite-card zone-${item.zone}`, type: "button", key: item.theme, "aria-pressed": active.theme === item.theme, onClick: () => setSelectedTheme(item.theme) },
+                  React.createElement("div", null, React.createElement("h3", null, item.theme), React.createElement("p", null, item.reading)),
+                  React.createElement("div", { className: "satellite-tags" }, React.createElement("span", { className: "satellite-tag" }, item.implementation), React.createElement("span", { className: "satellite-tag" }, item.quality))
+                )
+              )
+            )
+          ),
+          React.createElement(
+            "aside",
+            { className: "panel satellite-detail" },
+            React.createElement("span", { className: "detail-role" }, "Tema selecionado"),
+            React.createElement("h2", null, active.theme),
+            React.createElement(
+              "div",
+              { className: "detail-grid" },
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "ETF possível"), React.createElement("strong", null, active.etfs)),
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Implementação"), React.createElement("strong", null, active.implementation)),
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Qualidade"), React.createElement("strong", null, active.quality)),
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Zona"), React.createElement("strong", null, SATELLITE_FILTERS.zone.find(([value]) => value === active.zone)?.[1] || active.zone))
+            ),
+            React.createElement("p", null, active.reading),
+            React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
+            React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Nomes / proxies"), React.createElement("strong", null, active.names.join(" · "))),
+            React.createElement(
+              "div",
+              { className: "decision-rule" },
+              React.createElement("div", { className: "detail-box" }, React.createElement("h3", null, "Usar ETF quando"), React.createElement("p", null, "o índice captura a cadeia de valor, há liquidez e o objetivo é exposição.")),
+              React.createElement("div", { className: "detail-box" }, React.createElement("h3", null, "Usar cesta quando"), React.createElement("p", null, "o ETF dilui a tese, captura o setor errado ou ignora onde o CAPEX aparece."))
+            )
+          )
+        );
+      }
+
       function CoreModule() {
         const [selectedEtf, setSelectedEtf] = useState("VOO");
         const detail = CORE_DETAILS[selectedEtf] || CORE_DETAILS.VOO;
@@ -2231,6 +2651,16 @@
                     onClick: () => setActiveModule("core"),
                   },
                   "Core"
+                ),
+                React.createElement(
+                  "button",
+                  {
+                    className: "view-tab",
+                    type: "button",
+                    "aria-current": activeModule === "satellites" ? "page" : undefined,
+                    onClick: () => setActiveModule("satellites"),
+                  },
+                  "Satélites EUA"
                 )
               ),
               React.createElement("h1", null, moduleCopy.title),
@@ -2624,7 +3054,9 @@
               ? React.createElement(EquityValuationModule)
               : activeModule === "tech"
                 ? React.createElement(TechCycleModule)
-                : React.createElement(CoreModule)
+                : activeModule === "core"
+                  ? React.createElement(CoreModule)
+                  : React.createElement(SatelliteModule)
         );
       }
 
