@@ -627,7 +627,7 @@
         },
         inflation: {
           label: "Inflação Implícita",
-          short: "Fisher",
+          short: "Implícita",
           color: "#ffae6b",
           unit: "%",
           values: { "2Y": 2.37, "5Y": 2.28, "7Y": 2.27, "10Y": 2.25, "30Y": 2.19 },
@@ -638,19 +638,19 @@
 
       const READING_BULLETS = {
         nominal: [
-          "Inclinação positiva voltou.",
-          "Movimento concentrado na ponta longa.",
-          "Prêmio maior para horizontes extensos.",
+          "Curva voltou a inclinar.",
+          "Ponta longa lidera o movimento.",
+          "Prêmio de prazo voltou a importar.",
         ],
         real: [
-          "Inclinação vem dos juros reais.",
-          "Remuneração real voltou a ser relevante.",
-          "Carrego sem risco corporativo.",
+          "Juro real explica a inclinação.",
+          "Carry real voltou a ser relevante.",
+          "Menos necessidade de risco corporativo.",
         ],
         inflation: [
           "Expectativas seguem ancoradas.",
-          "Inflação implícita cai na curva.",
-          "Convergência para perto da meta.",
+          "Implícita cai ao longo da curva.",
+          "Sem sinal de desancoragem.",
         ],
       };
 
@@ -685,14 +685,14 @@
       ];
 
       const ALLOCATION_DIAGNOSIS = [
-        { title: "Inflação ancorada", text: "Sem sinal relevante de desancoragem." },
-        { title: "Juro real alto", text: "Carry real voltou a remunerar a espera." },
-        { title: "Duration seletiva", text: "Ponta longa exige mais convicção." },
+        { title: "Inflação ancorada", text: "A curva não aponta desancoragem." },
+        { title: "Juro real elevado", text: "O carry real remunera a espera." },
+        { title: "Duration seletiva", text: "A ponta longa exige convicção." },
       ];
 
       const ALLOCATION_BENEFITS = [
         "Proteção contra inflação realizada.",
-        "Juro real positivo.",
+        "Juro real positivo no carrego.",
         "Duration moderada (2.3y).",
         "Menor dependência do timing do Fed.",
       ];
@@ -857,7 +857,7 @@
               React.createElement(
                 "p",
                 { className: "lead" },
-                "Curvas de Treasuries, TIPS e inflação implícita conectadas a tabelas e spreads para separar inflação, juros reais e prêmio de duration."
+                "Curvas de Treasuries, TIPS e inflação implícita para separar inflação, juro real e prêmio de prazo."
               )
             ),
             React.createElement(
@@ -948,21 +948,21 @@
                   { className: "kpi panel" },
                   React.createElement("span", null, `${kpiCurve.short} 5s2s`),
                   React.createElement("strong", null, bps(spreadValue(kpiCurveKey, SPREADS[0]))),
-                  React.createElement("p", null, `Inclinação curta da curva ${kpiCurve.short}.`)
+                  React.createElement("p", null, "Trecho curto da curva.")
                 ),
                 React.createElement(
                   "article",
                   { className: "kpi panel" },
                   React.createElement("span", null, `${kpiCurve.short} 10s2s`),
                   React.createElement("strong", null, bps(spreadValue(kpiCurveKey, SPREADS[1]))),
-                  React.createElement("p", null, `Inclinação intermediária da curva ${kpiCurve.short}.`)
+                  React.createElement("p", null, "Inclinação contra o 2Y.")
                 ),
                 React.createElement(
                   "article",
                   { className: "kpi panel" },
                   React.createElement("span", null, `${kpiCurve.short} 30s10s`),
                   React.createElement("strong", null, bps(spreadValue(kpiCurveKey, SPREADS[2]))),
-                  React.createElement("p", null, `Ponta longa da curva ${kpiCurve.short}.`)
+                  React.createElement("p", null, "Prêmio concentrado na ponta longa.")
                 )
               ),
               React.createElement(
@@ -1002,7 +1002,7 @@
                       "div",
                       null,
                       React.createElement("span", { className: "control-title" }, "Diagnóstico"),
-                      React.createElement("h2", null, diagnosticMode === "curve" ? "Por curva" : "Implicações para alocação")
+                      React.createElement("h2", null, diagnosticMode === "curve" ? "Por curva" : "Alocação")
                     )
                   ),
                   diagnosticMode === "curve"
@@ -1052,7 +1052,7 @@
                         React.createElement(
                           "article",
                           { className: "selected-excerpt" },
-                          React.createElement("h3", null, "Trecho selecionado"),
+                          React.createElement("h3", null, "Trecho selecionado (0-5y)"),
                           React.createElement(
                             "ul",
                             null,
