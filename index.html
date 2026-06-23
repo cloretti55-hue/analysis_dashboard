@@ -2720,6 +2720,8 @@
       ];
 
       function EuropeModule() {
+        const legendOrder = { "sat-risk-high": 0, "sat-risk-defensive": 1, "sat-risk-medium": 2 };
+        const sortedThemes = [...EUROPE_THEMES].sort((a, b) => legendOrder[a.tone] - legendOrder[b.tone] || a.theme.localeCompare(b.theme, "pt-BR"));
         const [selectedTheme, setSelectedTheme] = useState("Defesa europeia");
         const active = EUROPE_THEMES.find((item) => item.theme === selectedTheme) || EUROPE_THEMES[0];
 
@@ -2740,7 +2742,7 @@
             React.createElement(
               "div",
               { className: "satellite-grid", style: { paddingTop: 16 } },
-              EUROPE_THEMES.map((item) =>
+              sortedThemes.map((item) =>
                 React.createElement(
                   "button",
                   { className: `satellite-card ${item.tone}`, type: "button", key: item.theme, "aria-pressed": active.theme === item.theme, onClick: () => setSelectedTheme(item.theme) },
