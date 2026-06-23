@@ -706,7 +706,7 @@
       .cycle-table th,
       .cycle-table td {
         border-top: 1px solid var(--line);
-        padding: 12px;
+        padding: 17px 12px;
         text-align: left;
         vertical-align: middle;
       }
@@ -728,7 +728,7 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        min-height: 34px;
+        min-height: 44px;
         border-radius: 8px;
         padding: 8px;
         color: var(--ink);
@@ -777,29 +777,16 @@
 
       .stack-frame {
         display: grid;
-        grid-template-columns: 34px minmax(0, 1fr);
-        gap: 10px;
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 12px;
         padding: 16px;
       }
 
       .stack-arrow {
-        display: flex;
-        align-items: center;
-        justify-content: center;
         min-height: 100%;
-        border: 1px solid rgba(72, 214, 233, 0.28);
-        border-radius: 8px;
-        background: rgba(72, 214, 233, 0.08);
-        color: var(--focus);
-        font-size: 24px;
-        font-weight: 900;
-      }
-
-      .stack-arrow span {
-        margin-top: 8px;
-        font-size: 10px;
-        letter-spacing: 0;
-        text-transform: uppercase;
+        background: linear-gradient(180deg, rgba(72, 214, 233, 0.92), rgba(72, 214, 233, 0.16));
+        clip-path: polygon(50% 0, 100% 15%, 72% 15%, 72% 100%, 28% 100%, 28% 15%, 0 15%);
+        filter: drop-shadow(0 0 14px rgba(72, 214, 233, 0.18));
       }
 
       .stack-layer {
@@ -1566,8 +1553,8 @@
       ];
 
       const AI_STACK = [
-        ["Energia / Grid", "Demanda física: utilities, transmissão e equipamentos.", "money-now", "captura já materializada"],
-        ["Data centers / Cooling", "Infraestrutura crítica: Vertiv, Eaton, Schneider, Equinix.", "money-now", "captura já materializada"],
+        ["Energia / Grid", "Demanda física: utilities, transmissão e equipamentos.", "money-now", "fluxo de CAPEX visível"],
+        ["Data centers / Cooling", "Infraestrutura crítica: Vertiv, Eaton, Schneider, Equinix.", "money-now", "fluxo de CAPEX visível"],
         ["Chips / HBM / Networking", "Gargalo tecnológico: Nvidia, TSMC, Broadcom, ASML.", "money-flow", "captura acelerada"],
         ["Cloud / Hyperscalers", "Escala e distribuição: Microsoft, Amazon, Google, Oracle.", "money-forming", "monetização em formação"],
         ["Aplicações", "Monetização final: software, agentes e vertical apps.", "money-future", "prova ainda incompleta"],
@@ -1666,8 +1653,7 @@
                 { className: "stack-frame" },
                 React.createElement(
                   "div",
-                  { className: "stack-arrow", "aria-label": "Ler a pilha de baixo para cima" },
-                  "↑"
+                  { className: "stack-arrow", "aria-label": "Ler a pilha de baixo para cima" }
                 ),
                 React.createElement(
                   "div",
