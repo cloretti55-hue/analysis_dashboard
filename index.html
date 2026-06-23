@@ -2641,6 +2641,7 @@
           tone: "sat-risk-high",
           implementation: "Cesta",
           etfs: "ETF amplo europeu dilui a tese",
+          tag: "Sem ETF limpo",
           why: "Rearmamento, OTAN e soberania militar.",
           thesis: "Novo ciclo de gasto militar europeu. A exposição é fragmentada por países e campeões nacionais.",
           names: ["Rheinmetall", "BAE Systems", "Leonardo", "Saab", "Thales", "Dassault Aviation", "Airbus", "Safran", "Rolls-Royce", "Hensoldt", "Kongsberg", "Indra"],
@@ -2654,6 +2655,7 @@
           tone: "sat-risk-high",
           implementation: "Cesta",
           etfs: "Sem ETF limpo para a tese",
+          tag: "Sem ETF limpo",
           why: "Cloud local, telecom, software, cyber e dados.",
           thesis: "A Europa não tem um hyperscaler dominante. A tese é uma arquitetura regulada de infraestrutura, software e segurança.",
           names: ["SAP", "OVHcloud", "Deutsche Telekom", "Orange", "Telefónica", "Capgemini", "Dassault Systèmes", "Sopra Steria", "Thales", "Schneider", "Siemens", "Legrand"],
@@ -2667,6 +2669,7 @@
           tone: "sat-risk-medium",
           implementation: "Cesta",
           etfs: "LUXU / GLUX (UCITS) como exposição simples; LUXY como alternativa US-listed",
+          tag: "LUXU / GLUX",
           why: "Pricing power e consumidor asiático indireto.",
           thesis: "Luxo europeu combina marca, escassez e margem global. ETF existe, mas a tese fica mais limpa em marcas específicas.",
           names: ["LVMH", "Hermès", "Ferrari", "Richemont", "Moncler", "Prada", "Kering", "L’Oréal", "EssilorLuxottica", "Pernod Ricard"],
@@ -2679,7 +2682,8 @@
           quality: "ETF parcial",
           tone: "sat-risk-defensive",
           implementation: "Cesta ou ETF setorial",
-          etfs: "Healthcare europeu/global como primeira camada; cesta melhora precisão",
+          etfs: "EXV4 / XDWH / healthcare global como primeira camada; cesta melhora precisão",
+          tag: "EXV4 / XDWH",
           why: "Defensividade, inovação e receita global.",
           thesis: "Pharma europeia combina pesquisa, escala global e menor dependência do ciclo econômico.",
           names: ["Novo Nordisk", "Roche", "Novartis", "AstraZeneca", "Sanofi", "GSK", "Merck KGaA", "Lonza", "Genmab", "UCB"],
@@ -2693,6 +2697,7 @@
           tone: "sat-risk-medium",
           implementation: "Cesta",
           etfs: "GRID / PAVE / ETF industrial europeu como primeira camada",
+          tag: "GRID / PAVE",
           why: "Grid, automação e equipamentos elétricos.",
           thesis: "A Europa tem líderes em equipamentos elétricos, automação e componentes críticos para infraestrutura, IA e data centers.",
           names: ["Schneider Electric", "Siemens", "ABB", "Legrand", "Prysmian", "Assa Abloy", "Atlas Copco", "Sandvik", "Infineon", "STMicroelectronics", "ASML"],
@@ -2706,6 +2711,7 @@
           tone: "sat-risk-medium",
           implementation: "Cesta",
           etfs: "SMH / SOXX como proxy global; cesta para Europa pura",
+          tag: "SMH / SOXX",
           why: "ASML, power semis e equipment crítico.",
           thesis: "A Europa não domina toda a cadeia, mas controla peças críticas em equipment, analog e power semis.",
           names: ["ASML", "Infineon", "STMicroelectronics", "ASM International", "BE Semiconductor", "Soitec"],
@@ -2744,7 +2750,7 @@
                     React.createElement("div", { className: "satellite-title-row" }, React.createElement(SatelliteIcon, { type: item.icon }), React.createElement("h3", null, item.theme)),
                     React.createElement("p", null, item.why)
                   ),
-                  React.createElement("div", { className: "satellite-tags" }, React.createElement("span", { className: "satellite-tag" }, `ETF amplo: ${item.status}`), React.createElement("span", { className: "satellite-tag" }, item.implementation))
+                  React.createElement("div", { className: "satellite-tags" }, React.createElement("span", { className: "satellite-tag" }, `ETF amplo: ${item.status}`), React.createElement("span", { className: "satellite-tag" }, item.tag || item.implementation))
                 )
               )
             )
