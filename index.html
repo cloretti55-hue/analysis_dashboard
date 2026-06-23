@@ -583,8 +583,7 @@
         overflow: hidden;
       }
 
-      .equity-chart-image,
-      .equity-pdf {
+      .equity-chart-image {
         display: block;
         width: 100%;
         border: 0;
@@ -595,8 +594,30 @@
         height: auto;
       }
 
-      .equity-pdf {
-        min-height: 520px;
+      .source-card {
+        display: grid;
+        gap: 12px;
+        min-height: 190px;
+        padding: 16px;
+      }
+
+      .source-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .source-link {
+        width: fit-content;
+        border: 1px solid rgba(72, 214, 233, 0.42);
+        border-radius: 8px;
+        padding: 9px 12px;
+        background: rgba(19, 119, 133, 0.18);
+        color: var(--focus);
+        font-size: 12px;
+        font-weight: 850;
+        text-decoration: none;
+        text-transform: uppercase;
       }
 
       .equity-cards {
@@ -981,7 +1002,7 @@
             { className: "equity-grid" },
             React.createElement(
               "article",
-              { className: "panel equity-chart-card" },
+              { className: "panel source-card" },
               React.createElement(
                 "div",
                 { className: "section-head" },
@@ -1059,15 +1080,20 @@
                   React.createElement("h2", null, "P/E ratio por capitalização")
                 )
               ),
-              React.createElement("object", {
-                className: "equity-pdf",
-                data: "./pe-ratio-cap.pdf",
-                type: "application/pdf",
-              })
+              React.createElement(
+                "p",
+                null,
+                "Material de referência para checar a série histórica e a composição dos múltiplos por capitalização."
+              ),
+              React.createElement(
+                "a",
+                { className: "source-link", href: "./pe-ratio-cap.pdf", target: "_blank", rel: "noopener" },
+                "Abrir PDF"
+              )
             ),
             React.createElement(
               "article",
-              { className: "panel equity-chart-card" },
+              { className: "panel source-card" },
               React.createElement(
                 "div",
                 { className: "section-head" },
@@ -1078,11 +1104,16 @@
                   React.createElement("h2", null, "Tech vs benchmark")
                 )
               ),
-              React.createElement("object", {
-                className: "equity-pdf",
-                data: "./tech-vs-bench.pdf",
-                type: "application/pdf",
-              })
+              React.createElement(
+                "p",
+                null,
+                "Apoio para avaliar se o prêmio de tecnologia ainda está em linha com o benchmark ou se virou concentração excessiva."
+              ),
+              React.createElement(
+                "a",
+                { className: "source-link", href: "./tech-vs-bench.pdf", target: "_blank", rel: "noopener" },
+                "Abrir PDF"
+              )
             )
           ),
           React.createElement(
