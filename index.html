@@ -771,6 +771,8 @@
         const [mode, setMode] = useState("all");
 
         const activeCurves = mode === "all" ? ["nominal", "real", "inflation"] : [mode];
+        const kpiCurveKey = mode === "all" ? "nominal" : mode;
+        const kpiCurve = CURVES[kpiCurveKey];
         const filteredMaturities = MATURITIES;
 
         const nominalLongPremium = spreadValue("nominal", SPREADS[2]);
@@ -854,23 +856,23 @@
                 React.createElement(
                   "article",
                   { className: "kpi panel" },
-                  React.createElement("span", null, "Nominal 5s2s"),
-                  React.createElement("strong", null, bps(spreadValue("nominal", SPREADS[0]))),
-                  React.createElement("p", null, "Inclinação curta da curva nominal.")
+                  React.createElement("span", null, `${kpiCurve.short} 5s2s`),
+                  React.createElement("strong", null, bps(spreadValue(kpiCurveKey, SPREADS[0]))),
+                  React.createElement("p", null, `Inclinação curta da curva ${kpiCurve.short}.`)
                 ),
                 React.createElement(
                   "article",
                   { className: "kpi panel" },
-                  React.createElement("span", null, "Nominal 10s2s"),
-                  React.createElement("strong", null, bps(spreadValue("nominal", SPREADS[1]))),
-                  React.createElement("p", null, "Inclinação intermediária contra o 2Y.")
+                  React.createElement("span", null, `${kpiCurve.short} 10s2s`),
+                  React.createElement("strong", null, bps(spreadValue(kpiCurveKey, SPREADS[1]))),
+                  React.createElement("p", null, `Inclinação intermediária da curva ${kpiCurve.short}.`)
                 ),
                 React.createElement(
                   "article",
                   { className: "kpi panel" },
-                  React.createElement("span", null, "Nominal 30s10s"),
-                  React.createElement("strong", null, bps(spreadValue("nominal", SPREADS[2]))),
-                  React.createElement("p", null, "Ponta longa concentra o prêmio de prazo.")
+                  React.createElement("span", null, `${kpiCurve.short} 30s10s`),
+                  React.createElement("strong", null, bps(spreadValue(kpiCurveKey, SPREADS[2]))),
+                  React.createElement("p", null, `Ponta longa da curva ${kpiCurve.short}.`)
                 )
               ),
               React.createElement(
