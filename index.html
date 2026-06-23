@@ -510,6 +510,18 @@
         padding: 0;
       }
 
+      .allocation-diagnostic .diagnosis {
+        grid-template-columns: 1fr;
+      }
+
+      .allocation-diagnostic .diag-item {
+        min-height: 0;
+      }
+
+      .allocation-diagnostic .benefits {
+        grid-template-columns: 1fr;
+      }
+
       footer {
         padding: 10px 0 4px;
         color: var(--muted);
@@ -647,6 +659,19 @@
         "Adaptação natural para investidores acostumados a carrego.",
       ];
 
+      const ALLOCATION_DIAGNOSIS = [
+        { title: "Inflação ancorada", text: "Sem sinal relevante de desancoragem." },
+        { title: "Juro real alto", text: "Carry real voltou a remunerar a espera." },
+        { title: "Duration seletiva", text: "Ponta longa exige mais convicção." },
+      ];
+
+      const ALLOCATION_BENEFITS = [
+        "Proteção contra inflação realizada.",
+        "Juro real positivo.",
+        "Duration moderada (2.3y).",
+        "Menor dependência do timing do Fed.",
+      ];
+
       function pct(value) {
         return `${value.toFixed(2).replace(".", ",")}%`;
       }
@@ -779,11 +804,11 @@
       }
 
       function App() {
-        const [mode, setMode] = useState("all");
+        const [mode, setMode] = useState("nominal");
         const [diagnosticMode, setDiagnosticMode] = useState("curve");
 
-        const activeCurves = mode === "all" ? ["nominal", "real", "inflation"] : [mode];
-        const kpiCurveKey = mode === "all" ? "nominal" : mode;
+        const activeCurves = [mode];
+        const kpiCurveKey = mode;
         const kpiCurve = CURVES[kpiCurveKey];
         const filteredMaturities = MATURITIES;
 
@@ -833,18 +858,16 @@
                   {
                     className: "segmented",
                     style: {
-                      "--active-color": mode === "all" ? "#0f6d7a" : CURVES[mode].color,
+                      "--active-color": CURVES[mode].color,
                       "--active-soft":
-                        mode === "all"
-                          ? "var(--nominal-soft)"
-                          : mode === "nominal"
+                        mode === "nominal"
                             ? "var(--nominal-soft)"
                             : mode === "real"
                               ? "var(--real-soft)"
                               : "var(--inflation-soft)",
                     },
                   },
-                  ["all", "nominal", "real", "inflation"].map((key) =>
+                  ["nominal", "real", "inflation"].map((key) =>
                     React.createElement(
                       "button",
                       {
@@ -853,7 +876,7 @@
                         "aria-pressed": mode === key,
                         onClick: () => setMode(key),
                       },
-                      key === "all" ? "Todas" : key === "inflation" ? "Inflação Implícita" : CURVES[key].short
+                      key === "inflation" ? "Inflação Implícita" : CURVES[key].short
                     )
                   )
                 )
@@ -930,7 +953,7 @@
                       "div",
                       null,
                       React.createElement("span", { className: "control-title" }, "O que o mercado está dizendo?"),
-                      React.createElement("h2", null, mode === "all" ? "Curvas conectadas" : CURVES[mode].label)
+                      React.createElement("h2", null, CURVES[mode].label)
                     ),
                     React.createElement("span", { className: "mini-label" }, `${filteredMaturities.length} vértices no gráfico`)
                   ),
@@ -992,7 +1015,7 @@
                         React.createElement(
                           "div",
                           { className: "diagnosis" },
-                          DIAGNOSIS.map((item) =>
+                          ALLOCATION_DIAGNOSIS.map((item) =>
                             React.createElement(
                               "article",
                               { className: "diag-item", key: item.title },
@@ -1004,7 +1027,7 @@
                         React.createElement(
                           "div",
                           { className: "benefits" },
-                          BENEFITS.map((benefit) =>
+                          ALLOCATION_BENEFITS.map((benefit) =>
                             React.createElement(
                               "div",
                               { className: "benefit", key: benefit },
@@ -1012,12 +1035,6 @@
                               React.createElement("span", null, benefit)
                             )
                           )
-                        ),
-                        React.createElement(
-                          "div",
-                          { className: "callout" },
-                          React.createElement("h3", null, "iShares $ TIPS 0-5 UCITS ETF"),
-                          React.createElement("p", null, "Exemplo ilustrativo. Não constitui recomendação de investimento.")
                         )
                       )
                 )
