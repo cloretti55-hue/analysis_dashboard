@@ -70,12 +70,27 @@
         padding: 22px 0 18px;
       }
 
-      .eyebrow {
-        margin: 0 0 10px;
+      .view-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 12px;
+      }
+
+      .view-tab {
+        min-height: 34px;
+        border: 1px solid rgba(72, 214, 233, 0.42);
+        border-radius: 8px;
+        padding: 7px 12px;
+        background: var(--nominal-soft);
         color: var(--focus);
         font-size: 12px;
-        font-weight: 800;
+        font-weight: 850;
         text-transform: uppercase;
+      }
+
+      .view-tab[aria-current="page"] {
+        box-shadow: inset 0 -2px 0 var(--focus);
       }
 
       h1 {
@@ -852,7 +867,15 @@
             React.createElement(
               "section",
               null,
-              React.createElement("p", { className: "eyebrow" }, "Arquitetura de Mercado"),
+              React.createElement(
+                "nav",
+                { className: "view-tabs", "aria-label": "Módulos do dashboard" },
+                React.createElement(
+                  "button",
+                  { className: "view-tab", type: "button", "aria-current": "page" },
+                  "Curve Yield"
+                )
+              ),
               React.createElement("h1", null, "O retorno livre de risco voltou a competir por capital"),
               React.createElement(
                 "p",
