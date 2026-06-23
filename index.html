@@ -1168,15 +1168,15 @@
       }
 
       .risk-high {
-        --zone: #ff7676;
+        --zone: #4f7dff;
       }
 
       .risk-medium {
-        --zone: #e0b85d;
+        --zone: #48d6e9;
       }
 
       .risk-defensive {
-        --zone: #36d399;
+        --zone: #3aa6a3;
       }
 
       .satellite-detail {
@@ -2428,11 +2428,12 @@
       ];
 
       function SatelliteModule() {
-        const [filters, setFilters] = useState({ zone: "all", aggression: "all", motor: "all", vehicle: "all" });
+        const riskOrder = { high: 0, medium: 1, defensive: 2 };
+        const [filters, setFilters] = useState({ aggression: "all", motor: "all" });
         const [selectedTheme, setSelectedTheme] = useState("Semicondutores / IA hardware");
         const filtered = SATELLITES.filter((item) =>
           Object.entries(filters).every(([key, value]) => value === "all" || item[key] === value)
-        );
+        ).sort((a, b) => riskOrder[a.aggression] - riskOrder[b.aggression] || a.theme.localeCompare(b.theme, "pt-BR"));
         const active = filtered.find((item) => item.theme === selectedTheme) || filtered[0] || SATELLITES[0];
 
         const filterRow = (key, label) =>
