@@ -387,54 +387,17 @@
       }
 
       .tables-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        gap: 18px;
+        display: block;
       }
 
-      .table-shell {
-        overflow: auto;
-        padding: 0 16px 16px;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        min-width: 520px;
-      }
-
-      th,
-      td {
-        border-bottom: 1px solid var(--line);
-        padding: 12px 10px;
-        text-align: right;
-        white-space: nowrap;
-      }
-
-      th:first-child,
-      td:first-child {
-        text-align: left;
-      }
-
-      th {
-        color: var(--muted);
-        font-size: 11px;
-        text-transform: uppercase;
-      }
-
-      tbody tr {
-        cursor: pointer;
-      }
-
-      tbody tr:hover,
-      tbody tr.is-selected {
-        background: rgba(72, 214, 233, 0.1);
+      .tables-grid > .panel:first-child {
+        display: none;
       }
 
       .spread-list {
         display: grid;
         gap: 10px;
-        padding: 0 16px 16px;
+        padding: 28px 16px 16px;
       }
 
       .spread-row {
@@ -545,9 +508,6 @@
         .layout,
         .main-grid,
         .allocation,
-        .tables-grid {
-          grid-template-columns: 1fr;
-        }
 
         .controls {
           position: static;
