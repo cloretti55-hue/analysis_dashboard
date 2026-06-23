@@ -639,7 +639,7 @@
       .mega-table {
         width: 100%;
         border-collapse: collapse;
-        min-width: 860px;
+        min-width: 1120px;
       }
 
       .mega-table th,
@@ -662,8 +662,7 @@
         line-height: 1.35;
       }
 
-      .mega-table td:nth-child(2),
-      .mega-table td:nth-child(3) {
+      .mega-table td:nth-child(2) {
         white-space: nowrap;
         font-weight: 850;
       }
@@ -1044,51 +1043,59 @@
         {
           company: "S&P 500",
           pe: "20,5x",
-          growth: "Benchmark",
-          read: "Referência para comparar o prêmio da Magnificent 7 contra o índice cheio.",
+          recent: "Lucro Q1 2026 entre ~27%-29% YoY.",
+          outlook: "Goldman vê EPS 2026 +24%; Wells Fargo e UBS elevaram projeções.",
+          read: "Benchmark: lucro forte, mas parte relevante vem de IA, semis, energia e megacaps.",
           benchmark: true,
         },
         {
           company: "Nvidia",
           pe: "~20x-25x",
-          growth: ">70%",
-          read: "Melhor relação crescimento/múltiplo do grupo; risco é desaceleração do ciclo de IA.",
+          recent: "Receita Q4 FY26 +73% YoY; lucro líquido +94% YoY.",
+          outlook: "Guidance Q1 FY27 de US$ 78 bi em receita.",
+          read: "Motor mais explosivo do grupo; principal beneficiária direta do CAPEX de IA.",
         },
         {
           company: "Meta",
           pe: "~22x-26x",
-          growth: "~25%-35%",
-          read: "Ads e IA sustentam crescimento forte, mas o CAPEX ficou mais pesado.",
+          recent: "Q1 2026: receita US$ 56,3 bi; EPS +62% YoY.",
+          outlook: "CAPEX 2026 elevado para US$ 125-145 bi.",
+          read: "Monetização de IA via ads é forte, mas o CAPEX virou ponto de cobrança.",
         },
         {
           company: "Amazon",
           pe: "~30x-40x",
-          growth: "~20%-30%",
-          read: "AWS e eficiência operacional ainda sustentam prêmio.",
+          recent: "Q1 2026: net sales +16,6%; net income +76,7%; AWS +28%.",
+          outlook: "CAPEX pode chegar perto de US$ 200 bi em 2026.",
+          read: "Lucro cresce bem, mas o mercado cobra retorno em AWS, IA e free cash flow.",
         },
         {
           company: "Alphabet",
           pe: "~22x-26x",
-          growth: "~20%-30%",
-          read: "Múltiplo relativamente razoável, com cloud e search ainda fortes.",
+          recent: "Receita Q1 2026 +22%; Google Cloud +63%.",
+          outlook: "Search, Cloud e Gemini sustentam a tese, apesar de CAPEX alto.",
+          read: "Deixa de ser só advertising e ganha perfil de infraestrutura/plataforma de IA.",
         },
         {
           company: "Microsoft",
           pe: "~20x-25x",
-          growth: "~15%-20%",
-          read: "Qualidade alta e cloud recorrente, com CAPEX de IA como ponto de atenção.",
+          recent: "Receita trimestre mar/2026 +18%; Microsoft Cloud +29%.",
+          outlook: "Foco do mercado é se o CAPEX de IA vira margem sustentável.",
+          read: "Um dos melhores perfis: cloud, software recorrente e IA corporativa.",
         },
         {
           company: "Apple",
           pe: "~28x-32x",
-          growth: "~5%-10%",
-          read: "Prêmio alto para crescimento mais baixo; depende de serviços e recompra.",
+          recent: "Receita fiscal Q2 2026 +17% YoY; EPS cerca de +22% YoY.",
+          outlook: "Depende mais de iPhone, serviços e China do que de AI infra puro.",
+          read: "Forte, mas menos ligada ao CAPEX de IA do que o restante do grupo.",
         },
         {
           company: "Tesla",
           pe: ">100x / distorcido",
-          growth: "Volátil",
-          read: "Valuation depende mais de optionalidade futura do que do lucro atual.",
+          recent: "Q1 2026: receita +16%; lucro líquido +17%.",
+          outlook: "Narrativa depende de robotaxi, Optimus, IA e CAPEX estimado em US$ 25 bi.",
+          read: "O mais especulativo: lucro atual não sustenta sozinho a narrativa.",
         },
       ];
 
@@ -1247,7 +1254,8 @@
                     null,
                     React.createElement("th", null, "Empresa"),
                     React.createElement("th", null, "Forward P/E"),
-                    React.createElement("th", null, "Growth"),
+                    React.createElement("th", null, "Realizado recente"),
+                    React.createElement("th", null, "Perspectiva"),
                     React.createElement("th", null, "Leitura")
                   )
                 ),
@@ -1260,7 +1268,8 @@
                       { key: row.company, className: row.benchmark ? "benchmark-row" : undefined },
                       React.createElement("td", null, row.company),
                       React.createElement("td", null, row.pe),
-                      React.createElement("td", null, row.growth),
+                      React.createElement("td", null, row.recent),
+                      React.createElement("td", null, row.outlook),
                       React.createElement("td", null, row.read)
                     )
                   )
@@ -1271,11 +1280,11 @@
           React.createElement(
             "section",
             { className: "panel equity-summary" },
-            React.createElement("h2", null, "O prêmio não é homogêneo dentro da Magnificent 7."),
+            React.createElement("h2", null, "O prêmio vem acompanhado de crescimento superior."),
             React.createElement(
               "p",
               null,
-              "Nvidia, Meta, Amazon e Alphabet sustentam melhor o múltiplo por crescimento. Apple e Tesla exigem mais cuidado: Apple por crescimento menor; Tesla porque o valuation depende de optionalidade futura."
+              "FactSet/IBD reportou +63,2% YoY de lucro no 1T para o Mag-7, contra +17,4% para o restante do S&P 500; Goldman vê o grupo de mega caps ainda entregando crescimento de lucro superior ao restante do índice."
             )
           )
         );
