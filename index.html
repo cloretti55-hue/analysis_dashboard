@@ -573,12 +573,6 @@
         gap: 18px;
       }
 
-      .equity-support-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        gap: 18px;
-      }
-
       .equity-chart-card {
         overflow: hidden;
       }
@@ -684,7 +678,6 @@
         .layout,
         .main-grid,
         .equity-grid,
-        .equity-support-grid,
         .allocation,
 
         .controls {
@@ -1066,54 +1059,26 @@
           ),
           React.createElement(
             "section",
-            { className: "equity-support-grid" },
+            { className: "panel source-card" },
             React.createElement(
-              "article",
-              { className: "panel equity-chart-card" },
+              "div",
+              { className: "section-head" },
               React.createElement(
                 "div",
-                { className: "section-head" },
-                React.createElement(
-                  "div",
-                  null,
-                  React.createElement("span", { className: "control-title" }, "Gráfico de apoio"),
-                  React.createElement("h2", null, "P/E ratio por capitalização")
-                )
-              ),
-              React.createElement(
-                "p",
                 null,
-                "Material de referência para checar a série histórica e a composição dos múltiplos por capitalização."
-              ),
-              React.createElement(
-                "a",
-                { className: "source-link", href: "./pe-ratio-cap.pdf", target: "_blank", rel: "noopener" },
-                "Abrir PDF"
+                React.createElement("span", { className: "control-title" }, "Gráfico de apoio"),
+                React.createElement("h2", null, "Tech vs benchmark")
               )
             ),
             React.createElement(
-              "article",
-              { className: "panel source-card" },
-              React.createElement(
-                "div",
-                { className: "section-head" },
-                React.createElement(
-                  "div",
-                  null,
-                  React.createElement("span", { className: "control-title" }, "Gráfico de apoio"),
-                  React.createElement("h2", null, "Tech vs benchmark")
-                )
-              ),
-              React.createElement(
-                "p",
-                null,
-                "Apoio para avaliar se o prêmio de tecnologia ainda está em linha com o benchmark ou se virou concentração excessiva."
-              ),
-              React.createElement(
-                "a",
-                { className: "source-link", href: "./tech-vs-bench.pdf", target: "_blank", rel: "noopener" },
-                "Abrir PDF"
-              )
+              "p",
+              null,
+              "Apoio para avaliar se o prêmio de tecnologia ainda está em linha com o benchmark ou se virou concentração excessiva."
+            ),
+            React.createElement(
+              "a",
+              { className: "source-link", href: "./tech-vs-bench.pdf", target: "_blank", rel: "noopener" },
+              "Abrir PDF"
             )
           ),
           React.createElement(
