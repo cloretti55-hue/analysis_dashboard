@@ -978,12 +978,6 @@
           bullets: ["Múltiplos mais baixos.", "Mais sensíveis a juros, crédito e ciclo."],
           message: "Mais barato não significa automaticamente melhor.",
         },
-        {
-          title: "S&P 493 / Equal Weight",
-          tone: "#aab8ca",
-          bullets: ["Remove a Magnificent 7 da leitura.", "Ajuda a enxergar o resto do mercado."],
-          message: "Mostra se o caro é amplo ou concentrado.",
-        },
       ];
 
       function EquityValuationModule() {
@@ -1002,8 +996,7 @@
                 React.createElement(
                   "div",
                   null,
-                  React.createElement("span", { className: "control-title" }, "Valuation relativo"),
-                  React.createElement("h2", null, "Forward P/E por capitalização")
+                  React.createElement("span", { className: "control-title" }, "Valuation relativo")
                 )
               ),
               React.createElement("img", {
@@ -1547,12 +1540,7 @@
               )
             )
           )
-            : React.createElement(EquityValuationModule),
-          React.createElement(
-            "footer",
-            null,
-            "Em um ambiente de juros reais elevados, ser bem remunerado para esperar pode ser mais eficiente do que assumir risco adicional de duration."
-          )
+            : React.createElement(EquityValuationModule)
         );
       }
 
