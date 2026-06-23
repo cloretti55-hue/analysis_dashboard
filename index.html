@@ -619,6 +619,15 @@
         justify-content: flex-end;
       }
 
+      .equity-filter .segmented {
+        display: flex;
+        flex-wrap: nowrap;
+      }
+
+      .equity-filter .segmented button {
+        white-space: nowrap;
+      }
+
       .mega-table-card {
         overflow: hidden;
       }
@@ -1191,16 +1200,6 @@
               "a",
               { className: "source-link", href: "./tech-vs-bench.pdf", target: "_blank", rel: "noopener" },
               "Abrir PDF"
-            )
-          ),
-          React.createElement(
-            "section",
-            { className: "panel equity-summary" },
-            React.createElement("h2", null, "O S&P 500 está caro, mas o caro está concentrado."),
-            React.createElement(
-              "p",
-              null,
-              "A leitura agregada do índice pode enganar. Parte relevante do prêmio está nas mega caps; abaixo da superfície, mid caps e small caps negociam a múltiplos mais moderados. O risco não é valuation alto em abstrato, mas pagar caro no pedaço errado do mercado."
             )
           )
         );
