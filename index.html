@@ -522,6 +522,31 @@
         grid-template-columns: 1fr;
       }
 
+      .selected-excerpt {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px;
+        background: rgba(126, 230, 165, 0.08);
+      }
+
+      .selected-excerpt h3 {
+        margin: 0 0 10px;
+        font-size: 16px;
+      }
+
+      .selected-excerpt ul {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      .selected-excerpt li::marker {
+        color: var(--positive);
+      }
+
       footer {
         padding: 10px 0 4px;
         color: var(--muted);
@@ -1025,15 +1050,13 @@
                           )
                         ),
                         React.createElement(
-                          "div",
-                          { className: "benefits" },
-                          ALLOCATION_BENEFITS.map((benefit) =>
-                            React.createElement(
-                              "div",
-                              { className: "benefit", key: benefit },
-                              React.createElement("b", null, "✓"),
-                              React.createElement("span", null, benefit)
-                            )
+                          "article",
+                          { className: "selected-excerpt" },
+                          React.createElement("h3", null, "Trecho selecionado"),
+                          React.createElement(
+                            "ul",
+                            null,
+                            ALLOCATION_BENEFITS.map((benefit) => React.createElement("li", { key: benefit }, benefit))
                           )
                         )
                       )
