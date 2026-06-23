@@ -1002,6 +1002,12 @@
         color: #c4ccff;
       }
 
+      .etf-token.etf-fixed {
+        border-color: rgba(126, 183, 255, 0.4);
+        background: rgba(126, 183, 255, 0.1);
+        color: #c9e0ff;
+      }
+
       .etf-token.etf-other {
         border-color: rgba(164, 181, 204, 0.3);
         background: rgba(164, 181, 204, 0.08);
@@ -2005,8 +2011,9 @@
         { fn: "Core Europa", why: "Exposição regional.", tickers: ["VGK", "IEUR", "FEZ", "IMEU"], note: "ETF amplo não captura bem defesa, luxo e soberania digital." },
         { fn: "Emergentes amplos", why: "Beta EM diversificado.", tickers: ["VWO", "IEMG", "EIMI"], note: "China pode dominar demais o risco." },
         { fn: "Emergentes ex-China", why: "Reduz risco China.", tickers: ["EMXC", "EXCH"], note: "Útil para China+1 e diversificação geopolítica." },
-        { fn: "Liquidez USD", why: "Carrego curto com baixa volatilidade.", tickers: ["IB01"], note: "Treasury bills UCITS Acc para reinvestimento offshore." },
-        { fn: "Inflação USD", why: "Inflação americana com duration controlada.", tickers: ["TIP5"], note: "Evita misturar inflação com duration longa." },
+        { fn: "Renda fixa USD Acc", why: "Escada de Treasuries por duration.", tickers: ["IB01", "IBTA", "CBU7", "IBTM", "DTLA"], note: "Do caixa remunerado à posição direcional em queda de juros." },
+        { fn: "Inflação USD Acc", why: "TIPS com diferentes perfis de duration.", tickers: ["TIP5", "ITPS", "ITPE"], note: "Separa proteção inflacionária curta de inflação ampla." },
+        { fn: "Crédito e core bond", why: "Spread corporativo e diversificação global em bonds.", tickers: ["LQDA", "IHYA", "AGGU"], note: "IG, high yield e agregado global cumprem funções distintas." },
         { fn: "Hedge macro", why: "Proteção de cauda ou crise.", tickers: ["Ouro ETC", "SPY options"], note: "Ouro protege regime; opção protege drawdown específico." },
       ];
 
@@ -2033,8 +2040,17 @@
         EIMI: "etf-emerging",
         EMXC: "etf-emerging",
         EXCH: "etf-emerging",
-        IB01: "etf-other",
-        TIP5: "etf-other",
+        IB01: "etf-fixed",
+        IBTA: "etf-fixed",
+        CBU7: "etf-fixed",
+        IBTM: "etf-fixed",
+        DTLA: "etf-fixed",
+        TIP5: "etf-fixed",
+        ITPS: "etf-fixed",
+        ITPE: "etf-fixed",
+        LQDA: "etf-fixed",
+        IHYA: "etf-fixed",
+        AGGU: "etf-fixed",
         "Ouro ETC": "etf-other",
         "SPY options": "etf-other",
       };
@@ -2062,8 +2078,17 @@
         EIMI: ["Emergentes amplos", "EM UCITS amplo.", "Risco China e tracking devem ser monitorados.", ["Útil para offshore UCITS.", "Diversificação EM ampla.", "Checar Acc/Dist e moeda."]],
         EMXC: ["Emergentes ex-China", "Tese China+1 e redução de risco China.", "Não representa o beta EM tradicional completo.", ["Remove o principal risco geopolítico do EM amplo.", "Aumenta peso relativo de Índia, Taiwan e outros.", "Útil como complemento."]],
         EXCH: ["Emergentes ex-China", "EM ex-China em wrapper UCITS.", "Checar liquidez e tracking.", ["Separação geopolítica do beta EM.", "Útil para carteiras offshore.", "Complementa VWO/IEMG/EIMI."]],
-        IB01: ["Liquidez USD", "Treasury bills UCITS Acc.", "Não é hedge de duration; é caixa remunerado.", ["Carrego curto com baixa volatilidade.", "Acc pode ser eficiente para reinvestimento.", "Peça de liquidez, margem e espera."]],
-        TIP5: ["Inflação USD", "TIPS curtos com duration controlada.", "Não misturar com TIPS longos sem querer duration.", ["Proteção contra inflação realizada.", "Menor dependência de queda de juros longos.", "Combina com tese de carrego real."]],
+        IB01: ["Liquidez USD", "iShares $ Treasury Bond 0-1yr UCITS ETF USD Acc.", "Caixa remunerado em dólar, não aposta de duration.", ["Serve como liquidez remunerada.", "Baixa volatilidade e baixa sensibilidade a juros.", "Bom veículo Acc quando o objetivo é reinvestimento offshore."]],
+        IBTA: ["Duration curta", "iShares $ Treasury Bond 1-3yr UCITS ETF USD Acc.", "Baixa sensibilidade a juros.", ["Adiciona um pouco mais de duration que caixa.", "Útil para carregar yield sem alongar demais.", "Funciona como primeiro degrau depois de liquidez."]],
+        CBU7: ["Duration média curta", "iShares $ Treasury Bond 3-7yr UCITS ETF USD Acc.", "Miolo curto da curva.", ["Equilibra carrego e risco de duration.", "Pode capturar cortes moderados sem ir para a ponta longa.", "Boa peça intermediária em escada de Treasuries."]],
+        IBTM: ["Duration média", "iShares $ Treasury Bond 7-10yr UCITS ETF USD Acc.", "Hedge parcial contra queda de juros.", ["Mais sensível ao ciclo de política monetária.", "Pode ajudar quando a tese pede queda de juros.", "Exige mais convicção do que os vértices curtos."]],
+        DTLA: ["Duration longa", "iShares $ Treasury Bond 20+yr UCITS ETF USD Acc.", "Posição direcional em queda de juros.", ["Alta sensibilidade a juros longos.", "Potencial de ganho maior se yields comprimirem.", "Volatilidade relevante; não é simples caixa remunerado."]],
+        TIP5: ["Inflação curta", "iShares $ TIPS 0-5 UCITS ETF USD Acc.", "Proteção inflacionária com duration menor.", ["Combina juro real positivo com menor duration.", "Mais alinhado a carrego real do que a aposta em juros longos.", "Evita misturar inflação com duration excessiva."]],
+        ITPS: ["Inflação ampla", "iShares $ TIPS UCITS ETF Acc.", "Inflação americana com mais duration.", ["Protege contra inflação realizada em uma cesta mais ampla.", "Traz mais sensibilidade a juros reais.", "Útil quando a carteira aceita mais duration."]],
+        ITPE: ["Inflação ampla", "iShares $ TIPS UCITS ETF Acc.", "Inflação americana com mais duration.", ["Alternativa para exposição ampla a TIPS.", "A escolha final depende da bolsa/listagem e política operacional.", "Comparar custo, tracking e moeda de negociação."]],
+        LQDA: ["Crédito IG USD", "iShares $ Corp Bond UCITS ETF USD Acc.", "Spread corporativo investment grade.", ["Adiciona prêmio de crédito com qualidade maior.", "Não substitui Treasury como hedge de crise.", "Sensível a spread, duration e ciclo corporativo."]],
+        IHYA: ["High Yield USD", "iShares $ High Yield Corp Bond UCITS ETF USD Acc.", "Crédito mais arriscado e yield maior.", ["Carrega mais spread e mais risco de default.", "Funciona melhor quando crédito e ciclo estão construtivos.", "Não deve ser tratado como renda fixa defensiva."]],
+        AGGU: ["Core bond global", "iShares Core Global Aggregate Bond UCITS ETF USD Acc.", "Diversificação global em bonds.", ["Combina governos e crédito global.", "Útil como peça ampla de renda fixa.", "Checar hedge cambial, duration e composição antes de usar como core."]],
         "Ouro ETC": ["Hedge macro", "Proteção de regime e crise.", "Não protege drawdown específico como opção.", ["Funciona como ativo real/monetário.", "Ajuda em choques de confiança.", "Escolher ETC exige cuidado operacional e fiscal."]],
         "SPY options": ["Hedge macro", "Proteção de drawdown específico.", "Custo de prêmio corrói retorno se mal dimensionado.", ["Puts, collars e overlays táticos.", "Exige gestão de vencimento e strike.", "Instrumento de proteção, não de carrego."]],
       };
