@@ -614,6 +614,51 @@
         text-transform: uppercase;
       }
 
+      .equity-filter {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .mega-table-card {
+        overflow: hidden;
+      }
+
+      .mega-table-wrap {
+        overflow-x: auto;
+      }
+
+      .mega-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 860px;
+      }
+
+      .mega-table th,
+      .mega-table td {
+        border-top: 1px solid var(--line);
+        padding: 13px 14px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .mega-table th {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .mega-table td {
+        color: var(--ink);
+        line-height: 1.35;
+      }
+
+      .mega-table td:nth-child(2),
+      .mega-table td:nth-child(3) {
+        white-space: nowrap;
+        font-weight: 850;
+      }
+
       .equity-cards {
         display: grid;
         gap: 12px;
@@ -980,10 +1025,84 @@
         },
       ];
 
+      const MAGNIFICENT_ROWS = [
+        {
+          company: "Nvidia",
+          pe: "~20x-25x",
+          growth: ">70%",
+          read: "Melhor relação crescimento/múltiplo do grupo; risco é desaceleração do ciclo de IA.",
+        },
+        {
+          company: "Meta",
+          pe: "~22x-26x",
+          growth: "~25%-35%",
+          read: "Ads e IA sustentam crescimento forte, mas o CAPEX ficou mais pesado.",
+        },
+        {
+          company: "Amazon",
+          pe: "~30x-40x",
+          growth: "~20%-30%",
+          read: "AWS e eficiência operacional ainda sustentam prêmio.",
+        },
+        {
+          company: "Alphabet",
+          pe: "~22x-26x",
+          growth: "~20%-30%",
+          read: "Múltiplo relativamente razoável, com cloud e search ainda fortes.",
+        },
+        {
+          company: "Microsoft",
+          pe: "~20x-25x",
+          growth: "~15%-20%",
+          read: "Qualidade alta e cloud recorrente, com CAPEX de IA como ponto de atenção.",
+        },
+        {
+          company: "Apple",
+          pe: "~28x-32x",
+          growth: "~5%-10%",
+          read: "Prêmio alto para crescimento mais baixo; depende de serviços e recompra.",
+        },
+        {
+          company: "Tesla",
+          pe: ">100x / distorcido",
+          growth: "Volátil",
+          read: "Valuation depende mais de optionalidade futura do que do lucro atual.",
+        },
+      ];
+
       function EquityValuationModule() {
-        return React.createElement(
-          "main",
-          { className: "equity-layout" },
+        const [equityView, setEquityView] = useState("broad");
+
+        const filter = React.createElement(
+          "section",
+          { className: "equity-filter" },
+          React.createElement(
+            "div",
+            { className: "segmented", "aria-label": "Visão do módulo Equity Valuation" },
+            React.createElement(
+              "button",
+              {
+                type: "button",
+                "aria-pressed": equityView === "broad",
+                onClick: () => setEquityView("broad"),
+              },
+              "Amplo"
+            ),
+            React.createElement(
+              "button",
+              {
+                type: "button",
+                "aria-pressed": equityView === "mega",
+                onClick: () => setEquityView("mega"),
+              },
+              "Magnificent 7"
+            )
+          )
+        );
+
+        const broadView = React.createElement(
+          React.Fragment,
+          null,
           React.createElement(
             "section",
             { className: "equity-grid" },
@@ -1084,6 +1203,76 @@
               "A leitura agregada do índice pode enganar. Parte relevante do prêmio está nas mega caps; abaixo da superfície, mid caps e small caps negociam a múltiplos mais moderados. O risco não é valuation alto em abstrato, mas pagar caro no pedaço errado do mercado."
             )
           )
+        );
+
+        const megaView = React.createElement(
+          React.Fragment,
+          null,
+          React.createElement(
+            "section",
+            { className: "panel mega-table-card" },
+            React.createElement(
+              "div",
+              { className: "section-head" },
+              React.createElement(
+                "div",
+                null,
+                React.createElement("span", { className: "control-title" }, "Magnificent 7"),
+                React.createElement("h2", null, "Múltiplo vs crescimento")
+              )
+            ),
+            React.createElement(
+              "div",
+              { className: "mega-table-wrap" },
+              React.createElement(
+                "table",
+                { className: "mega-table" },
+                React.createElement(
+                  "thead",
+                  null,
+                  React.createElement(
+                    "tr",
+                    null,
+                    React.createElement("th", null, "Empresa"),
+                    React.createElement("th", null, "Forward P/E"),
+                    React.createElement("th", null, "Growth"),
+                    React.createElement("th", null, "Leitura")
+                  )
+                ),
+                React.createElement(
+                  "tbody",
+                  null,
+                  MAGNIFICENT_ROWS.map((row) =>
+                    React.createElement(
+                      "tr",
+                      { key: row.company },
+                      React.createElement("td", null, row.company),
+                      React.createElement("td", null, row.pe),
+                      React.createElement("td", null, row.growth),
+                      React.createElement("td", null, row.read)
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          React.createElement(
+            "section",
+            { className: "panel equity-summary" },
+            React.createElement("h2", null, "O prêmio não é homogêneo dentro da Magnificent 7."),
+            React.createElement(
+              "p",
+              null,
+              "Nvidia, Meta, Amazon e Alphabet sustentam melhor o múltiplo por crescimento. Apple e Tesla exigem mais cuidado: Apple por crescimento menor; Tesla porque o valuation depende de optionalidade futura."
+            )
+          )
+        );
+
+        return React.createElement(
+          "main",
+          { className: "equity-layout" },
+          filter,
+          equityView === "broad" ? broadView : megaView
         );
       }
 
