@@ -1154,6 +1154,12 @@
         color: #a9efff;
       }
 
+      .etf-token.etf-global {
+        border-color: rgba(98, 178, 255, 0.5);
+        background: rgba(98, 178, 255, 0.12);
+        color: #b7ddff;
+      }
+
       .etf-token.etf-emerging {
         border-color: rgba(111, 132, 255, 0.52);
         background: rgba(111, 132, 255, 0.14);
@@ -1189,6 +1195,12 @@
         border-color: rgba(4, 122, 148, 0.42);
         background: rgba(4, 122, 148, 0.16);
         color: #035d73;
+      }
+
+      body.theme-light .etf-token.etf-global {
+        border-color: rgba(56, 128, 205, 0.42);
+        background: rgba(56, 128, 205, 0.16);
+        color: #255f9f;
       }
 
       body.theme-light .etf-token.etf-emerging {
@@ -2600,8 +2612,8 @@
         RSP: "etf-us",
         VEA: "etf-developed",
         IEFA: "etf-developed",
-        IWDA: "etf-developed",
-        SWDA: "etf-developed",
+        IWDA: "etf-global",
+        SWDA: "etf-global",
         VGK: "etf-developed",
         IEUR: "etf-developed",
         FEZ: "etf-developed",
@@ -2629,7 +2641,7 @@
 
       const CORE_COUNTRY_WEIGHTS = {
         VEA: [
-          ["Japão", 22.5],
+          ["Japão", 21.0],
           ["Reino Unido", 12.0],
           ["Canadá", 9.0],
           ["França", 8.0],
@@ -2661,20 +2673,20 @@
           ["Suíça", 2.6],
         ],
         VGK: [
-          ["Reino Unido", 22.0],
-          ["França", 18.0],
-          ["Suíça", 16.0],
-          ["Alemanha", 14.0],
+          ["Reino Unido", 23.0],
+          ["França", 17.0],
+          ["Suíça", 15.0],
+          ["Alemanha", 13.0],
           ["Holanda", 7.0],
-          ["Dinamarca", 5.0],
+          ["Suécia", 6.0],
         ],
         IEUR: [
-          ["Reino Unido", 22.0],
-          ["França", 18.0],
-          ["Suíça", 16.0],
-          ["Alemanha", 14.0],
-          ["Holanda", 7.0],
-          ["Dinamarca", 5.0],
+          ["Reino Unido", 21.5],
+          ["França", 18.2],
+          ["Suíça", 16.5],
+          ["Alemanha", 13.6],
+          ["Holanda", 7.3],
+          ["Dinamarca", 5.4],
         ],
         FEZ: [
           ["França", 34.0],
@@ -2682,15 +2694,55 @@
           ["Holanda", 14.0],
           ["Espanha", 8.0],
           ["Itália", 7.0],
-          ["Outros", 6.0],
+          ["Bélgica", 3.0],
         ],
         IMEU: [
           ["Reino Unido", 22.0],
           ["França", 18.0],
-          ["Suíça", 16.0],
-          ["Alemanha", 14.0],
-          ["Holanda", 7.0],
-          ["Dinamarca", 5.0],
+          ["Suíça", 16.2],
+          ["Alemanha", 13.8],
+          ["Holanda", 7.2],
+          ["Dinamarca", 5.1],
+        ],
+        VWO: [
+          ["Taiwan", 29.0],
+          ["China", 29.0],
+          ["Índia", 19.0],
+          ["Brasil", 4.0],
+          ["Arábia Saudita", 3.0],
+          ["África do Sul", 3.0],
+        ],
+        IEMG: [
+          ["Taiwan", 28.1],
+          ["Coreia do Sul", 21.7],
+          ["China", 17.9],
+          ["Índia", 12.2],
+          ["Brasil", 3.7],
+          ["África do Sul", 3.0],
+        ],
+        EIMI: [
+          ["Taiwan", 28.0],
+          ["Coreia do Sul", 21.5],
+          ["China", 18.0],
+          ["Índia", 12.0],
+          ["Brasil", 3.7],
+          ["África do Sul", 3.0],
+        ],
+        EMXC: [
+          ["Taiwan", 34.6],
+          ["Coreia do Sul", 28.2],
+          ["Índia", 13.6],
+          ["Brasil", 4.6],
+          ["África do Sul", 3.6],
+          ["Arábia Saudita", 3.0],
+        ],
+        EXCH: [
+          ["Taiwan", 34.5],
+          ["Coreia do Sul", 28.0],
+          ["Índia", 13.5],
+          ["Brasil", 4.5],
+          ["África do Sul", 3.5],
+          ["Arábia Saudita", 3.0],
         ],
       };
 
@@ -3545,6 +3597,7 @@
                 "div",
                 { className: "core-legend" },
                 React.createElement("span", { className: "etf-token etf-us" }, "EUA"),
+                React.createElement("span", { className: "etf-token etf-global" }, "Global desenvolvido"),
                 React.createElement("span", { className: "etf-token etf-developed" }, "Developed ex-US"),
                 React.createElement("span", { className: "etf-token etf-emerging" }, "Emergentes"),
                 React.createElement("span", { className: "etf-token etf-fixed" }, "Treasuries / Bonds"),
