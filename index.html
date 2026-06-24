@@ -1147,6 +1147,11 @@
         filter: grayscale(0.35);
       }
 
+      .etf-token:disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+
       .etf-token.is-ucits-highlight {
         border-color: rgba(255, 255, 255, 0.9);
         background: rgba(255, 255, 255, 0.92);
@@ -1333,8 +1338,8 @@
       }
 
       body.theme-light .ucits-toggle button[aria-pressed="true"] {
-        background: #0f172a;
-        color: #ffffff;
+        background: rgba(255, 255, 255, 0.92);
+        color: #061528;
       }
 
       .core-detail {
@@ -3705,6 +3710,12 @@
       function CoreModule() {
         const [selectedEtf, setSelectedEtf] = useState("VOO");
         const [ucitsView, setUcitsView] = useState("all");
+        const setCoreUcitsView = (nextView) => {
+          setUcitsView(nextView);
+          if (nextView === "ucits" && !UCITS_TICKERS.has(selectedEtf)) {
+            setSelectedEtf("CSPX");
+          }
+        };
         const detail = CORE_DETAILS[selectedEtf] || CORE_DETAILS.VOO;
         const countryWeights = CORE_COUNTRY_WEIGHTS[selectedEtf];
         const maxCountryWeight = countryWeights ? Math.max(...countryWeights.map((row) => row[1])) : 0;
@@ -3735,8 +3746,8 @@
                 React.createElement(
                   "div",
                   { className: "ucits-toggle", "aria-label": "Destaque UCITS" },
-                  React.createElement("button", { type: "button", "aria-pressed": ucitsView === "all", onClick: () => setUcitsView("all") }, "Todos"),
-                  React.createElement("button", { type: "button", "aria-pressed": ucitsView === "ucits", onClick: () => setUcitsView("ucits") }, "UCITS")
+                  React.createElement("button", { type: "button", "aria-pressed": ucitsView === "all", onClick: () => setCoreUcitsView("all") }, "Todos"),
+                  React.createElement("button", { type: "button", "aria-pressed": ucitsView === "ucits", onClick: () => setCoreUcitsView("ucits") }, "UCITS")
                 )
               ),
               React.createElement(
@@ -3751,7 +3762,7 @@
                       "div",
                       { className: "etf-token-grid" },
                       row.tickers.map((ticker) =>
-                        React.createElement("button", { className: coreTokenClass(ticker, ucitsView), type: "button", key: `${row.fn}-${ticker}`, "aria-pressed": selectedEtf === ticker, onClick: () => setSelectedEtf(ticker) }, ticker)
+                        React.createElement("button", { className: coreTokenClass(ticker, ucitsView), type: "button", key: `${row.fn}-${ticker}`, "aria-pressed": selectedEtf === ticker, disabled: ucitsView === "ucits" && !UCITS_TICKERS.has(ticker), onClick: () => setSelectedEtf(ticker) }, ticker)
                       )
                     )
                   )
