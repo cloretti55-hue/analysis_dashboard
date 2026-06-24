@@ -2488,7 +2488,7 @@
         { fn: "Treasuries USD Acc", why: "Escada de títulos do Tesouro americano por duration.", tickers: ["IB01", "IBTA", "CBU7", "IBTM", "DTLA"], note: "Do caixa remunerado à posição direcional em queda de juros." },
         { fn: "Inflação USD Acc", why: "TIPS com diferentes perfis de duration.", tickers: ["TIP5", "ITPS", "ITPE"], note: "Separa proteção inflacionária curta de inflação ampla." },
         { fn: "Crédito e core bond", why: "Spread corporativo e diversificação global em bonds.", tickers: ["LQDA", "IHYA", "AGGU"], note: "IG, high yield e agregado global cumprem funções distintas." },
-        { fn: "Hedge macro", why: "Proteção de regime e reserva de valor.", tickers: ["GLD", "IAU"], note: "ETFs de ouro físico para diversificação macro." },
+        { fn: "Hedge macro", why: "Proteção de regime, moeda forte e reserva de valor.", tickers: ["GLD", "IAU", "FXF / CHF"], note: "Ouro físico e franco suíço como diversificadores macro." },
       ];
 
       const CORE_TOKEN_GROUPS = {
@@ -2527,6 +2527,7 @@
         AGGU: "etf-fixed",
         GLD: "etf-other",
         IAU: "etf-other",
+        "FXF / CHF": "etf-other",
       };
 
       const CORE_DETAILS = {
@@ -2565,6 +2566,7 @@
         AGGU: ["Core bond global", "iShares Core Global Aggregate Bond UCITS ETF USD Acc.", "Diversificação global em bonds.", ["Combina governos e crédito global.", "Útil como peça ampla de renda fixa.", "Checar hedge cambial, duration e composição antes de usar como core."]],
         GLD: ["Hedge macro", "SPDR Gold Shares.", "ETF de ouro físico com alta liquidez.", ["Funciona como ativo real/monetário.", "Ajuda em choques de confiança e regimes adversos.", "Mais usado quando liquidez e profundidade importam."]],
         IAU: ["Hedge macro", "iShares Gold Trust.", "ETF de ouro físico com custo competitivo.", ["Alternativa eficiente para carregar exposição a ouro.", "Útil como diversificador macro de longo prazo.", "Menor foco em trading pesado do que GLD."]],
+        "FXF / CHF": ["Hedge macro", "Invesco CurrencyShares Swiss Franc Trust.", "Exposição ao franco suíço contra o dólar.", ["Refúgio histórico em choques de confiança.", "Baixo carrego, liquidez menor que grandes ETFs e risco de intervenção do SNB.", "Protege moeda/confiança; não substitui ouro, Treasuries ou opções."]],
       };
 
       const SATELLITE_FILTERS = {
