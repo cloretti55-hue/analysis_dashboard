@@ -2749,8 +2749,7 @@
                     null,
                     React.createElement("div", { className: "satellite-title-row" }, React.createElement(SatelliteIcon, { type: item.icon }), React.createElement("h3", null, item.theme)),
                     React.createElement("p", null, item.reading)
-                  ),
-                  React.createElement("div", { className: "satellite-tags" }, React.createElement("span", { className: "satellite-tag" }, item.implementation), React.createElement("span", { className: "satellite-tag" }, item.quality))
+                  )
                 )
               )
             )
@@ -2893,8 +2892,7 @@
                     null,
                     React.createElement("div", { className: "satellite-title-row" }, React.createElement(SatelliteIcon, { type: item.icon }), React.createElement("h3", null, item.theme)),
                     React.createElement("p", null, item.why)
-                  ),
-                  React.createElement("div", { className: "satellite-tags" }, React.createElement("span", { className: "satellite-tag" }, `ETF amplo: ${item.status}`), React.createElement("span", { className: "satellite-tag" }, item.tag || item.implementation))
+                  )
                 )
               )
             )
@@ -3112,7 +3110,6 @@
           ["beta", "Beta"],
           ["stress", "Stress"],
           ["payoff", "Payoff"],
-          ["currency", "Moeda"],
         ],
       };
 
@@ -3190,18 +3187,6 @@
           examples: ["RSP: S&P 500 equal weight", "QQEW: Nasdaq 100 equal weight", "USMV: min-vol com viés defensivo"],
         },
         {
-          theme: "Dólar para brasileiro",
-          icon: "factory",
-          objective: "currency",
-          tone: "sat-risk-defensive",
-          instruments: "USD cash offshore, conta em dólar, ativos USD não hedgeados",
-          does: "Reduz dependência do real e protege contra risco Brasil, fiscal, político e cambial.",
-          use: "Reserva estratégica fora do BRL e hedge natural para patrimônio local.",
-          limit: "Não é hedge universal; se o ativo cair e o dólar não compensar, a carteira ainda sofre.",
-          reading: "Dólar protege contra Brasil; não contra tudo.",
-          examples: ["USD cash offshore", "Conta em dólar / money market USD", "ETFs e ativos em USD sem hedge cambial"],
-        },
-        {
           theme: "Opções diretas sobre índice",
           icon: "shield",
           objective: "payoff",
@@ -3218,10 +3203,10 @@
       function HedgeModule() {
         const [filters, setFilters] = useState({ objective: "all" });
         const [selectedTheme, setSelectedTheme] = useState("Income de opções");
-        const objectiveOrder = { income: 0, beta: 1, stress: 2, payoff: 3, currency: 4 };
+        const toneOrder = { "sat-risk-high": 0, "sat-risk-medium": 1, "sat-risk-defensive": 2 };
         const filtered = HEDGE_STRATEGIES.filter((item) =>
           Object.entries(filters).every(([key, value]) => value === "all" || item[key] === value)
-        ).sort((a, b) => objectiveOrder[a.objective] - objectiveOrder[b.objective] || a.theme.localeCompare(b.theme, "pt-BR"));
+        ).sort((a, b) => toneOrder[a.tone] - toneOrder[b.tone] || a.theme.localeCompare(b.theme, "pt-BR"));
         const active = filtered.find((item) => item.theme === selectedTheme) || filtered[0] || HEDGE_STRATEGIES[0];
 
         const filterRow = (key, label) =>
@@ -3299,8 +3284,7 @@
               React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Limitação"), React.createElement("strong", null, active.limit))
             ),
             React.createElement("p", null, active.reading),
-            React.createElement("ul", { className: "satellite-list" }, active.examples.map((point) => React.createElement("li", { key: point }, point))),
-            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Síntese"), React.createElement("strong", null, "Covered call vende upside. Min-vol reduz beta. VIX protege stress curto. Buffered limita perda. Dólar protege Brasil. Opções desenham o piso."))
+            React.createElement("ul", { className: "satellite-list" }, active.examples.map((point) => React.createElement("li", { key: point }, point)))
           )
         );
       }
@@ -3473,7 +3457,7 @@
                     "aria-current": activeModule === "hedges" ? "page" : undefined,
                     onClick: () => setActiveModule("hedges"),
                   },
-                  "Estratégias de Hedge"
+                  "Hedge"
                 )
               ),
               React.createElement("h1", null, moduleCopy.title),
