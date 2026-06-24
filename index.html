@@ -2407,10 +2407,10 @@
         { fn: "Core Europa", why: "Exposição regional.", tickers: ["VGK", "IEUR", "FEZ", "IMEU"], note: "ETF amplo não captura bem defesa, luxo e soberania digital." },
         { fn: "Emergentes amplos", why: "Beta EM diversificado.", tickers: ["VWO", "IEMG", "EIMI"], note: "China pode dominar demais o risco." },
         { fn: "Emergentes ex-China", why: "Reduz risco China.", tickers: ["EMXC", "EXCH"], note: "Útil para China+1 e diversificação geopolítica." },
-        { fn: "Renda fixa USD Acc", why: "Escada de Treasuries por duration.", tickers: ["IB01", "IBTA", "CBU7", "IBTM", "DTLA"], note: "Do caixa remunerado à posição direcional em queda de juros." },
+        { fn: "Treasuries USD Acc", why: "Escada de títulos do Tesouro americano por duration.", tickers: ["IB01", "IBTA", "CBU7", "IBTM", "DTLA"], note: "Do caixa remunerado à posição direcional em queda de juros." },
         { fn: "Inflação USD Acc", why: "TIPS com diferentes perfis de duration.", tickers: ["TIP5", "ITPS", "ITPE"], note: "Separa proteção inflacionária curta de inflação ampla." },
         { fn: "Crédito e core bond", why: "Spread corporativo e diversificação global em bonds.", tickers: ["LQDA", "IHYA", "AGGU"], note: "IG, high yield e agregado global cumprem funções distintas." },
-        { fn: "Hedge macro", why: "Proteção de cauda ou crise.", tickers: ["Ouro ETC", "SPY options"], note: "Ouro protege regime; opção protege drawdown específico." },
+        { fn: "Hedge macro", why: "Proteção de regime e reserva de valor.", tickers: ["GLD", "IAU"], note: "ETFs de ouro físico para diversificação macro." },
       ];
 
       const CORE_TOKEN_GROUPS = {
@@ -2447,8 +2447,8 @@
         LQDA: "etf-fixed",
         IHYA: "etf-fixed",
         AGGU: "etf-fixed",
-        "Ouro ETC": "etf-other",
-        "SPY options": "etf-other",
+        GLD: "etf-other",
+        IAU: "etf-other",
       };
 
       const CORE_DETAILS = {
@@ -2485,8 +2485,8 @@
         LQDA: ["Crédito IG USD", "iShares $ Corp Bond UCITS ETF USD Acc.", "Spread corporativo investment grade.", ["Adiciona prêmio de crédito com qualidade maior.", "Não substitui Treasury como hedge de crise.", "Sensível a spread, duration e ciclo corporativo."]],
         IHYA: ["High Yield USD", "iShares $ High Yield Corp Bond UCITS ETF USD Acc.", "Crédito mais arriscado e yield maior.", ["Carrega mais spread e mais risco de default.", "Funciona melhor quando crédito e ciclo estão construtivos.", "Não deve ser tratado como renda fixa defensiva."]],
         AGGU: ["Core bond global", "iShares Core Global Aggregate Bond UCITS ETF USD Acc.", "Diversificação global em bonds.", ["Combina governos e crédito global.", "Útil como peça ampla de renda fixa.", "Checar hedge cambial, duration e composição antes de usar como core."]],
-        "Ouro ETC": ["Hedge macro", "Proteção de regime e crise.", "Não protege drawdown específico como opção.", ["Funciona como ativo real/monetário.", "Ajuda em choques de confiança.", "Escolher ETC exige cuidado operacional e fiscal."]],
-        "SPY options": ["Hedge macro", "Proteção de drawdown específico.", "Custo de prêmio corrói retorno se mal dimensionado.", ["Puts, collars e overlays táticos.", "Exige gestão de vencimento e strike.", "Instrumento de proteção, não de carrego."]],
+        GLD: ["Hedge macro", "SPDR Gold Shares.", "ETF de ouro físico com alta liquidez.", ["Funciona como ativo real/monetário.", "Ajuda em choques de confiança e regimes adversos.", "Mais usado quando liquidez e profundidade importam."]],
+        IAU: ["Hedge macro", "iShares Gold Trust.", "ETF de ouro físico com custo competitivo.", ["Alternativa eficiente para carregar exposição a ouro.", "Útil como diversificador macro de longo prazo.", "Menor foco em trading pesado do que GLD."]],
       };
 
       const SATELLITE_FILTERS = {
@@ -3118,7 +3118,7 @@
                 React.createElement("span", { className: "etf-token etf-us" }, "EUA"),
                 React.createElement("span", { className: "etf-token etf-developed" }, "Developed ex-US"),
                 React.createElement("span", { className: "etf-token etf-emerging" }, "Emergentes"),
-                React.createElement("span", { className: "etf-token etf-fixed" }, "Renda fixa"),
+                React.createElement("span", { className: "etf-token etf-fixed" }, "Treasuries / Bonds"),
                 React.createElement("span", { className: "etf-token etf-other" }, "Hedge macro")
               ),
               React.createElement(
