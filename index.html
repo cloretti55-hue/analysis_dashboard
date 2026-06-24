@@ -3003,10 +3003,8 @@
                   React.createElement(
                     "div",
                     null,
-                    React.createElement("div", { className: "satellite-title-row" }, React.createElement(SatelliteIcon, { type: item.icon }), React.createElement("h3", null, item.theme)),
-                    React.createElement("p", null, item.reading)
-                  ),
-                  React.createElement("div", { className: "satellite-tags" }, React.createElement("span", { className: "satellite-tag" }, item.instruments), React.createElement("span", { className: "satellite-tag" }, item.risk))
+                    React.createElement("div", { className: "satellite-title-row" }, React.createElement(SatelliteIcon, { type: item.icon }), React.createElement("h3", null, item.theme))
+                  )
                 )
               )
             )
@@ -3025,8 +3023,7 @@
             ),
             React.createElement("p", null, active.reading),
             React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
-            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Exemplos"), React.createElement("strong", null, active.names.join(" · "))),
-            React.createElement("div", { className: "callout" }, React.createElement("h3", null, "Frase de decisão"), React.createElement("p", null, "A melhor forma de investir em China pode ser não comprar China. China real não é igual a China listada."))
+            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Exemplos"), React.createElement("strong", null, active.names.join(" · ")))
           )
         );
       }
