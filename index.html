@@ -2964,7 +2964,6 @@
             "Tokyo Electron: equipamentos para fabricação de chips.",
             "Advantest: testes de chips avançados.",
           ],
-          extraNote: "SMH/SOXX capturam grande parte da cadeia global de semicondutores, mas não incluem alguns líderes estratégicos da Coreia e do Japão, especialmente em memória HBM e equipamentos.",
           points: ["ETF captura bem a cadeia de valor.", "Valuation e ciclo de semicondutores precisam ser monitorados.", "Boa primeira camada para exposição à infraestrutura de IA."],
         },
         {
@@ -3200,8 +3199,7 @@
                   "div",
                   { className: "detail-box proxy-box" },
                   React.createElement("span", null, active.extraTitle),
-                  React.createElement("ul", { className: "satellite-list" }, active.extraCompanies.map((point) => React.createElement("li", { key: point }, point))),
-                  React.createElement("p", null, active.extraNote)
+                  React.createElement("ul", { className: "satellite-list" }, active.extraCompanies.map((point) => React.createElement("li", { key: point }, point)))
                 )
               : null,
             React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Nomes / proxies"), React.createElement("strong", null, active.names.join(" · ")))
