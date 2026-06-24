@@ -3154,6 +3154,18 @@
           examples: ["VIXY: futuros curtos de VIX", "VXX: ETN de futuros curtos", "UVXY: exposição alavancada", "UCITS: alternativa offshore"],
         },
         {
+          theme: "Hedge tático direcional",
+          icon: "shield",
+          objective: "stress",
+          tone: "sat-risk-high",
+          instruments: "SH, PSQ, RWM, EUM, SDS, QID, SQQQ, SPXU",
+          does: "Compra exposição inversa diária ao índice para ganhar quando o mercado cai no curto prazo.",
+          use: "Proteção direcional tática em janelas curtas, quando a carteira quer reduzir beta sem vender a posição original.",
+          limit: "Objetivo geralmente diário; carregar por muito tempo pode sofrer com compounding/decay, especialmente em mercado volátil.",
+          reading: "ETF invertido é hedge tático, não peça estrutural de carteira.",
+          examples: ["SH: -1x diário do S&P 500", "PSQ: -1x diário do Nasdaq-100", "RWM: -1x diário de small caps", "EUM: -1x diário de emergentes", "SDS / QID / SQQQ / SPXU: alavancados, uso muito tático"],
+        },
+        {
           theme: "Buffered / defined outcome",
           icon: "server",
           objective: "payoff",
