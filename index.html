@@ -1142,6 +1142,18 @@
         font-weight: 850;
       }
 
+      .etf-token.is-muted {
+        opacity: 0.28;
+        filter: grayscale(0.35);
+      }
+
+      .etf-token.is-ucits-highlight {
+        border-color: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.92);
+        color: #061528;
+        box-shadow: 0 10px 24px rgba(255, 255, 255, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+      }
+
       .etf-token.etf-us {
         border-color: rgba(68, 143, 255, 0.48);
         background: rgba(68, 143, 255, 0.14);
@@ -1178,11 +1190,25 @@
         color: #f1d58d;
       }
 
+      .etf-token.is-ucits-highlight {
+        border-color: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.92);
+        color: #061528;
+        box-shadow: 0 10px 24px rgba(255, 255, 255, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+      }
+
       .etf-token[aria-pressed="true"] {
         border-color: rgba(255, 118, 118, 0.62);
         background: rgba(255, 118, 118, 0.13);
         color: #ffb5b5;
         box-shadow: inset 0 0 0 1px rgba(255, 118, 118, 0.26);
+      }
+
+      .etf-token.is-ucits-highlight[aria-pressed="true"] {
+        border-color: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.92);
+        color: #061528;
+        box-shadow: 0 10px 24px rgba(255, 255, 255, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.7);
       }
 
       body.theme-light .etf-token.etf-us {
@@ -1228,11 +1254,43 @@
         box-shadow: inset 0 0 0 1px rgba(192, 67, 67, 0.18);
       }
 
+      body.theme-light .etf-token.is-ucits-highlight[aria-pressed="true"] {
+        border-color: rgba(15, 23, 42, 0.2);
+        background: #ffffff;
+        color: #0f172a;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08), inset 0 0 0 1px rgba(15, 23, 42, 0.06);
+      }
+
+      body.theme-light .etf-token.is-muted {
+        opacity: 0.34;
+        filter: grayscale(0.3);
+      }
+
+      body.theme-light .etf-token.is-ucits-highlight {
+        border-color: rgba(15, 23, 42, 0.2);
+        background: #ffffff;
+        color: #0f172a;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08), inset 0 0 0 1px rgba(15, 23, 42, 0.06);
+      }
+
       .core-legend {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
         margin: 16px 16px 14px;
+      }
+
+      .core-legend-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        margin: 16px 16px 14px;
+      }
+
+      .core-legend-row .core-legend {
+        margin: 0;
+        flex: 1;
       }
 
       .core-legend .etf-token {
@@ -1241,6 +1299,42 @@
         padding: 6px 10px;
         font-size: 11px;
         pointer-events: none;
+      }
+
+      .ucits-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        flex: 0 0 auto;
+        padding: 4px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .ucits-toggle button {
+        min-height: 28px;
+        border: 0;
+        border-radius: 999px;
+        padding: 5px 11px;
+        background: transparent;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 850;
+      }
+
+      .ucits-toggle button[aria-pressed="true"] {
+        background: rgba(255, 255, 255, 0.92);
+        color: #061528;
+      }
+
+      body.theme-light .ucits-toggle {
+        background: rgba(15, 23, 42, 0.04);
+      }
+
+      body.theme-light .ucits-toggle button[aria-pressed="true"] {
+        background: #0f172a;
+        color: #ffffff;
       }
 
       .core-detail {
@@ -2639,6 +2733,37 @@
         "FXF / CHF": "etf-other",
       };
 
+      const UCITS_TICKERS = new Set([
+        "CSPX",
+        "VUAA",
+        "CNDX",
+        "EQQQ",
+        "IWDA",
+        "SWDA",
+        "IMEU",
+        "EIMI",
+        "EXCH",
+        "IB01",
+        "IBTA",
+        "CBU7",
+        "IBTM",
+        "DTLA",
+        "TIP5",
+        "ITPS",
+        "ITPE",
+        "LQDA",
+        "IHYA",
+        "AGGU",
+      ]);
+
+      const coreTokenClass = (ticker, ucitsView) => {
+        const classes = ["etf-token", CORE_TOKEN_GROUPS[ticker] || "etf-other"];
+        if (ucitsView === "ucits") {
+          classes.push(UCITS_TICKERS.has(ticker) ? "is-ucits-highlight" : "is-muted");
+        }
+        return classes.join(" ");
+      };
+
       const CORE_COUNTRY_WEIGHTS = {
         VEA: [
           ["Japão", 21.0],
@@ -3579,6 +3704,7 @@
 
       function CoreModule() {
         const [selectedEtf, setSelectedEtf] = useState("VOO");
+        const [ucitsView, setUcitsView] = useState("all");
         const detail = CORE_DETAILS[selectedEtf] || CORE_DETAILS.VOO;
         const countryWeights = CORE_COUNTRY_WEIGHTS[selectedEtf];
         const maxCountryWeight = countryWeights ? Math.max(...countryWeights.map((row) => row[1])) : 0;
@@ -3595,13 +3721,23 @@
               React.createElement("div", { className: "section-head" }, React.createElement("div", null, React.createElement("span", { className: "control-title" }, "Matriz de implementação"), React.createElement("h2", null, "Função antes do ticker"))),
               React.createElement(
                 "div",
-                { className: "core-legend" },
-                React.createElement("span", { className: "etf-token etf-us" }, "EUA"),
-                React.createElement("span", { className: "etf-token etf-global" }, "Global desenvolvido"),
-                React.createElement("span", { className: "etf-token etf-developed" }, "Developed ex-US"),
-                React.createElement("span", { className: "etf-token etf-emerging" }, "Emergentes"),
-                React.createElement("span", { className: "etf-token etf-fixed" }, "Treasuries / Bonds"),
-                React.createElement("span", { className: "etf-token etf-other" }, "Hedge macro")
+                { className: "core-legend-row" },
+                React.createElement(
+                  "div",
+                  { className: "core-legend" },
+                  React.createElement("span", { className: "etf-token etf-us" }, "EUA"),
+                  React.createElement("span", { className: "etf-token etf-global" }, "Global desenvolvido"),
+                  React.createElement("span", { className: "etf-token etf-developed" }, "Developed ex-US"),
+                  React.createElement("span", { className: "etf-token etf-emerging" }, "Emergentes"),
+                  React.createElement("span", { className: "etf-token etf-fixed" }, "Treasuries / Bonds"),
+                  React.createElement("span", { className: "etf-token etf-other" }, "Hedge macro")
+                ),
+                React.createElement(
+                  "div",
+                  { className: "ucits-toggle", "aria-label": "Destaque UCITS" },
+                  React.createElement("button", { type: "button", "aria-pressed": ucitsView === "all", onClick: () => setUcitsView("all") }, "Todos"),
+                  React.createElement("button", { type: "button", "aria-pressed": ucitsView === "ucits", onClick: () => setUcitsView("ucits") }, "UCITS")
+                )
               ),
               React.createElement(
                 "div",
@@ -3615,7 +3751,7 @@
                       "div",
                       { className: "etf-token-grid" },
                       row.tickers.map((ticker) =>
-                        React.createElement("button", { className: `etf-token ${CORE_TOKEN_GROUPS[ticker] || "etf-other"}`, type: "button", key: `${row.fn}-${ticker}`, "aria-pressed": selectedEtf === ticker, onClick: () => setSelectedEtf(ticker) }, ticker)
+                        React.createElement("button", { className: coreTokenClass(ticker, ucitsView), type: "button", key: `${row.fn}-${ticker}`, "aria-pressed": selectedEtf === ticker, onClick: () => setSelectedEtf(ticker) }, ticker)
                       )
                     )
                   )
