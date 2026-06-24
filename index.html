@@ -306,7 +306,7 @@
 
       .kpis {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 12px;
       }
 
@@ -333,6 +333,27 @@
         margin: 12px 0 0;
         color: var(--muted);
         line-height: 1.4;
+      }
+
+      .kpi-probs {
+        display: grid;
+        gap: 6px;
+        margin-top: 12px;
+      }
+
+      .kpi-probs div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 750;
+      }
+
+      .kpi-probs b {
+        color: var(--ink);
+        font-size: 15px;
       }
 
       .main-grid {
@@ -1668,6 +1689,12 @@
         },
       };
 
+      const LIGHT_CHART_COLORS = {
+        nominal: "#026f88",
+        real: "#6548b8",
+        inflation: "#a85d19",
+      };
+
       const READING_BULLETS = {
         nominal: [
           "Curva voltou a inclinar.",
@@ -1752,7 +1779,7 @@
         return CURVES[curveKey].values[spread.to] - CURVES[curveKey].values[spread.from];
       }
 
-      function Chart({ activeCurves, filteredMaturities, mode }) {
+      function Chart({ activeCurves, filteredMaturities, mode, theme }) {
         const width = 920;
         const height = 470;
         const margin = { top: 46, right: 138, bottom: 68, left: 78 };
@@ -1806,6 +1833,7 @@
             )
           ),
           activeCurves.map((curveKey) => {
+            const curveColor = theme === "light" ? LIGHT_CHART_COLORS[curveKey] : CURVES[curveKey].color;
             const points = filteredMaturities.map((m, index) => ({
               maturity: m.key,
               value: CURVES[curveKey].values[m.key],
@@ -1820,7 +1848,7 @@
               React.createElement("path", {
                 className: "curve-line",
                 d,
-                stroke: CURVES[curveKey].color,
+                stroke: curveColor,
                 opacity: 1,
               }),
               points.map((point) =>
@@ -1832,7 +1860,7 @@
                     cx: point.x,
                     cy: point.y,
                     r: 6,
-                    fill: CURVES[curveKey].color,
+                    fill: curveColor,
                     opacity: 1,
                   }),
                   React.createElement(
@@ -1841,7 +1869,7 @@
                       className: "point-value-label",
                       x: point.x,
                       y: point.y + labelOffset,
-                      fill: CURVES[curveKey].color,
+                      fill: curveColor,
                       opacity: 1,
                       textAnchor: "middle",
                     },
@@ -3655,6 +3683,19 @@
                   React.createElement("span", null, `${kpiCurve.short} 30s10s`),
                   React.createElement("strong", null, bps(spreadValue(kpiCurveKey, SPREADS[2]))),
                   React.createElement("p", null, "Prêmio concentrado na ponta longa.")
+                ),
+                React.createElement(
+                  "article",
+                  { className: "kpi panel" },
+                  React.createElement("span", null, "Expectativa até 16/09/26"),
+                  React.createElement(
+                    "div",
+                    { className: "kpi-probs" },
+                    React.createElement("div", null, React.createElement("span", null, "Rate hike"), React.createElement("b", null, "76,7%")),
+                    React.createElement("div", null, React.createElement("span", null, "Steady"), React.createElement("b", null, "20,8%")),
+                    React.createElement("div", null, React.createElement("span", null, "Rate cut"), React.createElement("b", null, "2,5%"))
+                  ),
+                  React.createElement("p", null, "Fonte: Atlanta Fed, 22/06/26.")
                 )
               ),
               React.createElement(
@@ -3681,6 +3722,7 @@
                       activeCurves,
                       filteredMaturities,
                       mode,
+                      theme,
                     })
                   )
                 ),
