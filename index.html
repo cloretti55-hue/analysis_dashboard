@@ -127,8 +127,16 @@
         align-items: center;
         justify-content: space-between;
         gap: 10px;
-        padding-bottom: 8px;
-        border-bottom: 1px solid var(--line);
+        min-width: 260px;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(15, 32, 55, 0.72);
+        box-shadow: var(--shadow);
+      }
+
+      body.theme-light .theme-switch {
+        background: rgba(255, 255, 255, 0.86);
       }
 
       .theme-switch button {
@@ -170,6 +178,11 @@
         border-radius: 8px;
         background: rgba(15, 32, 55, 0.88);
         box-shadow: var(--shadow);
+      }
+
+      .header-side {
+        display: grid;
+        gap: 10px;
       }
 
       .market-stamp span {
@@ -3251,7 +3264,7 @@
             ),
             React.createElement(
               "aside",
-              { className: "market-stamp" },
+              { className: "header-side" },
               React.createElement(
                 "div",
                 { className: "theme-switch" },
@@ -3265,8 +3278,12 @@
                   theme === "dark" ? "Claro" : "Escuro"
                 )
               ),
-              React.createElement("span", null, "Tese central"),
-              React.createElement("strong", null, moduleCopy.thesis)
+              React.createElement(
+                "div",
+                { className: "market-stamp" },
+                React.createElement("span", null, "Tese central"),
+                React.createElement("strong", null, moduleCopy.thesis)
+              )
             )
           ),
           activeModule === "curve"
