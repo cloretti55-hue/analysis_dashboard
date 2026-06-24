@@ -2046,6 +2046,13 @@
         subtitle: "Europa estratégica",
       };
 
+      MODULE_COPY.china = {
+        title: "China continua relevante — mas o canal de exposição importa mais",
+        lead: "A economia chinesa segue central para consumo, manufatura, commodities e cadeias globais. Isso não significa que a melhor forma de capturar China seja comprar ações chinesas diretamente.",
+        thesis: "Canal",
+        subtitle: "Direta, indireta ou China+1",
+      };
+
       const TECH_CYCLES = [
         {
           cycle: "Ferrovias",
@@ -2835,6 +2842,195 @@
         );
       }
 
+      const CHINA_FILTERS = {
+        channel: [
+          ["all", "Todos"],
+          ["direct", "China direta"],
+          ["indirect", "China indireta"],
+          ["china1", "China+1"],
+        ],
+        motor: [
+          ["all", "Todos"],
+          ["market", "Mercado"],
+          ["consumer", "Consumo"],
+          ["physical", "Demanda física"],
+          ["technology", "Tecnologia"],
+          ["chain", "Cadeia"],
+        ],
+      };
+
+      const CHINA_CHANNELS = [
+        {
+          theme: "China direta",
+          icon: "network",
+          channel: "direct",
+          motor: "market",
+          tone: "sat-risk-high",
+          instruments: "MCHI, FXI, KWEB, ASHR, KBA",
+          captures: "Mercado acionário chinês, consumo local, internet e A-shares.",
+          risk: "Governança, intervenção estatal, geopolítica, VIEs e deflação.",
+          reading: "Exposição pura, mas risco alto. Comprar China exige escolher qual China.",
+          points: ["MCHI compra China ampla.", "FXI concentra large caps/Hong Kong.", "KWEB compra internet chinesa.", "ASHR/KBA compram A-shares onshore."],
+          names: ["Alibaba", "Tencent", "PDD", "Baidu", "A-shares", "large caps Hong Kong"],
+        },
+        {
+          theme: "China indireta — luxo",
+          icon: "diamond",
+          channel: "indirect",
+          motor: "consumer",
+          tone: "sat-risk-medium",
+          instruments: "LVMH, Hermès, Ferrari, Richemont, Moncler, Prada, L'Oréal",
+          captures: "Consumidor chinês premium e demanda asiática sem comprar bolsa chinesa diretamente.",
+          risk: "Ciclo de consumo chinês, turismo, confiança e desaceleração de renda.",
+          reading: "Mais qualidade e menor risco político direto, mas ainda dependente do consumidor asiático.",
+          points: ["Marcas globais, margens altas e pricing power.", "Menor risco jurídico/político direto.", "ETF de luxo existe, mas cesta costuma ser mais limpa."],
+          names: ["LVMH", "Hermès", "Ferrari", "Richemont", "Moncler", "Prada", "L'Oréal", "EssilorLuxottica"],
+        },
+        {
+          theme: "China indireta — commodities",
+          icon: "energy",
+          channel: "indirect",
+          motor: "physical",
+          tone: "sat-risk-medium",
+          instruments: "BHP, Rio Tinto, Freeport, Glencore, Vale, COPX, PICK",
+          captures: "Demanda chinesa por cobre, minério, energia e infraestrutura.",
+          risk: "Ciclo industrial, construção, estímulo estatal e preço de commodities.",
+          reading: "Aqui a China aparece como comprador físico, não como mercado acionário.",
+          points: ["Exposição mais ligada a recursos reais.", "Mais cíclica e sensível a estímulo.", "Boa para separar China física de China listada."],
+          names: ["BHP", "Rio Tinto", "Freeport-McMoRan", "Glencore", "Vale", "COPX", "PICK"],
+        },
+        {
+          theme: "China indireta — tecnologia",
+          icon: "chip",
+          channel: "indirect",
+          motor: "technology",
+          tone: "sat-risk-high",
+          instruments: "ASML, TSMC, Applied Materials, Lam, KLA, Nvidia, Broadcom",
+          captures: "Cadeia tecnológica global com demanda chinesa e gargalos estratégicos.",
+          risk: "Sanções, restrições de exportação, Taiwan e competição geopolítica.",
+          reading: "Exposição estratégica, mas com geopolítica no centro da tese.",
+          points: ["Captura gargalos de semicondutores e equipment.", "Não depende apenas do consumidor chinês.", "Export controls podem mudar a tese rapidamente."],
+          names: ["ASML", "TSMC", "Applied Materials", "Lam Research", "KLA", "Nvidia", "Broadcom"],
+        },
+        {
+          theme: "China+1",
+          icon: "factory",
+          channel: "china1",
+          motor: "chain",
+          tone: "sat-risk-defensive",
+          instruments: "INDA, FLIN, EWW, VNM, EWT, EWY",
+          captures: "Diversificação de cadeia, nearshoring e manufatura alternativa.",
+          risk: "Valuation, execução local, infraestrutura e capacidade institucional.",
+          reading: "Não é abandonar China. É comprar seguro contra concentração em uma única cadeia.",
+          points: ["Índia combina mercado doméstico, serviços e escala demográfica.", "México captura nearshoring para os EUA.", "Vietnã e Sudeste Asiático capturam manufatura alternativa."],
+          names: ["Índia", "México", "Vietnã", "Indonésia", "Taiwan", "Coreia"],
+        },
+        {
+          theme: "EM ex-China",
+          icon: "grid",
+          channel: "china1",
+          motor: "chain",
+          tone: "sat-risk-defensive",
+          instruments: "EMXC / EXCH",
+          captures: "Emergentes sem peso dominante da China.",
+          risk: "Perde eventual recuperação chinesa e pode diluir teses específicas.",
+          reading: "Solução estrutural para reduzir risco China sem abandonar emergentes.",
+          points: ["Remove o risco dominante chinês do bloco emergente.", "Ajuda na construção de core EM mais neutro geopoliticamente.", "Menos tático; mais arquitetura de carteira."],
+          names: ["Índia", "Taiwan", "Coreia", "Brasil", "México", "Sudeste Asiático"],
+        },
+      ];
+
+      function ChinaModule() {
+        const [filters, setFilters] = useState({ channel: "all", motor: "all" });
+        const [selectedTheme, setSelectedTheme] = useState("China direta");
+        const order = { direct: 0, indirect: 1, china1: 2 };
+        const filtered = CHINA_CHANNELS.filter((item) =>
+          Object.entries(filters).every(([key, value]) => value === "all" || item[key] === value)
+        ).sort((a, b) => order[a.channel] - order[b.channel] || a.theme.localeCompare(b.theme, "pt-BR"));
+        const active = filtered.find((item) => item.theme === selectedTheme) || filtered[0] || CHINA_CHANNELS[0];
+
+        const filterRow = (key, label) =>
+          React.createElement(
+            "div",
+            { className: "filter-row", key },
+            React.createElement("span", { className: "filter-label" }, label),
+            CHINA_FILTERS[key].map(([value, text]) =>
+              React.createElement(
+                "button",
+                {
+                  className: "filter-chip",
+                  type: "button",
+                  key: value,
+                  "aria-pressed": filters[key] === value,
+                  onClick: () => setFilters({ ...filters, [key]: value }),
+                },
+                text
+              )
+            )
+          );
+
+        return React.createElement(
+          "main",
+          { className: "satellite-layout" },
+          React.createElement(
+            "article",
+            { className: "panel" },
+            React.createElement(
+              "div",
+              { className: "section-head" },
+              React.createElement("div", null, React.createElement("span", { className: "control-title" }, "Matriz de exposição"), React.createElement("h2", null, "Direta, indireta ou substituição parcial"))
+            ),
+            React.createElement(
+              "div",
+              { className: "satellite-filters" },
+              filterRow("channel", "Canal"),
+              filterRow("motor", "Motor"),
+              React.createElement(
+                "div",
+                { className: "risk-legend" },
+                React.createElement("span", { className: "sat-risk-high" }, "Risco geopolítico direto"),
+                React.createElement("span", { className: "sat-risk-medium" }, "Demanda chinesa indireta"),
+                React.createElement("span", { className: "sat-risk-defensive" }, "China+1 / redução de dependência")
+              )
+            ),
+            React.createElement(
+              "div",
+              { className: "satellite-grid" },
+              filtered.map((item) =>
+                React.createElement(
+                  "button",
+                  { className: `satellite-card ${item.tone}`, type: "button", key: item.theme, "aria-pressed": active.theme === item.theme, onClick: () => setSelectedTheme(item.theme) },
+                  React.createElement(
+                    "div",
+                    null,
+                    React.createElement("div", { className: "satellite-title-row" }, React.createElement(SatelliteIcon, { type: item.icon }), React.createElement("h3", null, item.theme)),
+                    React.createElement("p", null, item.reading)
+                  ),
+                  React.createElement("div", { className: "satellite-tags" }, React.createElement("span", { className: "satellite-tag" }, item.instruments), React.createElement("span", { className: "satellite-tag" }, item.risk))
+                )
+              )
+            )
+          ),
+          React.createElement(
+            "aside",
+            { className: "panel satellite-detail" },
+            React.createElement("span", { className: "detail-role" }, "Canal selecionado"),
+            React.createElement("div", { className: `satellite-detail-head ${active.tone}` }, React.createElement(SatelliteIcon, { type: active.icon }), React.createElement("h2", null, active.theme)),
+            React.createElement(
+              "div",
+              { className: "detail-grid" },
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Instrumentos"), React.createElement("strong", null, active.instruments)),
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Captura"), React.createElement("strong", null, active.captures)),
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Risco principal"), React.createElement("strong", null, active.risk))
+            ),
+            React.createElement("p", null, active.reading),
+            React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
+            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Exemplos"), React.createElement("strong", null, active.names.join(" · "))),
+            React.createElement("div", { className: "callout" }, React.createElement("h3", null, "Frase de decisão"), React.createElement("p", null, "A melhor forma de investir em China pode ser não comprar China. China real não é igual a China listada."))
+          )
+        );
+      }
+
       function CoreModule() {
         const [selectedEtf, setSelectedEtf] = useState("VOO");
         const detail = CORE_DETAILS[selectedEtf] || CORE_DETAILS.VOO;
@@ -2978,6 +3174,16 @@
                     onClick: () => setActiveModule("europe"),
                   },
                   "Europa Estratégica"
+                ),
+                React.createElement(
+                  "button",
+                  {
+                    className: "view-tab",
+                    type: "button",
+                    "aria-current": activeModule === "china" ? "page" : undefined,
+                    onClick: () => setActiveModule("china"),
+                  },
+                  "China / China+1"
                 )
               ),
               React.createElement("h1", null, moduleCopy.title),
@@ -3375,7 +3581,9 @@
                   ? React.createElement(CoreModule)
                   : activeModule === "satellites"
                     ? React.createElement(SatelliteModule)
-                    : React.createElement(EuropeModule)
+                    : activeModule === "europe"
+                      ? React.createElement(EuropeModule)
+                      : React.createElement(ChinaModule)
         );
       }
 
