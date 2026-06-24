@@ -1267,6 +1267,58 @@
         line-height: 1.3;
       }
 
+      .mini-country-chart {
+        display: grid;
+        gap: 9px;
+        margin: 8px 0 2px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.024);
+      }
+
+      body.theme-light .mini-country-chart {
+        background: rgba(4, 122, 148, 0.045);
+      }
+
+      .mini-country-chart h3 {
+        margin: 0;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .mini-country-row {
+        display: grid;
+        grid-template-columns: 78px minmax(0, 1fr) 46px;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .mini-country-row span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .mini-country-track {
+        height: 9px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.055);
+        overflow: hidden;
+      }
+
+      body.theme-light .mini-country-track {
+        background: rgba(32, 57, 84, 0.09);
+      }
+
+      .mini-country-bar {
+        height: 100%;
+        border-radius: inherit;
+        background: var(--focus);
+      }
+
       .satellite-layout {
         display: grid;
         grid-template-columns: minmax(0, 1.35fr) minmax(330px, 0.8fr);
@@ -2574,6 +2626,41 @@
         "FXF / CHF": "etf-other",
       };
 
+      const CORE_COUNTRY_WEIGHTS = {
+        VEA: [
+          ["Japão", 22.5],
+          ["Reino Unido", 12.0],
+          ["Canadá", 9.0],
+          ["França", 8.0],
+          ["Suíça", 7.5],
+          ["Alemanha", 7.0],
+        ],
+        IEFA: [
+          ["Japão", 25.7],
+          ["Reino Unido", 13.9],
+          ["França", 9.0],
+          ["Suíça", 8.7],
+          ["Alemanha", 8.0],
+          ["Austrália", 7.1],
+        ],
+        IWDA: [
+          ["EUA", 72.0],
+          ["Japão", 5.5],
+          ["Reino Unido", 3.5],
+          ["Canadá", 3.0],
+          ["França", 2.8],
+          ["Suíça", 2.6],
+        ],
+        SWDA: [
+          ["EUA", 72.0],
+          ["Japão", 5.5],
+          ["Reino Unido", 3.5],
+          ["Canadá", 3.0],
+          ["França", 2.8],
+          ["Suíça", 2.6],
+        ],
+      };
+
       const CORE_DETAILS = {
         VOO: ["Beta estrutural EUA", "Carregar S&P 500 com baixo custo.", "Não é o melhor instrumento para hedge com opções.", ["Veículo eficiente para buy and hold.", "Boa escolha quando fiscalidade US-listed é aceitável.", "Menos vocacionado a overlays táticos do que SPY."]],
         CSPX: ["Beta estrutural EUA", "S&P 500 UCITS acumulador.", "Menos útil para execução tática e opções.", ["Apropriado para muitas carteiras offshore não-US.", "Accumulating reduz distribuição de caixa.", "Veículo de carregamento, não de trading."]],
@@ -3408,6 +3495,8 @@
       function CoreModule() {
         const [selectedEtf, setSelectedEtf] = useState("VOO");
         const detail = CORE_DETAILS[selectedEtf] || CORE_DETAILS.VOO;
+        const countryWeights = CORE_COUNTRY_WEIGHTS[selectedEtf];
+        const maxCountryWeight = countryWeights ? Math.max(...countryWeights.map((row) => row[1])) : 0;
 
         return React.createElement(
           "main",
@@ -3454,6 +3543,22 @@
               React.createElement("span", { className: "detail-role" }, detail[0]),
               React.createElement("p", null, detail[1]),
               React.createElement("p", null, detail[2]),
+              countryWeights
+                ? React.createElement(
+                    "div",
+                    { className: "mini-country-chart" },
+                    React.createElement("h3", null, "Composição geográfica aprox."),
+                    countryWeights.map(([country, weight]) =>
+                      React.createElement(
+                        "div",
+                        { className: "mini-country-row", key: `${selectedEtf}-${country}` },
+                        React.createElement("span", null, country),
+                        React.createElement("div", { className: "mini-country-track" }, React.createElement("div", { className: "mini-country-bar", style: { width: `${(weight / maxCountryWeight) * 100}%` } })),
+                        React.createElement("span", null, `${weight.toFixed(1).replace(".", ",")}%`)
+                      )
+                    )
+                  )
+                : null,
               React.createElement("ul", { className: "core-detail-list" }, detail[3].map((point) => React.createElement("li", { key: point }, point)))
             )
           )
