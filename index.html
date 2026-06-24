@@ -3167,12 +3167,12 @@
           icon: "server",
           objective: "payoff",
           tone: "sat-risk-medium",
-          instruments: "Buffered ETFs, defined outcome ETFs, collars, put spreads",
+          instruments: "Innovator Buffer ETFs, FT Vest Buffer ETFs, AllianzIM Buffered Outcome ETFs",
           does: "Empacota opções para criar proteção parcial em troca de limitar parte da alta.",
           use: "Cliente conservador que aceita teto de retorno para reduzir perda moderada.",
           limit: "Proteção é parcial, depende da data de início, buffer, cap e estrutura.",
           reading: "Buffered ETF troca parte da alta por proteção parcial de queda.",
-          examples: ["Buffered ETFs: amortecem faixa inicial de queda", "Defined outcome: payoff por período", "Collars: put comprada + call vendida", "Put spreads: proteção com custo menor"],
+          examples: ["Innovator Buffer ETFs: séries mensais como BJAN/BJUN/BJUL", "FT Vest Buffer ETFs: famílias como FJAN/FJUN/FJUL", "AllianzIM Buffered Outcome ETFs: versões com buffer e cap definidos", "Collars e put spreads: estruturas com opções, não ETFs prontos"],
         },
         {
           theme: "Desconcentração",
@@ -3249,7 +3249,7 @@
                 { className: "risk-legend" },
                 React.createElement("span", { className: "sat-risk-high" }, "Tático / alto custo de carregamento"),
                 React.createElement("span", { className: "sat-risk-medium" }, "Payoff / income"),
-                React.createElement("span", { className: "sat-risk-defensive" }, "Redução de beta ou moeda")
+                React.createElement("span", { className: "sat-risk-defensive" }, "Redução de beta")
               )
             ),
             React.createElement(
