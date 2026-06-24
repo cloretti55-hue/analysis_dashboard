@@ -2123,6 +2123,13 @@
         subtitle: "Direta, indireta ou China+1",
       };
 
+      MODULE_COPY.hedges = {
+        title: "Proteção líquida sem ouro e sem renda fixa",
+        lead: "Quando Treasuries, TIPS, caixa e ouro já estão cobertos em outras camadas, hedge vira engenharia de payoff, beta, volatilidade e moeda.",
+        thesis: "Payoff",
+        subtitle: "Opções, beta, vol e dólar",
+      };
+
       const TECH_CYCLES = [
         {
           cycle: "Ferrovias",
@@ -3098,6 +3105,194 @@
         );
       }
 
+      const HEDGE_FILTERS = {
+        objective: [
+          ["all", "Todos"],
+          ["income", "Renda"],
+          ["beta", "Beta"],
+          ["stress", "Stress"],
+          ["payoff", "Payoff"],
+          ["currency", "Moeda"],
+        ],
+      };
+
+      const HEDGE_STRATEGIES = [
+        {
+          theme: "Income de opções",
+          icon: "network",
+          objective: "income",
+          tone: "sat-risk-medium",
+          instruments: "JEPI, JEPQ, XYLD, QYLD",
+          does: "Vende volatilidade e parte do upside para gerar prêmio corrente.",
+          use: "Mercado lateral, geração de renda e redução parcial de volatilidade versus equity pura.",
+          limit: "Não protege crash e pode sacrificar muita alta em bull market forte.",
+          reading: "Covered call é equity com upside vendido.",
+          examples: ["JEPI: equity defensivo + opções", "JEPQ: Nasdaq/growth + opções", "XYLD: S&P 500 covered call", "QYLD: Nasdaq 100 covered call"],
+        },
+        {
+          theme: "Equity defensivo / min-vol",
+          icon: "shield",
+          objective: "beta",
+          tone: "sat-risk-defensive",
+          instruments: "USMV, SPLV, MVOL / Min Vol UCITS",
+          does: "Reduz beta e volatilidade relativa sem sair totalmente de bolsa.",
+          use: "Trocar equity agressivo por equity mais defensivo dentro da carteira.",
+          limit: "Continua caindo em crise sistêmica e pode ficar para trás em bull market concentrado.",
+          reading: "Minimum volatility reduz beta; não elimina risco de mercado.",
+          examples: ["USMV: ações americanas minimum volatility", "SPLV: 100 ações menos voláteis do S&P 500", "MVOL / UCITS: versões globais ou regionais"],
+        },
+        {
+          theme: "Volatilidade / VIX",
+          icon: "pulse",
+          objective: "stress",
+          tone: "sat-risk-high",
+          instruments: "VIXY, VXX, UVXY, VIX futures UCITS",
+          does: "Busca ganhar quando a volatilidade implícita explode em stress curto.",
+          use: "Hedge tático de janela curta, antes ou durante eventos de stress.",
+          limit: "Sofre com rolagem, decay e destruição de valor se carregado por muito tempo.",
+          reading: "VIX ETF é extintor de incêndio, não tijolo de portfólio.",
+          examples: ["VIXY: futuros curtos de VIX", "VXX: ETN de futuros curtos", "UVXY: exposição alavancada", "UCITS: alternativa offshore"],
+        },
+        {
+          theme: "Buffered / defined outcome",
+          icon: "server",
+          objective: "payoff",
+          tone: "sat-risk-medium",
+          instruments: "Buffered ETFs, defined outcome ETFs, collars, put spreads",
+          does: "Empacota opções para criar proteção parcial em troca de limitar parte da alta.",
+          use: "Cliente conservador que aceita teto de retorno para reduzir perda moderada.",
+          limit: "Proteção é parcial, depende da data de início, buffer, cap e estrutura.",
+          reading: "Buffered ETF troca parte da alta por proteção parcial de queda.",
+          examples: ["Buffered ETFs: amortecem faixa inicial de queda", "Defined outcome: payoff por período", "Collars: put comprada + call vendida", "Put spreads: proteção com custo menor"],
+        },
+        {
+          theme: "Desconcentração",
+          icon: "grid",
+          objective: "beta",
+          tone: "sat-risk-defensive",
+          instruments: "RSP, QQEW, USMV",
+          does: "Reduz dependência de mega caps e de uma única liderança de mercado.",
+          use: "Hedge contra concentração extrema em Mag-7 ou grandes techs.",
+          limit: "Não protege contra queda geral; pode perder para índices cap-weighted se mega caps seguirem liderando.",
+          reading: "Equal weight protege contra concentração, não contra queda geral.",
+          examples: ["RSP: S&P 500 equal weight", "QQEW: Nasdaq 100 equal weight", "USMV: min-vol com viés defensivo"],
+        },
+        {
+          theme: "Dólar para brasileiro",
+          icon: "factory",
+          objective: "currency",
+          tone: "sat-risk-defensive",
+          instruments: "USD cash offshore, conta em dólar, ativos USD não hedgeados",
+          does: "Reduz dependência do real e protege contra risco Brasil, fiscal, político e cambial.",
+          use: "Reserva estratégica fora do BRL e hedge natural para patrimônio local.",
+          limit: "Não é hedge universal; se o ativo cair e o dólar não compensar, a carteira ainda sofre.",
+          reading: "Dólar protege contra Brasil; não contra tudo.",
+          examples: ["USD cash offshore", "Conta em dólar / money market USD", "ETFs e ativos em USD sem hedge cambial"],
+        },
+        {
+          theme: "Opções diretas sobre índice",
+          icon: "shield",
+          objective: "payoff",
+          tone: "sat-risk-high",
+          instruments: "SPY puts, QQQ puts, put spreads, collars",
+          does: "Desenha proteção sob medida para queda, volatilidade, janela e nível de perda tolerado.",
+          use: "Hedge preciso de drawdown específico em índices líquidos.",
+          limit: "Toda precisão tem custo: prêmio pago, upside vendido ou proteção limitada.",
+          reading: "Opção é seguro; seguro custa.",
+          examples: ["Protective put: seguro direto", "Put spread: proteção parcial", "Collar: reduz custo vendendo call", "Put spread financiado por call: custo menor com teto de alta"],
+        },
+      ];
+
+      function HedgeModule() {
+        const [filters, setFilters] = useState({ objective: "all" });
+        const [selectedTheme, setSelectedTheme] = useState("Income de opções");
+        const objectiveOrder = { income: 0, beta: 1, stress: 2, payoff: 3, currency: 4 };
+        const filtered = HEDGE_STRATEGIES.filter((item) =>
+          Object.entries(filters).every(([key, value]) => value === "all" || item[key] === value)
+        ).sort((a, b) => objectiveOrder[a.objective] - objectiveOrder[b.objective] || a.theme.localeCompare(b.theme, "pt-BR"));
+        const active = filtered.find((item) => item.theme === selectedTheme) || filtered[0] || HEDGE_STRATEGIES[0];
+
+        const filterRow = (key, label) =>
+          React.createElement(
+            "div",
+            { className: "filter-row", key },
+            React.createElement("span", { className: "filter-label" }, label),
+            HEDGE_FILTERS[key].map(([value, text]) =>
+              React.createElement(
+                "button",
+                {
+                  className: "filter-chip",
+                  type: "button",
+                  key: value,
+                  "aria-pressed": filters[key] === value,
+                  onClick: () => setFilters({ ...filters, [key]: value }),
+                },
+                text
+              )
+            )
+          );
+
+        return React.createElement(
+          "main",
+          { className: "satellite-layout" },
+          React.createElement(
+            "article",
+            { className: "panel" },
+            React.createElement(
+              "div",
+              { className: "section-head" },
+              React.createElement("div", null, React.createElement("span", { className: "control-title" }, "Estratégias de hedge"), React.createElement("h2", null, "Payoff, beta, volatilidade e moeda"))
+            ),
+            React.createElement(
+              "div",
+              { className: "satellite-filters" },
+              filterRow("objective", "Objetivo"),
+              React.createElement(
+                "div",
+                { className: "risk-legend" },
+                React.createElement("span", { className: "sat-risk-high" }, "Tático / alto custo de carregamento"),
+                React.createElement("span", { className: "sat-risk-medium" }, "Payoff / income"),
+                React.createElement("span", { className: "sat-risk-defensive" }, "Redução de beta ou moeda")
+              )
+            ),
+            React.createElement(
+              "div",
+              { className: "satellite-grid" },
+              filtered.map((item) =>
+                React.createElement(
+                  "button",
+                  { className: `satellite-card ${item.tone}`, type: "button", key: item.theme, "aria-pressed": active.theme === item.theme, onClick: () => setSelectedTheme(item.theme) },
+                  React.createElement(
+                    "div",
+                    null,
+                    React.createElement("div", { className: "satellite-title-row" }, React.createElement(SatelliteIcon, { type: item.icon }), React.createElement("h3", null, item.theme)),
+                    React.createElement("p", null, item.reading)
+                  ),
+                  React.createElement("div", { className: "satellite-tags" }, React.createElement("span", { className: "satellite-tag" }, item.instruments))
+                )
+              )
+            )
+          ),
+          React.createElement(
+            "aside",
+            { className: "panel satellite-detail" },
+            React.createElement("span", { className: "detail-role" }, "Hedge selecionado"),
+            React.createElement("div", { className: `satellite-detail-head ${active.tone}` }, React.createElement(SatelliteIcon, { type: active.icon }), React.createElement("h2", null, active.theme)),
+            React.createElement(
+              "div",
+              { className: "detail-grid" },
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Instrumentos"), React.createElement("strong", null, active.instruments)),
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "O que faz"), React.createElement("strong", null, active.does)),
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Uso correto"), React.createElement("strong", null, active.use)),
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Limitação"), React.createElement("strong", null, active.limit))
+            ),
+            React.createElement("p", null, active.reading),
+            React.createElement("ul", { className: "satellite-list" }, active.examples.map((point) => React.createElement("li", { key: point }, point))),
+            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Síntese"), React.createElement("strong", null, "Covered call vende upside. Min-vol reduz beta. VIX protege stress curto. Buffered limita perda. Dólar protege Brasil. Opções desenham o piso."))
+          )
+        );
+      }
+
       function CoreModule() {
         const [selectedEtf, setSelectedEtf] = useState("VOO");
         const detail = CORE_DETAILS[selectedEtf] || CORE_DETAILS.VOO;
@@ -3257,6 +3452,16 @@
                     onClick: () => setActiveModule("china"),
                   },
                   "China / China+1"
+                ),
+                React.createElement(
+                  "button",
+                  {
+                    className: "view-tab",
+                    type: "button",
+                    "aria-current": activeModule === "hedges" ? "page" : undefined,
+                    onClick: () => setActiveModule("hedges"),
+                  },
+                  "Estratégias de Hedge"
                 )
               ),
               React.createElement("h1", null, moduleCopy.title),
@@ -3673,7 +3878,9 @@
                     ? React.createElement(SatelliteModule)
                     : activeModule === "europe"
                       ? React.createElement(EuropeModule)
-                      : React.createElement(ChinaModule)
+                      : activeModule === "china"
+                        ? React.createElement(ChinaModule)
+                        : React.createElement(HedgeModule)
         );
       }
 
