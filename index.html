@@ -1657,6 +1657,13 @@
         color: var(--ink);
       }
 
+      .data-note {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.45;
+      }
+
       .satellite-list {
         display: grid;
         gap: 8px;
@@ -2109,7 +2116,7 @@
         {
           company: "Amazon",
           pe: "~30x-40x",
-          recent: "Q1 2026: net sales +16,6%; net income +76,7%; AWS +28%.",
+          recent: "Q1 2026: receita +16,6%; lucro líquido +76,7%; AWS +28%.",
           outlook: "CAPEX pode chegar perto de US$ 200 bi em 2026.",
           read: "Lucro cresce bem, mas o mercado cobra retorno em AWS, IA e free cash flow.",
         },
@@ -2264,7 +2271,8 @@
               "a",
               { className: "source-link", href: "./tech-vs-bench.pdf", target: "_blank", rel: "noopener" },
               "Abrir PDF"
-            )
+            ),
+            React.createElement("p", { className: "data-note" }, "Base: dados aproximados, junho/2026. Para versão final, padronizar todos os múltiplos no mesmo provedor.")
           )
         );
 
@@ -2319,7 +2327,8 @@
                   )
                 )
               )
-            )
+            ),
+            React.createElement("p", { className: "data-note" }, "Base: consenso público recente e dados aproximados. Usar o mesmo provedor para versão final: NTM P/E e EPS growth 2026E.")
           ),
           React.createElement(
             "section",
@@ -2328,7 +2337,7 @@
             React.createElement(
               "p",
               null,
-              "FactSet/IBD reportou +63,2% YoY de lucro no 1T para o Mag-7, contra +17,4% para o restante do S&P 500. Goldman ainda vê crescimento superior nas mega caps, mas a dispersão dentro do grupo importa."
+              "FactSet/IBD reportou +63,2% YoY de lucro no 1T para a Magnificent 7, contra +17,4% para o restante do S&P 500. Goldman ainda vê crescimento superior nas mega caps, mas a dispersão dentro do grupo importa."
             )
           ),
           React.createElement(
@@ -2392,7 +2401,7 @@
       };
 
       MODULE_COPY.scarcity = {
-        title: "Economy Bottlenecks: empresas que monetizam gargalos estruturais",
+        title: "US Scarcity Economy: empresas que monetizam gargalos estruturais",
         lead: "A tese não é comprar setores defensivos. É comprar mercados onde a demanda cresce e a oferta responde lentamente.",
         thesis: "Escassez",
         subtitle: "Demanda estrutural e oferta limitada",
@@ -3215,7 +3224,8 @@
                   React.createElement("ul", { className: "satellite-list" }, active.extraCompanies.map((point) => React.createElement("li", { key: point }, point)))
                 )
               : null,
-            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Nomes / proxies"), React.createElement("strong", null, active.names.join(" · ")))
+            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Nomes / proxies"), React.createElement("strong", null, active.names.join(" · "))),
+            React.createElement("p", { className: "data-note" }, "Base: exemplos e proxies setoriais, junho/2026. Cestas não são exaustivas.")
           )
         );
       }
@@ -3423,7 +3433,8 @@
             ),
             React.createElement("p", null, active.thesis),
             React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
-            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Nomes / cesta"), React.createElement("strong", null, active.names.join(" · ")))
+            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Nomes / cesta"), React.createElement("strong", null, active.names.join(" · "))),
+            React.createElement("p", { className: "data-note" }, "Base: exemplos de veículos e empresas, junho/2026. Cestas são ilustrativas e não exaustivas.")
           )
         );
       }
@@ -3567,7 +3578,8 @@
             ),
             React.createElement("p", null, active.thesis),
             React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
-            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Cesta possível"), React.createElement("strong", null, active.names.join(" · ")))
+            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Cesta possível"), React.createElement("strong", null, active.names.join(" · "))),
+            React.createElement("p", { className: "data-note" }, "Base: exemplos de ETFs/proxies e cestas estratégicas, junho/2026. Lista não exaustiva.")
           )
         );
       }
@@ -3753,7 +3765,8 @@
             ),
             React.createElement("p", null, active.reading),
             React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
-            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Exemplos"), React.createElement("strong", null, active.names.join(" · ")))
+            React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Exemplos"), React.createElement("strong", null, active.names.join(" · "))),
+            React.createElement("p", { className: "data-note" }, "Base: exemplos de canais e instrumentos, junho/2026. Pesos e composição devem ser checados no provedor antes da execução.")
           )
         );
       }
@@ -3938,7 +3951,8 @@
               React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Limitação"), React.createElement("strong", null, active.limit))
             ),
             React.createElement("p", null, active.reading),
-            React.createElement("ul", { className: "satellite-list" }, active.examples.map((point) => React.createElement("li", { key: point }, point)))
+            React.createElement("ul", { className: "satellite-list" }, active.examples.map((point) => React.createElement("li", { key: point }, point))),
+            React.createElement("p", { className: "data-note" }, "Base: instrumentos líquidos e estruturas comuns, junho/2026. Produtos táticos exigem checagem de prazo, liquidez, custo e regra diária.")
           )
         );
       }
@@ -4025,7 +4039,8 @@
                         React.createElement("div", { className: "mini-country-track" }, React.createElement("div", { className: "mini-country-bar", style: { width: `${(weight / maxCountryWeight) * 100}%` } })),
                         React.createElement("span", null, `${weight.toFixed(1).replace(".", ",")}%`)
                       )
-                    )
+                    ),
+                    React.createElement("p", { className: "data-note" }, "Pesos aproximados por país. Base: lâminas dos provedores e benchmarks, junho/2026.")
                   )
                 : null,
               React.createElement("ul", { className: "core-detail-list" }, detail[3].map((point) => React.createElement("li", { key: point }, point)))
@@ -4127,7 +4142,7 @@
                     "aria-current": activeModule === "scarcity" ? "page" : undefined,
                     onClick: () => setActiveModule("scarcity"),
                   },
-                  "Economy Bottlenecks"
+                  "US Scarcity Economy"
                 ),
                 React.createElement(
                   "button",
@@ -4324,7 +4339,8 @@
                       mode,
                       theme,
                     })
-                  )
+                  ),
+                  React.createElement("p", { className: "data-note" }, "Base: curvas inseridas no dashboard; expectativas de Fed Funds via Atlanta Fed, 22/06/26, até 16/09/26.")
                 ),
                 React.createElement(
                   "article",
