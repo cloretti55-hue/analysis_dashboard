@@ -2415,10 +2415,10 @@
       };
 
       MODULE_COPY.hedges = {
-        title: "Proteção líquida sem ouro e sem renda fixa",
-        lead: "Quando Treasuries, TIPS, caixa e ouro já estão cobertos em outras camadas, hedge vira engenharia de payoff, beta, volatilidade e moeda.",
+        title: "Estratégias líquidas de hedge",
+        lead: "Quando Treasuries, TIPS, caixa e ouro já estão cobertos em outras camadas, hedge vira engenharia de payoff, beta e volatilidade.",
         thesis: "Payoff",
-        subtitle: "Opções, beta, vol e dólar",
+        subtitle: "Opções, beta e volatilidade",
       };
 
       const TECH_CYCLES = [
@@ -3101,7 +3101,7 @@
           motor: "demography",
           vehicle: "basket",
           etfs: "Sem ETF limpo",
-          quality: "Alta",
+          quality: "Baixa",
           implementation: "Cesta de ações",
           reading: "Mercado altamente concentrado, responsável pela distribuição da maior parte dos medicamentos nos Estados Unidos.",
           names: ["McKesson", "Cencora", "Cardinal Health"],
@@ -3414,7 +3414,7 @@
               { className: "detail-grid" },
               React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "ETF amplo"), React.createElement("strong", null, active.status)),
               React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Implementação"), React.createElement("strong", null, active.implementation)),
-              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Qualidade do ETF"), React.createElement("strong", null, active.quality)),
+              React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Leitura do veículo"), React.createElement("strong", null, active.quality)),
               React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Primeira camada"), React.createElement("strong", null, active.etfs))
             ),
             React.createElement("p", null, active.thesis),
