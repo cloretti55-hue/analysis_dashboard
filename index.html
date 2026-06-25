@@ -2272,7 +2272,7 @@
               { className: "source-link", href: "./tech-vs-bench.pdf", target: "_blank", rel: "noopener" },
               "Abrir PDF"
             ),
-            React.createElement("p", { className: "data-note" }, "Base: dados aproximados, junho/2026. Para versão final, padronizar todos os múltiplos no mesmo provedor.")
+            React.createElement("p", { className: "data-note" }, "Base: Yardeni Research, 22/06/26.")
           )
         );
 
@@ -2328,7 +2328,7 @@
                 )
               )
             ),
-            React.createElement("p", { className: "data-note" }, "Base: consenso público recente e dados aproximados. Usar o mesmo provedor para versão final: NTM P/E e EPS growth 2026E.")
+            React.createElement("p", { className: "data-note" }, "Base: estimativas públicas recentes. Múltiplos e crescimento devem ser comparados na mesma metodologia: NTM P/E e EPS growth 2026E.")
           ),
           React.createElement(
             "section",
@@ -3354,7 +3354,7 @@
       ];
 
       function ScarcityModule() {
-        const [filters, setFilters] = useState({ motor: "all", vehicle: "all" });
+        const [filters, setFilters] = useState({ motor: "all" });
         const [selectedTheme, setSelectedTheme] = useState("Saúde — prestadores");
         const motorOrder = { health: 0, housing: 1, education: 2, demography: 3 };
         const filtered = SCARCITY_THEMES.filter((item) =>
@@ -3393,7 +3393,6 @@
               "div",
               { className: "satellite-filters" },
               filterRow("motor", "Motor"),
-              filterRow("vehicle", "Veículo"),
               React.createElement(
                 "div",
                 { className: "risk-legend" },
@@ -4340,7 +4339,7 @@
                       theme,
                     })
                   ),
-                  React.createElement("p", { className: "data-note" }, "Base: curvas inseridas no dashboard; expectativas de Fed Funds via Atlanta Fed, 22/06/26, até 16/09/26.")
+                  React.createElement("p", { className: "data-note" }, "Base: Atlanta Fed, 22/06/26.")
                 ),
                 React.createElement(
                   "article",
