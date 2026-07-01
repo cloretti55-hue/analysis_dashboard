@@ -679,6 +679,99 @@
         height: auto;
       }
 
+      .equity-pe-chart {
+        display: grid;
+        gap: 18px;
+      }
+
+      .equity-pe-chart h2 {
+        margin: 0;
+        font-size: 25px;
+      }
+
+      .equity-pe-chart .chart-subtitle {
+        margin: -10px 0 2px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      .pe-bars {
+        display: grid;
+        gap: 14px;
+      }
+
+      .pe-bar-row {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 12px;
+        align-items: center;
+      }
+
+      .pe-bar-row span {
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 850;
+      }
+
+      .pe-bar-track {
+        min-height: 34px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 4px;
+        background: rgba(255, 255, 255, 0.028);
+      }
+
+      body.theme-light .pe-bar-track {
+        background: rgba(23, 48, 77, 0.055);
+      }
+
+      .pe-bar-fill {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 24px;
+        min-width: 36px;
+        border-radius: 6px;
+        padding: 0 8px;
+        background: linear-gradient(90deg, color-mix(in srgb, var(--tone) 62%, transparent), var(--tone));
+        color: #071324;
+        font-size: 12px;
+        font-weight: 950;
+      }
+
+      .pe-premium-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .pe-premium {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 11px;
+        background: rgba(255, 255, 255, 0.026);
+      }
+
+      body.theme-light .pe-premium {
+        background: rgba(23, 48, 77, 0.05);
+      }
+
+      .pe-premium span {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .pe-premium strong {
+        display: block;
+        margin-top: 5px;
+        color: var(--tone);
+        font-size: 22px;
+      }
+
       .source-card {
         display: grid;
         align-content: start;
@@ -1763,6 +1856,227 @@
         font-size: 12px;
       }
 
+      .mobile-shell {
+        min-height: 100vh;
+        padding: 12px;
+      }
+
+      .mobile-top {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin: -12px -12px 14px;
+        padding: 12px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(7, 19, 36, 0.92);
+        backdrop-filter: blur(14px);
+      }
+
+      body.theme-light .mobile-top {
+        background: rgba(244, 247, 251, 0.92);
+      }
+
+      .mobile-brand {
+        display: grid;
+        gap: 2px;
+        min-width: 0;
+      }
+
+      .mobile-brand span {
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .mobile-brand strong {
+        overflow: hidden;
+        color: var(--ink);
+        font-size: 15px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .mobile-icon-btn {
+        min-width: 42px;
+        min-height: 36px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      .mobile-hero {
+        display: grid;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .mobile-hero h1 {
+        font-size: 30px;
+        line-height: 1.02;
+      }
+
+      .mobile-hero p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      .mobile-module-grid {
+        display: grid;
+        gap: 10px;
+      }
+
+      .mobile-module-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+        min-height: 92px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 14px;
+        background: rgba(15, 32, 55, 0.88);
+        color: var(--ink);
+        text-align: left;
+        box-shadow: var(--shadow);
+      }
+
+      body.theme-light .mobile-module-card {
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .mobile-module-card h2 {
+        margin: 0 0 6px;
+        font-size: 18px;
+        line-height: 1.1;
+      }
+
+      .mobile-module-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .mobile-module-card strong {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 62px;
+        min-height: 34px;
+        border: 1px solid var(--mobile-accent);
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--mobile-accent) 16%, transparent);
+        color: var(--mobile-accent);
+        font-size: 11px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .mobile-module-view,
+      .mobile-curve,
+      .mobile-card-stack {
+        display: grid;
+        gap: 12px;
+      }
+
+      .mobile-module-head {
+        display: grid;
+        gap: 8px;
+        padding: 14px;
+      }
+
+      .mobile-module-head span {
+        color: var(--focus);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .mobile-module-head h1 {
+        font-size: 28px;
+        line-height: 1.04;
+      }
+
+      .mobile-module-head p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      .mobile-summary-card {
+        padding: 14px;
+      }
+
+      .mobile-summary-card h2 {
+        margin: 0 0 10px;
+        font-size: 18px;
+      }
+
+      .mobile-summary-card ul {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.35;
+      }
+
+      .mobile-curve-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .mobile-curve .segmented {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .mobile-curve .segmented button {
+        min-height: 36px;
+        padding: 6px 8px;
+        font-size: 12px;
+      }
+
+      .mobile-stat {
+        display: grid;
+        gap: 5px;
+        min-height: 78px;
+        padding: 11px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .mobile-stat span {
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .mobile-stat strong {
+        font-size: 18px;
+      }
+
+      @media (min-width: 721px) {
+        .mobile-shell {
+          display: none;
+        }
+      }
+
       @media (max-width: 1120px) {
         .layout,
         .main-grid,
@@ -1770,8 +2084,13 @@
         .core-layout,
         .satellite-layout,
         .allocation,
+        .tech-main {
+          grid-template-columns: 1fr;
+        }
 
-        .controls {
+        .controls,
+        .core-detail,
+        .satellite-detail {
           position: static;
         }
 
@@ -1784,12 +2103,61 @@
       }
 
       @media (max-width: 720px) {
+        body {
+          overflow-x: hidden;
+        }
+
         .app {
-          padding: 16px;
+          padding: 12px;
         }
 
         .topbar {
           grid-template-columns: 1fr;
+          gap: 14px;
+          padding: 12px 0 14px;
+        }
+
+        .view-tabs {
+          flex-wrap: nowrap;
+          gap: 7px;
+          margin: 0 -12px 12px;
+          padding: 0 12px 8px;
+          overflow-x: auto;
+          scrollbar-width: thin;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .view-tab {
+          flex: 0 0 auto;
+          min-height: 32px;
+          padding: 7px 10px;
+          font-size: 11px;
+          white-space: nowrap;
+        }
+
+        h1 {
+          font-size: 34px;
+          line-height: 1.05;
+        }
+
+        .lead {
+          margin-top: 10px;
+          font-size: 15px;
+          line-height: 1.45;
+        }
+
+        .header-side {
+          grid-template-columns: 1fr;
+        }
+
+        .theme-switch,
+        .market-stamp {
+          min-width: 0;
+          width: 100%;
+        }
+
+        .market-stamp strong {
+          font-size: 25px;
         }
 
         .kpis,
@@ -1801,21 +2169,237 @@
           grid-template-columns: 1fr;
         }
 
+        .kpi {
+          min-height: 0;
+          padding: 14px;
+        }
+
+        .kpi strong {
+          font-size: 28px;
+        }
+
+        .controls,
+        .panel,
+        .core-detail,
+        .satellite-detail {
+          border-radius: 8px;
+        }
+
+        .controls {
+          padding: 12px;
+        }
+
+        .segmented {
+          grid-template-columns: 1fr;
+        }
+
+        .main-grid,
+        .equity-grid,
+        .core-layout,
+        .satellite-layout,
+        .allocation,
+        .tech-main {
+          gap: 12px;
+        }
+
+        .section-head {
+          flex-direction: column;
+          gap: 8px;
+          padding: 14px 14px 0;
+        }
+
+        .section-head h2 {
+          font-size: 19px;
+          line-height: 1.15;
+        }
+
         .core-function,
         .satellite-card {
           grid-template-columns: 1fr;
+        }
+
+        .core-function-grid,
+        .satellite-grid,
+        .satellite-filters,
+        .equity-cards,
+        .diagnosis,
+        .benefits {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+
+        .core-function {
+          align-items: start;
+        }
+
+        .core-legend-row {
+          display: grid;
+          gap: 10px;
+          margin: 14px 12px 12px;
+        }
+
+        .ucits-toggle {
+          justify-self: start;
+        }
+
+        .etf-token {
+          min-width: 58px;
+          min-height: 34px;
+          padding: 7px 9px;
+          font-size: 12px;
+        }
+
+        .filter-row {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 7px;
+        }
+
+        .filter-label {
+          min-width: 0;
+        }
+
+        .risk-legend {
+          gap: 6px;
+        }
+
+        .risk-legend span {
+          width: 100%;
+        }
+
+        .satellite-detail h2 {
+          font-size: 22px;
+        }
+
+        .detail-box {
+          padding: 10px;
         }
 
         .satellite-tags {
           justify-content: start;
         }
 
-        .section-head {
-          flex-direction: column;
+        .chart-wrap,
+        .cycle-table-wrap,
+        .mega-table-wrap,
+        .table-shell {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
         }
 
         .chart {
-          min-height: 320px;
+          min-width: 640px;
+          min-height: 330px;
+        }
+
+        .chart-wrap {
+          padding-bottom: 16px;
+        }
+
+        .axis-label,
+        .tick {
+          font-size: 18px;
+        }
+
+        .point-value-label {
+          font-size: 17px;
+        }
+
+        .spread-row {
+          grid-template-columns: 64px minmax(0, 1fr) 58px;
+          gap: 8px;
+        }
+
+        .timeline {
+          grid-template-columns: 1fr;
+        }
+
+        .timeline-step {
+          min-height: 0;
+        }
+
+        .ai-stack {
+          display: grid;
+          overflow-x: visible;
+        }
+
+        .stack-layer {
+          min-width: 0;
+        }
+
+        .stack-arrow {
+          height: 18px;
+        }
+
+        .mega-table,
+        .cycle-table,
+        .policy-table {
+          min-width: 760px;
+        }
+
+        .pe-bar-row {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+
+        .pe-bar-row > span:last-child {
+          display: none;
+        }
+
+        .pe-premium-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .mini-country-row {
+          grid-template-columns: 72px minmax(0, 1fr) 44px;
+          gap: 8px;
+        }
+      }
+
+      @media (max-width: 460px) {
+        .app {
+          padding: 10px;
+        }
+
+        .view-tabs {
+          margin-left: -10px;
+          margin-right: -10px;
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+
+        h1 {
+          font-size: 30px;
+        }
+
+        .lead {
+          font-size: 14px;
+        }
+
+        .chart {
+          min-width: 600px;
+        }
+
+        .satellite-card,
+        .core-function,
+        .diag-item,
+        .equity-card {
+          padding: 12px;
+        }
+
+        .satellite-title-row {
+          align-items: flex-start;
+        }
+
+        .satellite-icon {
+          width: 28px;
+          height: 28px;
+          flex-basis: 28px;
+        }
+
+        .satellite-icon svg {
+          width: 18px;
+          height: 18px;
         }
       }
     </style>
@@ -2063,11 +2647,67 @@
       }
 
       const EQUITY_PE = [
-        { name: "Magnificent 7", value: "24,4x", note: "Principal fonte do prêmio." },
-        { name: "S&P 500 LargeCap", value: "20,5x", note: "Benchmark do índice cheio." },
-        { name: "S&P 400 MidCap", value: "16,4x", note: "Valuation mais moderado." },
-        { name: "S&P 600 SmallCap", value: "16,0x", note: "Desconto com maior ciclicidade." },
+        { name: "Magnificent 7", value: 24.4, tone: "#4f7cff", note: "Principal fonte do prêmio." },
+        { name: "S&P 500 Information Technology", value: 22.2, tone: "#5bbcff", note: "Setor de tecnologia do S&P 500." },
+        { name: "S&P 500", value: 20.5, tone: "#48d6e9", note: "Benchmark do índice cheio." },
+        { name: "S&P 400 MidCap", value: 16.4, tone: "#ffae6b", note: "Valuation mais moderado." },
+        { name: "S&P 600 SmallCap", value: 16.0, tone: "#ffae6b", note: "Desconto com maior ciclicidade." },
       ];
+
+      function formatMultiple(value) {
+        return `${value.toFixed(1).replace(".", ",")}x`;
+      }
+
+      function EquityPeChart() {
+        const maxPe = Math.max(...EQUITY_PE.map((item) => item.value));
+        const mag7 = EQUITY_PE[0].value;
+        const tech = EQUITY_PE[1].value;
+        const sp500 = EQUITY_PE[2].value;
+        const midcap = EQUITY_PE[3].value;
+        const smallcap = EQUITY_PE[4].value;
+        const premium = (base) => Math.round(((mag7 / base) - 1) * 100);
+
+        return React.createElement(
+          "div",
+          { className: "equity-pe-chart" },
+          React.createElement("h2", null, "Forward P/E aproximado por bloco"),
+          React.createElement("p", { className: "chart-subtitle" }, "A leitura agregada do S&P 500 esconde uma dispersão relevante entre mega caps, índice cheio e mercado por baixo."),
+          React.createElement(
+            "div",
+            { className: "pe-bars" },
+            EQUITY_PE.map((item) =>
+              React.createElement(
+                "div",
+                { className: "pe-bar-row", key: item.name, style: { "--tone": item.tone } },
+                React.createElement("span", null, item.name),
+                React.createElement(
+                  "div",
+                  { className: "pe-bar-track" },
+                  React.createElement("div", { className: "pe-bar-fill", style: { width: `${(item.value / maxPe) * 100}%` } }, formatMultiple(item.value))
+                )
+              )
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "pe-premium-grid" },
+            [
+              ["Prêmio vs Tecnologia", `+${premium(tech)}%`, "#5bbcff"],
+              ["Prêmio vs S&P 500", `+${premium(sp500)}%`, "#48d6e9"],
+              ["Prêmio vs MidCap", `+${premium(midcap)}%`, "#ffae6b"],
+              ["Prêmio vs SmallCap", `+${premium(smallcap)}%`, "#ffae6b"],
+            ].map(([label, value, tone]) =>
+              React.createElement(
+                "div",
+                { className: "pe-premium", key: label, style: { "--tone": tone } },
+                React.createElement("span", null, label),
+                React.createElement("strong", null, value)
+              )
+            )
+          ),
+          React.createElement("p", { className: "data-note" }, "Base: Yardeni Research, LSEG Datastream e S&P, 22/06/26. Valores aproximados; gráfico próprio.")
+        );
+      }
 
       const EQUITY_CARDS = [
         {
@@ -2198,11 +2838,7 @@
                   React.createElement("span", { className: "control-title" }, "Valuation relativo")
                 )
               ),
-              React.createElement("img", {
-                className: "equity-chart-image",
-                src: "./forward-pe-capitalization.png",
-                alt: "Forward P/E by capitalization",
-              })
+              React.createElement(EquityPeChart)
             ),
             React.createElement(
               "article",
@@ -2238,41 +2874,13 @@
           ),
           React.createElement(
             "section",
-            { className: "equity-kpis" },
-            EQUITY_PE.map((item) =>
-              React.createElement(
-                "article",
-                { className: "kpi panel", key: item.name },
-                React.createElement("span", null, item.name),
-                React.createElement("strong", null, item.value),
-                React.createElement("p", null, item.note)
-              )
-            )
-          ),
-          React.createElement(
-            "section",
-            { className: "panel source-card" },
-            React.createElement(
-              "div",
-              { className: "section-head" },
-              React.createElement(
-                "div",
-                null,
-                React.createElement("span", { className: "control-title" }, "Gráfico de apoio"),
-                React.createElement("h2", null, "Tech vs benchmark")
-              )
-            ),
+            { className: "panel equity-summary" },
+            React.createElement("h2", null, "Leitura"),
             React.createElement(
               "p",
               null,
-              "Ajuda a separar prêmio justificado por crescimento de concentração excessiva em tecnologia."
-            ),
-            React.createElement(
-              "a",
-              { className: "source-link", href: "./tech-vs-bench.pdf", target: "_blank", rel: "noopener" },
-              "Abrir PDF"
-            ),
-            React.createElement("p", { className: "data-note" }, "Base: Yardeni Research, 22/06/26.")
+              "O prêmio não está distribuído de forma homogênea: a Magnificent 7 negocia acima do S&P 500 e também acima do próprio setor de tecnologia do índice. O excesso está concentrado nas mega caps, não simplesmente em toda a bolsa americana."
+            )
           )
         );
 
@@ -3890,11 +4498,235 @@
         );
       }
 
+      const MOBILE_MODULES = [
+        ["curve", "Curve Yield", "#48d6e9"],
+        ["equity", "Equity Valuation", "#6ee7b7"],
+        ["tech", "Matriz de Ciclos", "#ffae6b"],
+        ["core", "Core", "#8db7ff"],
+        ["satellites", "Satélites EUA", "#7dd3fc"],
+        ["europe", "Europa Estratégica", "#c49bff"],
+        ["china", "China / China+1", "#f59e0b"],
+        ["hedges", "Hedge", "#ff8b86"],
+      ];
+
+      function useIsMobile() {
+        const [isMobile, setIsMobile] = useState(false);
+
+        useEffect(() => {
+          const query = window.matchMedia("(max-width: 720px)");
+          const update = () => setIsMobile(query.matches);
+          update();
+          query.addEventListener("change", update);
+          return () => query.removeEventListener("change", update);
+        }, []);
+
+        return isMobile;
+      }
+
+      function MobileCurveModule({ mode, setMode, theme }) {
+        const activeCurves = [mode];
+        const current = CURVES[mode];
+
+        return React.createElement(
+          "main",
+          { className: "mobile-curve" },
+          React.createElement(
+            "section",
+            { className: "panel controls" },
+            React.createElement("div", { className: "control-title" }, "Visão"),
+            React.createElement(
+              "div",
+              {
+                className: "segmented",
+                style: {
+                  "--active-color": current.color,
+                  "--active-soft":
+                    mode === "nominal"
+                      ? "var(--nominal-soft)"
+                      : mode === "real"
+                        ? "var(--real-soft)"
+                        : "var(--inflation-soft)",
+                },
+              },
+              ["nominal", "real", "inflation"].map((key) =>
+                React.createElement(
+                  "button",
+                  {
+                    key,
+                    type: "button",
+                    "aria-pressed": mode === key,
+                    onClick: () => setMode(key),
+                  },
+                  key === "inflation" ? "Inflação Implícita" : CURVES[key].short
+                )
+              )
+            )
+          ),
+          React.createElement(
+            "section",
+            { className: "mobile-curve-stats" },
+            SPREADS.map((spread) =>
+              React.createElement(
+                "article",
+                { className: "mobile-stat", key: spread.label },
+                React.createElement("span", null, spread.label),
+                React.createElement("strong", null, bps(spreadValue(mode, spread)))
+              )
+            )
+          ),
+          React.createElement(
+            "section",
+            { className: "panel" },
+            React.createElement(
+              "div",
+              { className: "chart-wrap" },
+              React.createElement(Chart, {
+                activeCurves,
+                filteredMaturities: MATURITIES,
+                mode,
+                theme,
+              })
+            ),
+            React.createElement("p", { className: "data-note" }, "Base: Atlanta Fed, 22/06/26.")
+          ),
+          React.createElement(
+            "section",
+            { className: "mobile-card-stack" },
+            React.createElement(
+              "article",
+              { className: "panel mobile-summary-card" },
+              React.createElement("h2", null, current.label),
+              React.createElement(
+                "ul",
+                null,
+                READING_BULLETS[mode].map((item) => React.createElement("li", { key: item }, item))
+              )
+            ),
+            React.createElement(
+              "article",
+              { className: "panel mobile-summary-card" },
+              React.createElement("h2", null, "Fed Funds até 16/09/26"),
+              React.createElement(
+                "div",
+                { className: "kpi-probs" },
+                React.createElement("div", null, React.createElement("span", null, "Rate hike"), React.createElement("b", null, "76,7%")),
+                React.createElement("div", null, React.createElement("span", null, "Steady"), React.createElement("b", null, "20,8%")),
+                React.createElement("div", null, React.createElement("span", null, "Rate cut"), React.createElement("b", null, "2,5%"))
+              )
+            )
+          )
+        );
+      }
+
+      function MobileModuleContent({ activeModule, mode, setMode, theme }) {
+        if (activeModule === "curve") {
+          return React.createElement(MobileCurveModule, { mode, setMode, theme });
+        }
+        if (activeModule === "equity") return React.createElement(EquityValuationModule);
+        if (activeModule === "tech") return React.createElement(TechCycleModule);
+        if (activeModule === "core") return React.createElement(CoreModule);
+        if (activeModule === "satellites") return React.createElement(SatelliteModule);
+        if (activeModule === "europe") return React.createElement(EuropeModule);
+        if (activeModule === "china") return React.createElement(ChinaModule);
+        return React.createElement(HedgeModule);
+      }
+
+      function MobileDashboard({ activeModule, setActiveModule, theme, setTheme, mode, setMode }) {
+        const [mobileModule, setMobileModule] = useState(null);
+        const selectedModule = mobileModule || activeModule;
+        const selectedCopy = MODULE_COPY[selectedModule];
+
+        const openModule = (key) => {
+          setActiveModule(key);
+          setMobileModule(key);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        };
+
+        const closeModule = () => {
+          setMobileModule(null);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        };
+
+        return React.createElement(
+          "div",
+          { className: "mobile-shell" },
+          React.createElement(
+            "header",
+            { className: "mobile-top" },
+            React.createElement(
+              "div",
+              { className: "mobile-brand" },
+              React.createElement("span", null, mobileModule ? "Módulo" : "Dashboard"),
+              React.createElement("strong", null, mobileModule ? MOBILE_MODULES.find(([key]) => key === selectedModule)?.[1] : "General Channels")
+            ),
+            React.createElement(
+              "div",
+              { style: { display: "flex", gap: "8px" } },
+              mobileModule
+                ? React.createElement("button", { className: "mobile-icon-btn", type: "button", onClick: closeModule }, "Voltar")
+                : null,
+              React.createElement(
+                "button",
+                { className: "mobile-icon-btn", type: "button", onClick: () => setTheme(theme === "dark" ? "light" : "dark") },
+                theme === "dark" ? "Claro" : "Escuro"
+              )
+            )
+          ),
+          mobileModule
+            ? React.createElement(
+                "section",
+                { className: "mobile-module-view" },
+                React.createElement(
+                  "article",
+                  { className: "panel mobile-module-head" },
+                  React.createElement("span", null, selectedCopy.thesis),
+                  React.createElement("h1", null, selectedCopy.title),
+                  React.createElement("p", null, selectedCopy.lead)
+                ),
+                React.createElement(MobileModuleContent, { activeModule: selectedModule, mode, setMode, theme })
+              )
+            : React.createElement(
+                React.Fragment,
+                null,
+                React.createElement(
+                  "section",
+                  { className: "mobile-hero" },
+                  React.createElement("h1", null, "Dashboard de alocação global"),
+                  React.createElement("p", null, "Versão mobile em modo consulta: escolha uma tese, abra os detalhes e navegue sem tentar espremer o slide desktop na tela.")
+                ),
+                React.createElement(
+                  "section",
+                  { className: "mobile-module-grid" },
+                  MOBILE_MODULES.map(([key, label, color]) =>
+                    React.createElement(
+                      "button",
+                      {
+                        className: "mobile-module-card",
+                        key,
+                        type: "button",
+                        style: { "--mobile-accent": color },
+                        onClick: () => openModule(key),
+                      },
+                      React.createElement(
+                        "div",
+                        null,
+                        React.createElement("h2", null, label),
+                        React.createElement("p", null, MODULE_COPY[key].lead)
+                      ),
+                      React.createElement("strong", null, MODULE_COPY[key].thesis)
+                    )
+                  )
+                )
+              )
+        );
+      }
+
       function App() {
         const [activeModule, setActiveModule] = useState("curve");
         const [theme, setTheme] = useState("dark");
         const [mode, setMode] = useState("nominal");
         const [diagnosticMode, setDiagnosticMode] = useState("curve");
+        const isMobile = useIsMobile();
 
         useEffect(() => {
           document.body.classList.toggle("theme-light", theme === "light");
@@ -3912,6 +4744,17 @@
         const selectedRows = [];
         const setSelected = () => {};
         const moduleCopy = MODULE_COPY[activeModule];
+
+        if (isMobile) {
+          return React.createElement(MobileDashboard, {
+            activeModule,
+            setActiveModule,
+            theme,
+            setTheme,
+            mode,
+            setMode,
+          });
+        }
 
         return React.createElement(
           "div",
