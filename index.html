@@ -2037,24 +2037,27 @@
 
       .mobile-curve-stats {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 96px));
+        justify-content: start;
         gap: 8px;
       }
 
       .mobile-curve .curve-view-segmented {
-        grid-template-columns: repeat(3, minmax(0, 104px));
+        grid-template-columns: repeat(3, 58px);
+        justify-content: start;
       }
 
       .mobile-curve .segmented button {
-        min-height: 36px;
-        padding: 6px 8px;
-        font-size: 12px;
+        min-height: 30px;
+        padding: 4px 3px;
+        font-size: 9px;
       }
 
       .mobile-stat {
         display: grid;
         gap: 5px;
         min-height: 78px;
+        max-width: 96px;
         padding: 11px;
         border: 1px solid var(--line);
         border-radius: 8px;
@@ -2311,8 +2314,8 @@
         }
 
         .chart {
-          min-width: 640px;
-          min-height: 330px;
+          min-width: 440px;
+          min-height: 280px;
         }
 
         .chart-wrap {
@@ -2400,7 +2403,7 @@
         }
 
         .chart {
-          min-width: 600px;
+          min-width: 420px;
         }
 
         .satellite-card,
